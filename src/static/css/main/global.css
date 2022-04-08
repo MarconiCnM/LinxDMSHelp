@@ -1,0 +1,360 @@
+body {
+    background-color: #f1f3f6 !important;
+}
+
+a:active {
+	text-decoration: none
+}
+
+body::-webkit-scrollbar {
+    width: 6px;               /* width of the entire scrollbar */
+  }
+  
+body::-webkit-scrollbar-track {
+    background: #c9c9c9;        /* color of the tracking area */
+}
+  
+body::-webkit-scrollbar-thumb {
+    background: #ffffff;    /* color of the scroll thumb */
+    border-radius: 20px;       /* roundness of the scroll thumb */
+    border: 0.5px solid #b6b5b5;  /* creates padding around scroll thumb */
+}
+
+
+/* Sidbar */
+
+.sidebar {
+    overflow-x: hidden;
+    color: #fff;
+    height: 100%;
+    width: 55px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    padding-bottom: 20px;
+    background-color: #2c004b;
+}
+
+.menu {
+    width: 55px;
+    height: 50px;
+    padding-top: 8px;
+    padding-bottom: 12px;
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.img-linx {
+    width: 22px;
+}
+
+.img-nav {
+    width: 18px;
+    margin-right: 2px;
+}
+
+.img-pesq {
+    width: 20px;
+    margin-right: 2px;
+}
+
+.sidebar-perfil {
+    display: none;
+}
+
+.sidebar .menu:hover:not(.active) {
+    background-color: #5B2E90;
+    color: white;
+}
+
+@media screen and (max-width: 700px) {
+    .sidebar {
+        width: 100%;
+        height: 51px;
+        padding-bottom: 0;
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    .menu {
+        width: 51px;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 0px;
+    }
+
+    .sidebar-perfil {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: center;
+        margin-left: 30px;
+    }
+
+    .sidebar-perfil img {
+        width: 24px;
+        margin-left: 12px;
+    }
+
+    .sidebar-perfil spam {
+        font-size: 16px;
+        margin: 7px;
+        vertical-align: middle;
+    }
+
+    .sidebar-perfil a:link, a:visited {
+        color: #e6e6e6 !important;
+    }
+    
+    .sidebar-perfil a:hover {
+        color: #e6e6e6 !important;
+    }
+    
+    
+}
+
+/* Navbar */
+
+.navbar {
+    overflow-x: hidden;
+    color: #2c004b;
+    width: 100%;
+    height: 55px;
+    position: fixed !important;
+    z-index: 1;
+    top: 0;
+    padding-bottom: 20px;
+    background-color: #FFFFFF;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.25);
+
+}
+
+.navbar-rside {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    padding-right: 20px;
+}
+
+.navbar-rside img {
+    width: 22px;
+    margin-left: 16px;
+}
+
+.navbar-rside  spam {
+    font-size: 18px;
+    margin: 7px;
+    vertical-align: middle;
+    color:#6b6b6b;
+}
+
+.navbar-lside  spam {
+    color: #6b6b6b;
+    font-size: 18px;
+    padding-left: 40px;
+    vertical-align: middle;
+    padding-right: 5px;
+    border-right: 1px solid rgb(190, 190, 190);
+}
+
+@media screen and (max-width: 700px) {
+    .navbar {
+        display: none !important;
+    }
+}
+
+/* Gerais */
+.invalid-feedback {
+    position: absolute;
+}
+
+#mensagens {
+    position: absolute;
+    right: 1%;
+    top: 7%;
+    opacity: 0;
+    animation: move 5s;
+}
+
+@keyframes move {
+    10% { opacity: 1; }
+    60% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+.corpo-site {
+    margin-left: 55px;
+    padding: 20px;
+}
+
+@media screen and (max-width: 700px) {
+    .corpo-site {
+        margin-left: 0px;
+        margin-top: -45px;
+    }
+    
+}
+
+/* Canvas */
+.bs-canvas-overlay {
+    opacity: 0;
+    z-index: -1;
+ }
+ 
+ .bs-canvas-overlay.show {
+    opacity: 0.85;
+    z-index: 1100;
+ }
+ 
+ .bs-canvas {
+    top: 0;
+    width: 0;
+    z-index: 1110;
+    overflow-x: hidden;
+    overflow-y: auto;
+ }
+
+
+ .bs-canvas-left {
+    background-color: #5B2E90 !important;
+    color: #ffffff;
+    left: 0;
+}
+
+
+.bs-canvas-header {
+    background-color: #2C004B !important;
+    color: #ffffff;
+}
+
+.bs-canvas-header  spam {
+    font-size: 18px;
+    padding-left: 20px;
+    vertical-align: middle;
+    padding-right: 5px;
+}
+
+.bg-dark-ani {
+    background-color: #121518;
+}
+
+ .bs-canvas-anim {
+    transition: all .4s ease-out;
+    -webkit-transition: all .4s ease-out;
+    -moz-transition: all .4s ease-out;
+    -ms-transition: all .4s ease-out;
+ }
+
+/* Botões menu */
+.menu-btn {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: .975rem !important;
+    color: #e6e6e6;
+    display: block;
+    background: #744DA1;
+    width:100%;
+    text-align: left;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid #9071b4;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    transform: rotate(0deg);
+}
+
+.menu-btn img{
+    width: 9px;
+    margin-right: 10px;
+}
+
+.menu-btn :focus{
+    outline: thin dotted;
+    outline: 0px auto -webkit-focus-ring-color;
+    outline-offset: 0px;
+}
+
+.menu-btn:focus {
+    outline: thin dotted;
+    outline: 0px auto -webkit-focus-ring-color;
+    outline-offset: 0px;
+}
+
+.menu-btn:focus img{
+    transform: rotate(90deg);
+}
+
+.menu-btn a {
+    color: #e6e6e6 !important;
+}
+.menu-btn a:link, a:visited {
+    color: #e6e6e6 !important;
+}
+
+.menu-btn a:hover {
+    color: #e6e6e6 !important;
+}
+
+
+.menu-container {
+    display: none;
+    background-color: #5B2E90;
+}
+
+.menu-container a {
+    padding: 6px;
+    padding-left: 10px;
+    text-decoration: none;
+    font-size: .875rem !important;
+    color: #e6e6e6;
+    display: block;
+    background: #5B2E90;
+    width:100%;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid #9071b4;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    transition: 0.8s;
+}
+
+.menu-container a:hover {
+    padding-left: 20px;
+    text-decoration: none;
+    color: #e6e6e6;
+    display: block;
+    background: #744DA1;
+    width:100%;
+    text-align: left;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid #9071b4;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.menu-container a div{
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #e6e6e6;
+    margin: 0px 8px;
+
+}

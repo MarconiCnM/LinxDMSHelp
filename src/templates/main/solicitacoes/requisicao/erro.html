@@ -1,0 +1,300 @@
+{% extends 'main/global.html' %}
+
+{% block head %}
+    <link rel= "stylesheet" 
+    type= "text/css" 
+    href= "{{url_for('static',filename='css/main/solicitacoes/requisicao/main.css')}}">
+{% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="col-12 mb-3">
+        <div class="div-card-cabecario d-flex align-items-center">
+            Analise de Erro
+            
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4 col-xxl-4">
+        <div class="div-card mb-3">
+            {% if request.path == url_for('solicitacaoErro') %}
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1"><img src="{{url_for('static',filename='img/site/icon-pesquisa.svg')}}" alt=""></span>
+                    <input id="myInput" type="text" class="form-control" placeholder="Pesquisar..." aria-label="Username" aria-describedby="basic-addon1">
+                </div>
+                <div class="table-cad">
+                    <table id="myTable" class="table table-bordered table-striped table-hover">
+                        <thead class="header">
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Nro_tp</th>
+                                <th scope="col">Analista</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for erro in erros %}
+                                <a href="">
+                                    <tr data-url="{{url_for('solicitacaoErroID', erro_id=erro.id)}}">
+                                        <td>{{ erro.id }}</td>
+                                        <td>{{ erro.NRO_TP }}</td>
+                                        <td>{{ erro.requester.USUARIO }}</td>
+                                    </tr>
+                                </a>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <div class="div-card mb-3">
+                    Movimentações
+                    <div class="container div-card-mov">
+                        <div class="row">
+                            <div class="col-12 pt-4">
+                                <div class="list-group-item mb-3">
+                                    <h5 class="list-group-item-heading">Solicitação Finalizada <small>Segunda at 17:43</small></h5>
+                                    <p class="list-group-item-text">Helper: <strong>João Marconi</strong></p>
+                                    <p class="list-group-item-text"> <strong>Resumo: </strong> Rotulo adicionado e solicitação finalizada</strong></p>
+                                    <span class="text-status">FINALIZADA</span>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="list-group-item mb-3">
+                                    <h5 class="list-group-item-heading">Solicitação de rotulo no JIRA <small>Segunda at 16:43</small></h5>
+                                    <p class="list-group-item-text">Analista: <strong>Gabriel Reolon</strong></p>
+                                    <p class="list-group-item-text"> <strong>Resumo: </strong> ISSUE aberta e informada na solicitação favor adicionar o rotulo</strong></p>
+                                    <span class="text-status">AGUARDANDO ADIÇÃO DE ROTULO</span>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="list-group-item mb-3">
+                                    <h5 class="list-group-item-heading">Aprovação de Abertura de ISSUE <small>Segunda at 15:43</small></h5>
+                                    <p class="list-group-item-text">Helper: <strong>João Marconi</strong></p>
+                                    <p class="list-group-item-text"> <strong>Resumo: </strong> Solicitação aprovada, apos a abertura da issue não esqueça de vincular o numero na solicitação para adição do rotulo de aprovação</strong></p>
+                                    <span class="text-status">AGUARDANDO ABERTURA DE ISSUE</span>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="list-group-item mb-3">
+                                    <h5 class="list-group-item-heading">Conclusão de Informação <small>Segunda at 14:43</small></h5>
+                                    <p class="list-group-item-text">Analista: <strong>Gabriel Reolon</strong></p>
+                                    <p class="list-group-item-text"> <strong>Resumo: </strong> Os manuais foram passados para o cliente porem o mesmo solicita o envio para alteração</strong></p>
+                                    <span class="text-status">EM ANALISE</span>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="list-group-item mb-3">
+                                    <h5 class="list-group-item-heading">Solicitação de Informação <small>Segunda at 13:43</small></h5>
+                                    <p class="list-group-item-text">Helper: <strong>João Marconi</strong></p>
+                                    <p class="list-group-item-text"> <strong>Resumo: </strong> Vi que na tp não foram passados o manual sobre o processo, o mesmo foi passado?</strong></p>
+                                    <span class="text-status">AGUARDANDO INFORMAÇÂO</span>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="list-group-item mb-3">
+                                    <h5 class="list-group-item-heading">Iniciada a Analise <small>Segunda at 13:33</small></h5>
+                                    <p class="list-group-item-text">Helper: <strong>João Marconi</strong></p>
+                                    <span class="text-status">EM ANALISE</span>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="list-group-item mb-3">
+                                    <h5 class="list-group-item-heading">Abertura de Analise <small>Segunda as 12:33</small></h5>
+                                    <p class="list-group-item-text">Analista Gabriel Reolon solicitou essa analise</p>
+                                    <span class="text-status">AGUARDANDO INICIALIZAÇÂO</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-12 col-lg-8 col-xl-8 col-xxl-8">
+        <div class="div-card">
+            <form method="POST" autocomplete="off" enctype="multipart/form-data">
+                {{ form_erro.csrf_token }}
+                <div class="row">
+                    <div class="col-9">
+                        <div class="row">
+                            <div class="mb-3 col-3">
+                                {% if form_erro.nro_tp.errors %}
+                                    {{ form_erro.nro_tp.label(class="form-label") }}
+                                    {{ form_erro.nro_tp(class="form-control is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for erro in form_erro.nro_tp.errors %}
+                                            {{ erro }}
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form_erro.nro_tp.label(class="form-label") }}
+                                    {{ form_erro.nro_tp(class="form-control") }}
+                                {% endif %} 
+                            </div>
+                            <div class="mb-3 col-3">
+                                {% if form_erro.issue.errors %}
+                                    {{ form_erro.issue.label(class="form-label") }}
+                                    {{ form_erro.issue(class="form-control is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for erro in form_erro.issue.errors %}
+                                            {{ erro }}
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form_erro.issue.label(class="form-label") }}
+                                    {{ form_erro.issue(class="form-control") }}
+                                {% endif %} 
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="mb-3 col-8">
+                                {% if form_erro.menu_dir.errors %}
+                                    {{ form_erro.menu_dir.label(class="form-label") }}
+                                    {{ form_erro.menu_dir(class="form-control is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for erro in form_erro.menu_dir.errors %}
+                                            {{ erro }}
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form_erro.menu_dir.label(class="form-label") }}
+                                    {{ form_erro.menu_dir(class="form-control") }}
+                                {% endif %} 
+                            </div>
+                            <div class="mb-3 col-3">
+                                {% if form_erro.menu_cod.errors %}
+                                    {{ form_erro.menu_cod.label(class="form-label") }}
+                                    {{ form_erro.menu_cod(class="form-control is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for erro in form_erro.menu_cod.errors %}
+                                            {{ erro }}
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form_erro.menu_cod.label(class="form-label") }}
+                                    {{ form_erro.menu_cod(class="form-control") }}
+                                {% endif %} 
+                            </div>
+                        </div>
+                        <div class="mb-3 col-12 div-cod">
+                            {% if form_erro.fazendo.errors %}
+                                {{ form_erro.fazendo.label(class="form-label") }}
+                                {{ form_erro.fazendo(class="form-control is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for erro in form_erro.fazendo.errors %}
+                                        {{ erro }}
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form_erro.fazendo.label(class="form-label") }}
+                                {{ form_erro.fazendo(class="form-control") }}
+                            {% endif %} 
+                        </div>
+                        <div class="mb-3 col-12 div-cod">
+                            {% if form_erro.fazer.errors %}
+                                {{ form_erro.fazer.label(class="form-label") }}
+                                {{ form_erro.fazer(class="form-control is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for erro in form_erro.fazer.errors %}
+                                        {{ erro }}
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form_erro.fazer.label(class="form-label") }}
+                                {{ form_erro.fazer(class="form-control") }}
+                            {% endif %} 
+                        </div>
+                        <div class="mb-3 col-12 div-cod">
+                            {% if form_erro.paliativa.errors %}
+                                {{ form_erro.paliativa.label(class="form-label") }}
+                                {{ form_erro.paliativa(class="form-control is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for erro in form_erro.paliativa.errors %}
+                                        {{ erro }}
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form_erro.paliativa.label(class="form-label") }}
+                                {{ form_erro.paliativa(class="form-control") }}
+                            {% endif %} 
+                        </div>
+                        <div class="row mb-3">
+                            <div class="mb-3 col-7">
+                                {% if form_erro.db_teste.errors %}
+                                    {{ form_erro.db_teste.label(class="form-label") }}
+                                    {{ form_erro.db_teste(class="form-control is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for erro in form_erro.db_teste.errors %}
+                                            {{ erro }}
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form_erro.db_teste.label(class="form-label") }}
+                                    {{ form_erro.db_teste(class="form-control") }}
+                                {% endif %} 
+                            </div>
+                            <div class="mb-3 col-2">
+                                {% if form_erro.versao.errors %}
+                                    {{ form_erro.versao.label(class="form-label") }}
+                                    {{ form_erro.versao(class="form-control is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for erro in form_erro.versao.errors %}
+                                            {{ erro }}
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form_erro.versao.label(class="form-label") }}
+                                    {{ form_erro.versao(class="form-control") }}
+                                {% endif %} 
+                            </div>
+                            <div class="mb-3 col-2">
+                                {% if form_erro.versao_ant.errors %}
+                                    {{ form_erro.versao_ant.label(class="form-label") }}
+                                    {{ form_erro.versao_ant(class="form-control is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for erro in form_erro.versao_ant.errors %}
+                                            {{ erro }}
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form_erro.versao_ant.label(class="form-label") }}
+                                    {{ form_erro.versao_ant(class="form-control") }}
+                                {% endif %} 
+                            </div>
+                        </div>
+                        <div class="mb-3 col-12 div-cod">
+                            {% if form_erro.docs.errors %}
+                                {{ form_erro.docs.label(class="form-label") }}
+                                {{ form_erro.docs(class="form-control is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for erro in form_erro.docs.errors %}
+                                        {{ erro }}
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form_erro.docs.label(class="form-label") }}
+                                {{ form_erro.docs(class="form-control") }}
+                            {% endif %} 
+                        </div>
+                    </div>
+                    <div class="col-3 d-flex flex-column mt-5">
+                        {{ form_erro.btn_submit_inserir(class="btn btn-cadastro-salvar mb-3") }}
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+    $("#myInput").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#myTable tbody tr").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+    });
+    });
+
+    $(document).ready(function(){
+    $('table tr').click(function(){
+        window.location = $(this).data('url');
+        returnfalse;
+    });
+    });
+</script>
+
+{% endblock %}

@@ -1,0 +1,379 @@
+
+.container {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    max-width: 100% !important;
+    max-height: 50% !important;
+    padding: 0 !important;
+}
+
+.carousel-control-prev {
+    justify-content: start !important;
+    width: 3% !important;
+}
+
+.carousel-control-next{
+    justify-content: end !important;
+    width: 3% !important;
+}
+
+.carousel-inner {
+    width: 98% !important;
+    margin-left: 1%;
+}
+
+.carousel-inner .carousel-item-right,
+.carousel-inner .carousel-item-left{ 
+  transform: translateX(0);
+}
+
+.carousel-inner .carousel-item.active,
+.carousel-inner .carousel-item-next,
+.carousel-inner .carousel-item-prev {
+    display: flex;
+}
+
+@media (max-width: 768px) {
+    .carousel-inner .carousel-item > div {
+        display: none;
+    }
+    .carousel-inner .carousel-item > div:first-child {
+        display: block;
+    }
+}
+
+@media (min-width: 576px) {
+    .carousel-inner .carousel-item-right.active,
+    .carousel-inner .carousel-item-next {
+      transform: translateX(100%);
+    }
+    
+    .carousel-inner .carousel-item-left.active, 
+    .carousel-inner .carousel-item-prev {
+      transform: translateX(-100%);
+    }
+}
+
+@media (min-width: 768px) {
+    .carousel-inner .carousel-item-right.active,
+    .carousel-inner .carousel-item-next {
+      transform: translateX(50%);
+    }
+    
+    .carousel-inner .carousel-item-left.active, 
+    .carousel-inner .carousel-item-prev {
+      transform: translateX(-50%);
+    }
+}
+
+@media (min-width: 992px) {
+    .carousel-inner .carousel-item-right.active,
+    .carousel-inner .carousel-item-next {
+      transform: translateX(33.33%);
+    }
+    
+    .carousel-inner .carousel-item-left.active, 
+    .carousel-inner .carousel-item-prev {
+      transform: translateX(-33.33%);
+    }
+}
+
+
+@media (min-width: 1200px) {
+    .carousel-inner .carousel-item-right.active,
+    .carousel-inner .carousel-item-next {
+      transform: translateX(16.7%);
+    }
+    
+    .carousel-inner .carousel-item-left.active, 
+    .carousel-inner .carousel-item-prev {
+      transform: translateX(-16.7%);
+    }
+}
+
+/* ---------------------- Ajustes do conteudo dos cards ----------------------*/
+
+.box-card {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    height: 220px !important;
+    display: flex;
+    justify-content: center;
+}
+
+.card {
+    height: 170px;
+    margin: 40px 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    position: relative;
+    background-color: #FFFFFF;
+    border: none !important;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.25);
+    border-radius: 1px !important;
+}
+
+.img-card-sol {
+    position: absolute;
+    top: 8%;
+    right: 3%;
+    width: 23px;
+}
+
+.title-card {
+    font-size: .975rem;
+    margin-top: 14px;
+}
+
+.numbers {
+     display: flex;
+     flex-direction: row;
+     align-items: center;
+     justify-content:space-around;
+     margin-top: 10px;
+     padding: 3px 5px;
+     width: 100%;
+     background-color: #F8F8F8;
+     border-radius: 4px;
+ }
+
+ .open {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #ED6363;
+ }
+
+ .closed {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #1CA510;
+ }
+
+ .open h6{
+    font-size: .875rem;
+ }
+
+ .closed h6{
+    font-size: .875rem;
+ }
+
+
+.btn {
+    font-size: .875rem !important;
+    margin: 10px;
+    cursor: pointer;
+    background-color: #5b2e90;
+    border-radius: 3px !important;
+}
+
+.btn a:link, .btn a:visited {
+    color: #fff !important;
+}
+
+.btn a:hover {
+    color: #fff !important;
+}
+
+.div-card-lista-filas {
+    padding: 5% 0%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    position: relative;
+    background-color: #FFFFFF;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.25);
+    border-radius: 1px;
+}
+
+.title-control-tps {
+    margin-top: 3%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.div-desc {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items:center;
+    width: 100%;
+    margin-bottom: 12%;
+
+}
+
+.div-desc p {
+    margin-top: 0;
+    margin-bottom: -5%;
+    font-size: .875rem !important;
+}
+
+
+.div-desc .priority p {
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 20%;
+}
+
+.priority {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    margin-left: -3%;
+}
+
+.div-p {
+    margin: 5%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.div-p img {
+    margin-left: 12%;
+}
+
+.div-total {
+    margin-top: -5% !important;
+    margin-bottom: 0;
+    font-size: .875rem !important;
+}
+
+/* ---------------------- Conteudo do card de controle de tps ----------------------*/
+.div-list-tps-title {
+    width: 100%;
+}
+
+.div-card-analitico {
+    height: 450px;
+    padding: 2%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    position: relative;
+    background-color: #FFFFFF;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.25);
+    border-radius: 1px;
+    font-size: 0.875rem !important;
+}
+
+.dropdown-menu {
+    font-size: 0.875rem !important;
+}
+
+.div-header-analitico span {
+    font-size: 0.8rem !important;
+}
+
+.sla-dentro {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #24d613;
+    margin-left: 8px;
+    margin-top:7px;
+}
+
+.sla-pra-estourar {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #ffd414;
+    margin-left: 8px;
+    margin-top: 7px;
+}
+
+.sla-fora {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #3f3f3f;
+    margin-left: 8px;
+    margin-top: 7px;
+}
+
+.div-header-bases span {
+    font-size: 0.8rem !important;
+}
+
+.table-tps {
+    overflow:scroll; 
+    width:100%; 
+    height:100%;
+}
+
+.table-tps::-webkit-scrollbar {
+    width: 6px;               /* width of the entire scrollbar */
+    height: 6px;
+  }
+  
+.table-tps::-webkit-scrollbar-track {
+    background: #ffffff;        /* color of the tracking area */
+}
+  
+.table-tps::-webkit-scrollbar-thumb {
+    background: #ffffff;    /* color of the scroll thumb */
+    border-radius: 20px;       /* roundness of the scroll thumb */
+    border: 0.5px solid #b6b5b5;  /* creates padding around scroll thumb */
+}
+
+.nav-tabs a {
+    color: #0a030f !important;
+}
+
+
+.header {
+    border-bottom: 1px solid #dee2e6 !important;
+    position: sticky; 
+    top: 0; 
+    background: white;
+}
+
+.header th {
+    border: none !important;
+
+}
+
+.div-card-bases {
+    height: 365px;
+    padding: 2%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    position: relative;
+    background-color: #FFFFFF;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.25);
+    border-radius: 1px;
+    font-size: 0.875rem !important;
+}
+
+.table-bases {
+    overflow:scroll; 
+    width:100%; 
+    height:100%;
+}
+
+.table-bases::-webkit-scrollbar {
+    width: 6px;               /* width of the entire scrollbar */
+    height: 6px;
+  }
+  
+.table-bases::-webkit-scrollbar-track {
+    background: #ffffff;        /* color of the tracking area */
+}
+  
+.table-bases::-webkit-scrollbar-thumb {
+    background: #ffffff;    /* color of the scroll thumb */
+    border-radius: 20px;       /* roundness of the scroll thumb */
+    border: 0.5px solid #b6b5b5;  /* creates padding around scroll thumb */
+}
+

@@ -1,0 +1,642 @@
+{% extends 'main/global.html' %}
+
+{% block head %}
+    <link rel= "stylesheet" 
+        type= "text/css" 
+        href= "{{url_for('static',filename='css/main/dashboard.css')}}">
+    
+{% endblock %}
+
+{% block body %}
+<div class="container text-center my-3">
+    <div class="row mx-auto my-auto">
+        <div id="recipeCarousel" class="carousel slide w-100" data-ride="carousel">
+            <div class="carousel-inner" role="listbox">
+                <div class="carousel-item active">
+                    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-2 col-xxl-2 box-card">
+                        <div class="card card-body">
+                            <h6 class="title-card">Erro</h6>
+                            <img class="img-card-sol" src="./static/img/site/icon_erro_card.svg" alt="">
+                            <div class="numbers">
+                                <div class="open">
+                                    <h6>0</h6>
+                                    <h6>Abertos</h6>
+                                </div>
+                                <div class="closed">
+                                    <h6>0</h6>
+                                    <h6>Fechados</h6>
+                                </div>
+                            </div>
+                            <div class="btn">
+                                <a href="{{ url_for('solicitacaoErro') }}">
+                                    Solicitar
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-2 col-xxl-2 box-card">
+                        <div class="card card-body">
+                            <h6 class="title-card">Alteração</h6>
+                            <img class="img-card-sol" src="./static/img/site/icon_alteracao_card.svg" alt="">
+                            <div class="numbers">
+                                <div class="open">
+                                    <h6>0</h6>
+                                    <h6>Abertos</h6>
+                                </div>
+                                <div class="closed">
+                                    <h6>0</h6>
+                                    <h6>Fechados</h6>
+                                </div>
+                            </div>
+                            <div class="btn">
+                                <a href="{{ url_for('solicitacaoAlteracao') }}">
+                                    Solicitar
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-2 col-xxl-2 box-card">
+                        <div class="card card-body">
+                            <h6 class="title-card">Serviço</h6>
+                            <img class="img-card-sol" src="./static/img/site/icon_servico_card.svg" alt="">
+                            <div class="numbers">
+                                <div class="open">
+                                    <h6>0</h6>
+                                    <h6>Abertos</h6>
+                                </div>
+                                <div class="closed">
+                                    <h6>0</h6>
+                                    <h6>Fechados</h6>
+                                </div>
+                            </div>
+                            <div class="btn">
+                                <a href="{{ url_for('solicitacaoServico') }}">
+                                    Solicitar
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-2 col-xxl-2 box-card">
+                        <div class="card card-body">
+                            <h6 class="title-card">Compilação</h6>
+                            <img class="img-card-sol" src="./static/img/site/icon_script_card.svg" alt="">
+                            <div class="numbers">
+                                <div class="open">
+                                    <h6>0</h6>
+                                    <h6>Abertos</h6>
+                                </div>
+                                <div class="closed">
+                                    <h6>0</h6>
+                                    <h6>Fechados</h6>
+                                </div>
+                            </div>
+                            <div class="btn">
+                                <a href="{{ url_for('solicitacaoCompilacao') }}">
+                                    Solicitar
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-2 col-xxl-2 box-card">
+                        <div class="card card-body">
+                            <h6 class="title-card">Importação</h6>
+                            <img class="img-card-sol" src="./static/img/site/icon_import_card.svg" alt=""> 
+                            <div class="numbers">
+                                <div class="open">
+                                    <h6>0</h6>
+                                    <h6>Abertos</h6>
+                                </div>
+                                <div class="closed">
+                                    <h6>0</h6>
+                                    <h6>Fechados</h6>
+                                </div>
+                            </div>
+                            <div class="btn">
+                                <a href="{{ url_for('solicitacaoImportacao') }}">
+                                    Solicitar
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-2 col-xxl-2 box-card">
+                        <div class="card card-body">
+                            <h6 class="title-card">Share</h6>
+                            <img class="img-card-sol" src="./static/img/site/icon_share_card.svg" alt=""> 
+                            <div class="numbers">
+                                <div class="open">
+                                    <h6>0</h6>
+                                    <h6>Abertos</h6>
+                                </div>
+                                <div class="closed">
+                                    <h6>0</h6>
+                                    <h6>Fechados</h6>
+                                </div>
+                            </div>
+                            <div class="btn">
+                                <a href="{{ url_for('solicitacaoShare') }}">
+                                    Solicitar
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-2 col-xxl-2 box-card">
+                        <div class="card card-body">
+                            <h6 class="title-card">Help</h6>
+                            <img class="img-card-sol" src="./static/img/site/icon_help_card.svg" alt=""> 
+                            <div class="numbers">
+                                <div class="open">
+                                    <h6>0</h6>
+                                    <h6>Abertos</h6>
+                                </div>
+                                <div class="closed">
+                                    <h6>0</h6>
+                                    <h6>Fechados</h6>
+                                </div>
+                            </div>
+                            <div class="btn">
+                                <a href="{{ url_for('solicitacaoHelp') }}">
+                                    Solicitar
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a class="carousel-control-prev w-auto" href="#recipeCarousel" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon bg-dark border border-dark rounded-circle" aria-hidden="true"></span>
+            </a>
+            <a class="carousel-control-next w-auto" href="#recipeCarousel" role="button" data-slide="next">
+                <span class="carousel-control-next-icon bg-dark border border-dark rounded-circle" aria-hidden="true"></span>
+            </a>
+        </div>
+    </div>
+</div>
+<div class="row mx-3">
+    <div class="col-sm-12 col-md-12 col-lg-9 col-xl-10 col-xxl-10">
+        <div class="div-card-analitico mb-4">
+            <div class="div-header-analitico d-flex justify-content-between align-items-center" style="width: 100%;">
+                <h6 style="margin-left: 2px;">Listagem de TPs | <span>Tempo de atualização 10min</span></h6>
+                <nav style="width: 30%;">
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                        <a class="nav-item nav-link active" id="nav-geral-tab" data-toggle="tab" href="#nav-geral" role="tab" aria-controls="nav-geral" aria-selected="true">Fila geral</a>
+                        <a class="nav-item nav-link" id="nav-mais15-tab" data-toggle="tab" href="#nav-mais15" role="tab" aria-controls="nav-mais15" aria-selected="false">Chamados +15</a>
+                        <a class="nav-item nav-link" id="nav-backlog-tab" data-toggle="tab" href="#nav-backlog" role="tab" aria-controls="nav-backlog" aria-selected="false">Backlog</a>
+                    </div>
+                </nav>
+            </div>
+            <div class="tab-content table-tps" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="nav-geral" role="tabpanel" aria-labelledby="nav-geral-tab">
+                    <table class="table table-striped table-hover">
+                        <thead class="header">
+                            <tr>
+                                <th scope="col">SLA</th>
+                                <th scope="col">Tarefa</th>
+                                <th scope="col">Prioridade</th>
+                                <th scope="col">Dias Aberto</th>
+                                <th scope="col">Ultima Mov</th>
+                                <th scope="col">Grupo</th>
+                                <th scope="col">Resumo</th>
+                                <th scope="col">Status</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody style="overflow:hidden;">
+                            <tr>
+                                <td>
+                                    <div class="sla-fora" data-toggle="tooltip" data-placement="top" title="0h 0min">
+                                         
+                                    </div>
+                                </td>
+                                <td>43562865</td>
+                                <td>@mdo</td>
+                                <td>Mark</td>
+                                <td>Mark</td>
+                                <td>Mark</td>
+                                <td>Mark</td>
+                                <td>Mark</td>
+                                <td><b>
+                                    <div class="dropleft">
+                                        <a type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                          ...
+                                        </a>
+                                        <div class="dropdown-menu">
+                                            <button  class="dropdown-item" href="#">Sol Erro</button >
+                                            <button  class="dropdown-item" href="#">Sol Alteração</button >
+                                            <button  class="dropdown-item" href="#">Sol Serviço</button >
+                                            <button  class="dropdown-item" href="#">Sol Compilação</button >
+                                            <button  class="dropdown-item" href="#">Sol Importação</button >
+                                            <button  class="dropdown-item" href="#">Sol Help</button >
+                                            <div class="dropdown-divider"></div>
+                                            <button  class="dropdown-item" href="#">Movimentações</button >
+                                        </div>
+                                    </div>
+                                </b></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="sla-pra-estourar" data-toggle="tooltip" data-placement="top" title="6h 10min">
+                                         
+                                    </div>
+                                </td>
+                                <td>43562865</td>
+                                <td>@mdo</td>
+                                <td>Mark</td>
+                                <td>Mark</td>
+                                <td>Mark</td>
+                                <td>Mark</td>
+                                <td>Mark</td>
+                                <td><b>
+                                    <div class="dropleft">
+                                        <a type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                          ...
+                                        </a>
+                                        <div class="dropdown-menu">
+                                            <button  class="dropdown-item" href="#">Sol Erro</button >
+                                            <button  class="dropdown-item" href="#">Sol Alteração</button >
+                                            <button  class="dropdown-item" href="#">Sol Serviço</button >
+                                            <button  class="dropdown-item" href="#">Sol Compilação</button >
+                                            <button  class="dropdown-item" href="#">Sol Importação</button >
+                                            <button  class="dropdown-item" href="#">Sol Help</button >
+                                            <div class="dropdown-divider"></div>
+                                            <button  class="dropdown-item" href="#">Movimentações</button >
+                                        </div>
+                                    </div>
+                                </b></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="sla-dentro" data-toggle="tooltip" data-placement="top" title="36h 40min">
+                                         
+                                    </div>
+                                </td>
+                                <td>43562865</td>
+                                <td>@mdo</td>
+                                <td>Mark</td>
+                                <td>Mark</td>
+                                <td>Mark</td>
+                                <td>Mark</td>
+                                <td>Mark</td>
+                                <td><b>
+                                    <div class="dropleft">
+                                        <a type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                          ...
+                                        </a>
+                                        <div class="dropdown-menu">
+                                            <button  class="dropdown-item" href="#">Sol Erro</button >
+                                            <button  class="dropdown-item" href="#">Sol Alteração</button >
+                                            <button  class="dropdown-item" href="#">Sol Serviço</button >
+                                            <button  class="dropdown-item" href="#">Sol Compilação</button >
+                                            <button  class="dropdown-item" href="#">Sol Importação</button >
+                                            <button  class="dropdown-item" href="#">Sol Help</button >
+                                            <div class="dropdown-divider"></div>
+                                            <button  class="dropdown-item" href="#">Movimentações</button >
+                                        </div>
+                                    </div>
+                                </b></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tab-pane fade" id="nav-mais15" role="tabpanel" aria-labelledby="nav-mais15-tab">...</div>
+                <div class="tab-pane fade" id="nav-backlog" role="tabpanel" aria-labelledby="nav-backlog-tab">...</div>
+            </div>
+        </div>
+        <div class="div-card-bases mb-4">
+            <div class="div-header-bases d-flex justify-content-between align-items-center" style="width: 100%;">
+                <h6 style="margin-left: 2px;">Lista de bases dos servidores | <span>Tempo de atualização 5min</span></h6>
+                <nav style="width: 30%;">
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                        <a class="nav-item nav-link active" id="nav-oracle-tab" data-toggle="tab" href="#nav-oracle" role="tab" aria-controls="nav-oracle" aria-selected="true">Bases Oracle</a>
+                        <a class="nav-item nav-link" id="nav-sqlserver-tab" data-toggle="tab" href="#nav-sqlserver" role="tab" aria-controls="nav-sqlserver" aria-selected="false">Bases SQL server</a>
+                    </div>
+                </nav>
+            </div>
+            <div class="tab-content table-bases" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="nav-oracle" role="tabpanel" aria-labelledby="nav-oracle-tab">
+                    <table class="table table-striped table-hover">
+                        <thead class="header">
+                            <tr>
+                                <th scope="col">Cliente</th>
+                                <th scope="col">Servidor</th>
+                                <th scope="col">Instancia</th>
+                                <th scope="col">Usuario Oracle</th>
+                                <th scope="col">Marca</th>
+                                <th scope="col">Tamanho</th>
+                                <th scope="col">Status</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody style="overflow:hidden;">
+                            {% for base in bases_oracle %}
+                            <tr>
+                                <td>{{ base.CLIENTE }}</td>
+                                <td>{{ base.SERVIDOR }}</td>
+                                <td>{{ base.INSTANCIA }}</td>
+                                <td>{{ base.USUARIO }}</td>
+                                <td>{{ base.MARCA }}</td>
+                                <td>{{ base.TAMANHO }}</td>
+                                <td>Ativa</td>
+                                <td>
+                                    <div class="dropleft">
+                                        <a type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                          ...
+                                        </a>
+                                        <div class="dropdown-menu">
+                                            <button  class="dropdown-item" href="#">Teste de conexão</button>
+                                            <button  class="dropdown-item" href="#">Conf de conexão</button>
+                                            <div class="dropdown-divider"></div>
+                                            <button  class="dropdown-item" href="#">Soliticar ajuda</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tab-pane fade" id="nav-sqlserver" role="tabpanel" aria-labelledby="nav-sqlserver-tab">
+                    <table class="table table-striped table-hover">
+                        <thead class="header">
+                            <tr>
+                                <th scope="col">Cliente</th>
+                                <th scope="col">Servidor</th>
+                                <th scope="col">Marca</th>
+                                <th scope="col">Tamanho</th>
+                                <th scope="col">Status</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody style="overflow:hidden;">
+                            {% for base in bases_sqlserver %}
+                            <tr>
+                                <td>{{ base.CLIENTE }}</td>
+                                <td>{{ base.SERVIDOR }}</td>
+                                <td>{{ base.MARCA }}</td>
+                                <td>{{ base.TAMANHO }}</td>
+                                <td>Ativa</td>
+                                <td>
+                                    <div class="dropleft">
+                                        <a type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                          ...
+                                        </a>
+                                        <div class="dropdown-menu">
+                                            <button  class="dropdown-item" href="#">Teste de conexão</button>
+                                            <button  class="dropdown-item" href="#">Conf de conexão</button>
+                                            <div class="dropdown-divider"></div>
+                                            <button  class="dropdown-item" href="#">Soliticar ajuda</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-12 col-lg-3 col-xl-2 col-xxl-2">
+        <div class="div-card-lista-filas mb-4">
+            <div class="div-card div-tps">
+                <div class="title-control-tps">
+                    <h6>Controle de Filas</h6> 
+                    <hr class="w-100"> 
+                </div>
+                <div class="div-desc">
+                    <p>SUPORTE APOLLO</p>
+                    <div class="priority">
+                        <div class="div-p">
+                            <img src="./static/img/site/icon_p0.svg" alt="">
+                            <p>0</p>
+                        </div>
+                        <div class="div-p">
+                            <img src="./static/img/site/icon_p1.svg" alt="">
+                            <p>0</p>
+                        </div>
+                        <div class="div-p">
+                            <img src="./static/img/site/icon_p2.svg" alt="">
+                            <p>0</p>
+                        </div>
+                        <div class="div-p">
+                            <img src="./static/img/site/icon_p3.svg" alt="">
+                            <p>0</p>
+                        </div>
+                    </div>
+                    <p class="div-total">Chamados na fila: 0</p>
+                </div> 
+                <div class="div-desc">
+                    <p>SUPORTE BRAVOS</p>
+                    <div class="priority">
+                        <div class="div-p">
+                            <img src="./static/img/site/icon_p0.svg" alt="">
+                            <p>0</p>
+                        </div>
+                        <div class="div-p">
+                            <img src="./static/img/site/icon_p1.svg" alt="">
+                            <p>0</p>
+                        </div>
+                        <div class="div-p">
+                            <img src="./static/img/site/icon_p2.svg" alt="">
+                            <p>0</p>
+                        </div>
+                        <div class="div-p">
+                            <img src="./static/img/site/icon_p3.svg" alt="">
+                            <p>0</p>
+                        </div>
+                    </div>
+                    <p class="div-total">Chamados na fila: 0</p>
+                </div>
+                <div class="div-desc">
+                    <p>SUPORTE TOYOTA</p>
+                    <div class="priority">
+                        <div class="div-p">
+                            <img src="./static/img/site/icon_p0.svg" alt="">
+                            <p>0</p>
+                        </div>
+                        <div class="div-p">
+                            <img src="./static/img/site/icon_p1.svg" alt="">
+                            <p>0</p>
+                        </div>
+                        <div class="div-p">
+                            <img src="./static/img/site/icon_p2.svg" alt="">
+                            <p>0</p>
+                        </div>
+                        <div class="div-p">
+                            <img src="./static/img/site/icon_p3.svg" alt="">
+                            <p>0</p>
+                        </div>
+                    </div>
+                    <p class="div-total">Chamados na fila: 0</p>
+                </div>
+                <div class="div-desc">
+                    <p>SUPORTE BERÇÁRIO</p>
+                    <div class="priority">
+                        <div class="div-p">
+                            <img src="./static/img/site/icon_p0.svg" alt="">
+                            <p>0</p>
+                        </div>
+                        <div class="div-p">
+                            <img src="./static/img/site/icon_p1.svg" alt="">
+                            <p>0</p>
+                        </div>
+                        <div class="div-p">
+                            <img src="./static/img/site/icon_p2.svg" alt="">
+                            <p>0</p>
+                        </div>
+                        <div class="div-p">
+                            <img src="./static/img/site/icon_p3.svg" alt="">
+                            <p>0</p>
+                        </div>
+                    </div>
+                    <p class="div-total">Chamados na fila: 0</p>
+                </div>
+                <div class="div-desc">
+                    <p>SUPORTE FINANCEIRO</p>
+                    <div class="priority">
+                        <div class="div-p">
+                            <img src="./static/img/site/icon_p0.svg" alt="">
+                            <p>0</p>
+                        </div>
+                        <div class="div-p">
+                            <img src="./static/img/site/icon_p1.svg" alt="">
+                            <p>0</p>
+                        </div>
+                        <div class="div-p">
+                            <img src="./static/img/site/icon_p2.svg" alt="">
+                            <p>0</p>
+                        </div>
+                        <div class="div-p">
+                            <img src="./static/img/site/icon_p3.svg" alt="">
+                            <p>0</p>
+                        </div>
+                    </div>
+                    <p class="div-total">Chamados na fila: 0</p>
+                </div>
+                <div class="div-desc">
+                    <p>SUPORTE NFCE/NFSE/TEF</p>
+                    <div class="priority">
+                        <div class="div-p">
+                            <img src="./static/img/site/icon_p0.svg" alt="">
+                            <p>0</p>
+                        </div>
+                        <div class="div-p">
+                            <img src="./static/img/site/icon_p1.svg" alt="">
+                            <p>0</p>
+                        </div>
+                        <div class="div-p">
+                            <img src="./static/img/site/icon_p2.svg" alt="">
+                            <p>0</p>
+                        </div>
+                        <div class="div-p">
+                            <img src="./static/img/site/icon_p3.svg" alt="">
+                            <p>0</p>
+                        </div>
+                    </div>
+                    <p class="div-total">Chamados na fila: 0</p>
+                </div>
+                <div class="div-desc">
+                    <p>SUPORTE MONTADORAS</p>
+                    <div class="priority">
+                        <div class="div-p">
+                            <img src="./static/img/site/icon_p0.svg" alt="">
+                            <p>0</p>
+                        </div>
+                        <div class="div-p">
+                            <img src="./static/img/site/icon_p1.svg" alt="">
+                            <p>0</p>
+                        </div>
+                        <div class="div-p">
+                            <img src="./static/img/site/icon_p2.svg" alt="">
+                            <p>0</p>
+                        </div>
+                        <div class="div-p">
+                            <img src="./static/img/site/icon_p3.svg" alt="">
+                            <p>0</p>
+                        </div>
+                    </div>
+                    <p class="div-total">Chamados na fila: 0</p>
+                </div>
+                <div class="div-desc">
+                    <p>SUPORTE MOBILE</p>
+                    <div class="priority">
+                        <div class="div-p">
+                            <img src="./static/img/site/icon_p0.svg" alt="">
+                            <p>0</p>
+                        </div>
+                        <div class="div-p">
+                            <img src="./static/img/site/icon_p1.svg" alt="">
+                            <p>0</p>
+                        </div>
+                        <div class="div-p">
+                            <img src="./static/img/site/icon_p2.svg" alt="">
+                            <p>0</p>
+                        </div>
+                        <div class="div-p">
+                            <img src="./static/img/site/icon_p3.svg" alt="">
+                            <p>0</p>
+                        </div>
+                    </div>
+                    <p class="div-total">Chamados na fila: 0</p>
+                </div>
+                <div class="div-desc">
+                    <p>SUPORTE CONTABIL/FISCAL</p>
+                    <div class="priority">
+                        <div class="div-p">
+                            <img src="./static/img/site/icon_p0.svg" alt="">
+                            <p>0</p>
+                        </div>
+                        <div class="div-p">
+                            <img src="./static/img/site/icon_p1.svg" alt="">
+                            <p>0</p>
+                        </div>
+                        <div class="div-p">
+                            <img src="./static/img/site/icon_p2.svg" alt="">
+                            <p>0</p>
+                        </div>
+                        <div class="div-p">
+                            <img src="./static/img/site/icon_p3.svg" alt="">
+                            <p>0</p>
+                        </div>
+                    </div>
+                    <p class="div-total">Chamados na fila: 0</p>
+                </div>
+                <div class="div-desc">
+                    <p>SUPORTE LINX DMS CC1</p>
+                    <div class="priority">
+                        <div class="div-p">
+                            <img src="./static/img/site/icon_p0.svg" alt="">
+                            <p>0</p>
+                        </div>
+                        <div class="div-p">
+                            <img src="./static/img/site/icon_p1.svg" alt="">
+                            <p>0</p>
+                        </div>
+                        <div class="div-p">
+                            <img src="./static/img/site/icon_p2.svg" alt="">
+                            <p>0</p>
+                        </div>
+                        <div class="div-p">
+                            <img src="./static/img/site/icon_p3.svg" alt="">
+                            <p>0</p>
+                        </div>
+                    </div>
+                    <p class="div-total">Chamados na fila: 0</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

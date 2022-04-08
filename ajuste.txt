@@ -1,0 +1,33 @@
+USE LINXDMSHELP
+
+DECLARE @cnt INT = 0;
+DECLARE @cnt_total INT = 1000;
+
+WHILE @cnt < @cnt_total
+BEGIN
+   insert into helper (USUARIO, EMAIL, SENHA, LIDER) values ('teste', 'teste' ,'123', 'N')
+   SET @cnt = @cnt + 1;
+END;
+
+
+delete from helper;
+
+
+
+
+USE LINXDMSHELP
+
+DECLARE @cnt INT = 0;
+DECLARE @cnt_total INT = 2000;
+
+WHILE @cnt < @cnt_total
+BEGIN
+   insert into gestor (USUARIO, EMAIL, SENHA) values ('teste', 'teste' ,'123')
+   SET @cnt = @cnt + 1;
+END;
+
+
+delete from gestor;
+
+
+insert into gestor (usuario, email, senha) values ('Administrador', 'admin@linx.com.br' ,'$2b$12$PFDA5.rmsz9fQL1B/8.BA.l/Z/7GTZfcqG29iYZvRlwSxmBOi8HM2');

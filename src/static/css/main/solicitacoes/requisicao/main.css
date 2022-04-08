@@ -1,0 +1,104 @@
+.corpo-site {
+    margin-top: 50px !important;
+}
+
+@media (max-width: 768px) {
+    .corpo-site {
+        margin-top: 0px !important;
+    }
+    
+}
+
+.div-card-cabecario {
+    height: 70px;
+    padding: 1%;
+    background-color: #FFFFFF;
+    border-radius: 1px;
+    font-size: 22px;
+}
+
+.div-card {
+    padding: 3%;
+    background-color: #FFFFFF;
+    border-radius: 1px;
+    font-size: 0.875rem;
+}
+
+.div-cod {
+    padding-left: 0 !important;
+}
+
+.btn-cadastro {
+    background-color: #ffffff;
+    color: #211033;
+    border-radius: 1px !important;
+    box-shadow: rgb(0 0 0 / 40%) 0 0 4px;
+    transition: 1s;
+}
+
+.btn-cadastro-salvar {
+    background-color: #5b2e90;
+    color: #ffffff;
+    border-radius: 1px !important;
+    box-shadow: rgb(0 0 0 / 40%) 0 0 4px;
+    transition: 1s;
+}
+
+.btn-cadastro:hover {
+    background-color: #eee0fa;
+    color: #5b2e90;
+    border-radius: 1px !important;
+}
+
+.btn-cadastro-salvar:hover {
+    background-color: rgb(71, 40, 110);
+    color: #ffffff;
+    border-radius: 1px !important;
+}
+
+.div-card-mov {
+    height: 730px;
+    overflow-y: auto;
+    border: 1px solid rgb(211, 209, 209);
+}
+
+.div-card-mov::-webkit-scrollbar {
+    width: 6px;               /* width of the entire scrollbar */
+    height: 6px;
+  }
+  
+.div-card-mov::-webkit-scrollbar-track {
+    background: #ffffff;        /* color of the tracking area */
+}
+  
+.div-card-mov::-webkit-scrollbar-thumb {
+    background: #ffffff;    /* color of the scroll thumb */
+    border-radius: 20px;       /* roundness of the scroll thumb */
+    border: 0.5px solid #b6b5b5;  /* creates padding around scroll thumb */
+}
+
+.list-group-item {
+    border-radius: 10%;
+}
+
+.list-group-item:hover {
+    border: 1px solid rgb(177, 41, 159);
+}
+
+.list-group-item-heading {
+    color: #5b2e90;
+}
+
+.list-group-item-heading small{
+    color: #8b8a8b;
+}
+
+.text-status {
+    color: #242525;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.input-group-text img{
+    width: 15px;
+}

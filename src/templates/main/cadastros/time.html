@@ -1,0 +1,144 @@
+{% extends 'main/global.html' %}
+
+{% block head %}
+    <link rel= "stylesheet" 
+    type= "text/css" 
+    href= "{{url_for('static',filename='css/main/cadastros/main.css')}}">
+{% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="col-12 mb-3">
+        <div class="div-card-cabecario d-flex align-items-center">
+            Manutenção de Times
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4 col-xxl-4">
+        <div class="div-card mb-3">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1"><img src="{{url_for('static',filename='img/site/icon-pesquisa.svg')}}" alt=""></span>
+                <input id="myInput" type="text" class="form-control" placeholder="Pesquisar..." aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+            <div class="table-cad">
+                <table id="myTable" class="table table-bordered table-striped table-hover">
+                    <thead class="header">
+                        <tr>
+                            <th class="text-center" scope="col">Código</th>
+                            <th scope="col">Descrição</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for time in times %}
+                            <a href="">
+                                <tr data-url="{{url_for('cadastroTimeID', time_id=time.id)}}">
+                                    <td class="text-center">{{ time.CODIGO }}</td>
+                                    <td>{{ time.NOME }}</td>
+                                </tr>
+                            </a>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-12 col-lg-8 col-xl-8 col-xxl-8">
+        <div class="div-card">
+            <form method="POST" autocomplete="off">
+                {{ form_time.csrf_token }}
+                <div class="row">
+                    <div class="col-9">
+                        <div class="mb-3 col-7 div-cod">
+                            {% if form_time.codigo.errors %}
+                                {{ form_time.codigo.label(class="form-label") }}
+                                {{ form_time.codigo(class="form-control is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for erro in form_time.codigo.errors %}
+                                        {{ erro }}
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form_time.codigo.label(class="form-label") }}
+                                    {{ form_time.codigo(class="form-control") }}
+                            {% endif %} 
+                        </div>
+                        <div class="mb-3 col-7 div-cod">
+                            {% if form_time.nome.errors %}
+                                {{ form_time.nome.label(class="form-label") }}
+                                {{ form_time.nome(class="form-control is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for erro in form_time.nome.errors %}
+                                        {{ erro }}
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form_time.nome.label(class="form-label") }}
+                                    {{ form_time.nome(class="form-control") }}
+                            {% endif %} 
+                        </div>
+                        <div class="row">
+                            <div class="mb-3 mr-3 col-5">
+                                {% if form_time.helper.errors %}
+                                    {{ form_time.helper.label(class="form-label") }}
+                                    {{ form_time.helper(class="form-control is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for erro in form_time.helper.errors %}
+                                        {{ erro }}
+                                    {% endfor %}
+                                </div>
+                                {% else %}
+                                    {{ form_time.helper.label(class="form-label") }}
+                                    {{ form_time.helper(class="form-control") }}
+                                {% endif %}
+                            </div>
+                            <div class="mb-3 mr-3 col-5">
+                                {% if form_time.gestor.errors %}
+                                    {{ form_time.gestor.label(class="form-label") }}
+                                    {{ form_time.gestor(class="form-control is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for erro in form_time.gestor.errors %}
+                                        {{ erro }}
+                                    {% endfor %}
+                                </div>
+                                {% else %}
+                                    {{ form_time.gestor.label(class="form-label") }}
+                                    {{ form_time.gestor(class="form-control") }}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3 d-flex flex-column mt-5">
+                        {% if request.path == url_for('cadastroTime') %}
+                            {{ form_time.btn_submit_salvar(class="btn btn-cadastro-salvar mb-3", disabled_="disabled") }}
+                            {{ form_time.btn_submit_inserir(class="btn btn-cadastro mb-3") }}
+                            {{ form_time.btn_submit_excluir(class="btn btn-cadastro mb-3", disabled_="disabled") }}
+                        {% else %}
+                            {{ form_time.btn_submit_salvar(class="btn btn-cadastro-salvar mb-3") }}
+                            {{ form_time.btn_submit_redirect(class="btn btn-cadastro mb-3") }}
+                            {{ form_time.btn_submit_excluir(class="btn btn-cadastro mb-3") }}
+                        {% endif %}
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+    $("#myInput").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#myTable tbody tr").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+    });
+    });
+
+    $(document).ready(function(){
+    $('table tr').click(function(){
+        window.location = $(this).data('url');
+        returnfalse;
+    });
+    });
+</script>
+{% endblock %}
