@@ -209,108 +209,160 @@
                                 <th scope="col">Grupo</th>
                                 <th scope="col">Resumo</th>
                                 <th scope="col">Status</th>
-                                <th scope="col"></th>
+                                <th scope="col"> </th>
                             </tr>
                         </thead>
                         <tbody style="overflow:hidden;">
-                            <tr>
-                                <td>
-                                    <div class="sla-fora" data-toggle="tooltip" data-placement="top" title="0h 0min">
-                                         
-                                    </div>
-                                </td>
-                                <td>43562865</td>
-                                <td>@mdo</td>
-                                <td>Mark</td>
-                                <td>Mark</td>
-                                <td>Mark</td>
-                                <td>Mark</td>
-                                <td>Mark</td>
-                                <td><b>
-                                    <div class="dropleft">
-                                        <a type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                          ...
-                                        </a>
-                                        <div class="dropdown-menu">
-                                            <button  class="dropdown-item" href="#">Sol Erro</button >
-                                            <button  class="dropdown-item" href="#">Sol Alteração</button >
-                                            <button  class="dropdown-item" href="#">Sol Serviço</button >
-                                            <button  class="dropdown-item" href="#">Sol Compilação</button >
-                                            <button  class="dropdown-item" href="#">Sol Importação</button >
-                                            <button  class="dropdown-item" href="#">Sol Help</button >
-                                            <div class="dropdown-divider"></div>
-                                            <button  class="dropdown-item" href="#">Movimentações</button >
+                            {% for tp in tps_analistas %}
+                                <tr>
+                                    <td>
+                                        <div class="sla-dentro" data-toggle="tooltip" data-placement="top" title="0h 0min">
+                                
                                         </div>
-                                    </div>
-                                </b></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="sla-pra-estourar" data-toggle="tooltip" data-placement="top" title="6h 10min">
-                                         
-                                    </div>
-                                </td>
-                                <td>43562865</td>
-                                <td>@mdo</td>
-                                <td>Mark</td>
-                                <td>Mark</td>
-                                <td>Mark</td>
-                                <td>Mark</td>
-                                <td>Mark</td>
-                                <td><b>
-                                    <div class="dropleft">
-                                        <a type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                          ...
-                                        </a>
-                                        <div class="dropdown-menu">
-                                            <button  class="dropdown-item" href="#">Sol Erro</button >
-                                            <button  class="dropdown-item" href="#">Sol Alteração</button >
-                                            <button  class="dropdown-item" href="#">Sol Serviço</button >
-                                            <button  class="dropdown-item" href="#">Sol Compilação</button >
-                                            <button  class="dropdown-item" href="#">Sol Importação</button >
-                                            <button  class="dropdown-item" href="#">Sol Help</button >
-                                            <div class="dropdown-divider"></div>
-                                            <button  class="dropdown-item" href="#">Movimentações</button >
-                                        </div>
-                                    </div>
-                                </b></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="sla-dentro" data-toggle="tooltip" data-placement="top" title="36h 40min">
-                                         
-                                    </div>
-                                </td>
-                                <td>43562865</td>
-                                <td>@mdo</td>
-                                <td>Mark</td>
-                                <td>Mark</td>
-                                <td>Mark</td>
-                                <td>Mark</td>
-                                <td>Mark</td>
-                                <td><b>
-                                    <div class="dropleft">
-                                        <a type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                          ...
-                                        </a>
-                                        <div class="dropdown-menu">
-                                            <button  class="dropdown-item" href="#">Sol Erro</button >
-                                            <button  class="dropdown-item" href="#">Sol Alteração</button >
-                                            <button  class="dropdown-item" href="#">Sol Serviço</button >
-                                            <button  class="dropdown-item" href="#">Sol Compilação</button >
-                                            <button  class="dropdown-item" href="#">Sol Importação</button >
-                                            <button  class="dropdown-item" href="#">Sol Help</button >
-                                            <div class="dropdown-divider"></div>
-                                            <button  class="dropdown-item" href="#">Movimentações</button >
-                                        </div>
-                                    </div>
-                                </b></td>
-                            </tr>
+                                    </td>
+                                    <td>{{ tp.NRO_TP }}</td>
+                                    <td>{{ tp.PRIORIDADE }}</td>
+                                    <td>{{ tp.DIAS_ABERTO }}</td>
+                                    <td>{{ tp.DTA_ULT_MOV }}</td>
+                                    <td>{{ tp.GRUPO }}</td>
+                                    <td>{{ tp.RESUMO }}</td>
+                                    <td>{{ tp.STATUS }}</td>
+                                    <td><b>
+                                            <div class="dropleft">
+                                                <a type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                                                    aria-expanded="false">
+                                                    ...
+                                                </a>
+                                                <div class="dropdown-menu">
+                                                    <button class="dropdown-item" href="#">Sol Erro</button>
+                                                    <button class="dropdown-item" href="#">Sol Alteração</button>
+                                                    <button class="dropdown-item" href="#">Sol Serviço</button>
+                                                    <button class="dropdown-item" href="#">Sol Compilação</button>
+                                                    <button class="dropdown-item" href="#">Sol Importação</button>
+                                                    <button class="dropdown-item" href="#">Sol Help</button>
+                                                    <div class="dropdown-divider"></div>
+                                                    <button class="dropdown-item" href="#">Movimentações</button>
+                                                </div>
+                                            </div>
+                                        </b>
+                                    </td>
+                                </tr>
+                            {% endfor %}
                         </tbody>
                     </table>
                 </div>
-                <div class="tab-pane fade" id="nav-mais15" role="tabpanel" aria-labelledby="nav-mais15-tab">...</div>
-                <div class="tab-pane fade" id="nav-backlog" role="tabpanel" aria-labelledby="nav-backlog-tab">...</div>
+                <div class="tab-pane fade" id="nav-mais15" role="tabpanel" aria-labelledby="nav-mais15-tab">
+                    <table class="table table-striped table-hover">
+                        <thead class="header">
+                            <tr>
+                                <th scope="col">SLA</th>
+                                <th scope="col">Tarefa</th>
+                                <th scope="col">Prioridade</th>
+                                <th scope="col">Dias Aberto</th>
+                                <th scope="col">Ultima Mov</th>
+                                <th scope="col">Grupo</th>
+                                <th scope="col">Resumo</th>
+                                <th scope="col">Status</th>
+                                <th scope="col"> </th>
+                            </tr>
+                        </thead>
+                        <tbody style="overflow:hidden;">
+                            {% for tp in tps_analistas %}
+                                {% if tp.DIAS_ABERTO >= 15 %}
+                                    <tr>
+                                        <td>
+                                            <div class="sla-dentro" data-toggle="tooltip" data-placement="top" title="0h 0min">
+                                    
+                                            </div>
+                                        </td>
+                                        <td>{{ tp.NRO_TP }}</td>
+                                        <td>{{ tp.PRIORIDADE }}</td>
+                                        <td>{{ tp.DIAS_ABERTO }}</td>
+                                        <td>{{ tp.DTA_ULT_MOV }}</td>
+                                        <td>{{ tp.GRUPO }}</td>
+                                        <td>{{ tp.RESUMO }}</td>
+                                        <td>{{ tp.STATUS }}</td>
+                                        <td><b>
+                                                <div class="dropleft">
+                                                    <a type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                                                        aria-expanded="false">
+                                                        ...
+                                                    </a>
+                                                    <div class="dropdown-menu">
+                                                        <button class="dropdown-item" href="#">Sol Erro</button>
+                                                        <button class="dropdown-item" href="#">Sol Alteração</button>
+                                                        <button class="dropdown-item" href="#">Sol Serviço</button>
+                                                        <button class="dropdown-item" href="#">Sol Compilação</button>
+                                                        <button class="dropdown-item" href="#">Sol Importação</button>
+                                                        <button class="dropdown-item" href="#">Sol Help</button>
+                                                        <div class="dropdown-divider"></div>
+                                                        <button class="dropdown-item" href="#">Movimentações</button>
+                                                    </div>
+                                                </div>
+                                            </b>
+                                        </td>
+                                    </tr>
+                                {% endif %}
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tab-pane fade" id="nav-backlog" role="tabpanel" aria-labelledby="nav-backlog-tab">
+                    <table class="table table-striped table-hover">
+                        <thead class="header">
+                            <tr>
+                                <th scope="col">SLA</th>
+                                <th scope="col">Tarefa</th>
+                                <th scope="col">Prioridade</th>
+                                <th scope="col">Dias Aberto</th>
+                                <th scope="col">Ultima Mov</th>
+                                <th scope="col">Grupo</th>
+                                <th scope="col">Resumo</th>
+                                <th scope="col">Status</th>
+                                <th scope="col"> </th>
+                            </tr>
+                        </thead>
+                        <tbody style="overflow:hidden;">
+                            {% for tp in tps_analistas %}
+                                {% if data_hoje >= tp.DTA_FIM %}
+                                    <tr>
+                                        <td>
+                                            <div class="sla-dentro" data-toggle="tooltip" data-placement="top" title="0h 0min">
+                                    
+                                            </div>
+                                        </td>
+                                        <td>{{ tp.NRO_TP }}</td>
+                                        <td>{{ tp.PRIORIDADE }}</td>
+                                        <td>{{ tp.DIAS_ABERTO }}</td>
+                                        <td>{{ tp.DTA_ULT_MOV }}</td>
+                                        <td>{{ tp.GRUPO }}</td>
+                                        <td>{{ tp.RESUMO }}</td>
+                                        <td>{{ tp.STATUS }}</td>
+                                        <td><b>
+                                                <div class="dropleft">
+                                                    <a type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                                                        aria-expanded="false">
+                                                        ...
+                                                    </a>
+                                                    <div class="dropdown-menu">
+                                                        <button class="dropdown-item" href="#">Sol Erro</button>
+                                                        <button class="dropdown-item" href="#">Sol Alteração</button>
+                                                        <button class="dropdown-item" href="#">Sol Serviço</button>
+                                                        <button class="dropdown-item" href="#">Sol Compilação</button>
+                                                        <button class="dropdown-item" href="#">Sol Importação</button>
+                                                        <button class="dropdown-item" href="#">Sol Help</button>
+                                                        <div class="dropdown-divider"></div>
+                                                        <button class="dropdown-item" href="#">Movimentações</button>
+                                                    </div>
+                                                </div>
+                                            </b>
+                                        </td>
+                                    </tr>
+                                {% endif %}
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
         <div class="div-card-bases mb-4">
@@ -420,220 +472,242 @@
                     <div class="priority">
                         <div class="div-p">
                             <img src="./static/img/site/icon_p0.svg" alt="">
-                            <p>0</p>
+                            <p>{{ tps_gerais.APOLLO_p0 }}</p>
                         </div>
                         <div class="div-p">
                             <img src="./static/img/site/icon_p1.svg" alt="">
-                            <p>0</p>
+                            <p>{{ tps_gerais.APOLLO_p1}}</p>
                         </div>
                         <div class="div-p">
                             <img src="./static/img/site/icon_p2.svg" alt="">
-                            <p>0</p>
+                            <p>{{ tps_gerais.APOLLO_p2 }}</p>
                         </div>
                         <div class="div-p">
                             <img src="./static/img/site/icon_p3.svg" alt="">
-                            <p>0</p>
+                            <p>{{ tps_gerais.APOLLO_p3 }}</p>
                         </div>
                     </div>
-                    <p class="div-total">Chamados na fila: 0</p>
+                    <p class="div-total">Chamados na fila: {{ tps_gerais.APOLLO_tot }}</p>
                 </div> 
                 <div class="div-desc">
                     <p>SUPORTE BRAVOS</p>
                     <div class="priority">
                         <div class="div-p">
                             <img src="./static/img/site/icon_p0.svg" alt="">
-                            <p>0</p>
+                            <p>{{ tps_gerais.BRAVOS_p0 }}</p>
                         </div>
                         <div class="div-p">
                             <img src="./static/img/site/icon_p1.svg" alt="">
-                            <p>0</p>
+                            <p>{{ tps_gerais.BRAVOS_p1 }}</p>
                         </div>
                         <div class="div-p">
                             <img src="./static/img/site/icon_p2.svg" alt="">
-                            <p>0</p>
+                            <p>{{ tps_gerais.BRAVOS_p2 }}</p>
                         </div>
                         <div class="div-p">
                             <img src="./static/img/site/icon_p3.svg" alt="">
-                            <p>0</p>
+                            <p>{{ tps_gerais.BRAVOS_p3 }}</p>
                         </div>
                     </div>
-                    <p class="div-total">Chamados na fila: 0</p>
+                    <p class="div-total">Chamados na fila: {{ tps_gerais.BRAVOS_tot }}</p>
                 </div>
                 <div class="div-desc">
                     <p>SUPORTE TOYOTA</p>
                     <div class="priority">
                         <div class="div-p">
                             <img src="./static/img/site/icon_p0.svg" alt="">
-                            <p>0</p>
+                            <p>{{ tps_gerais.TOYOTA_p0 }}</p>
                         </div>
                         <div class="div-p">
                             <img src="./static/img/site/icon_p1.svg" alt="">
-                            <p>0</p>
+                            <p>{{ tps_gerais.TOYOTA_p1 }}</p>
                         </div>
                         <div class="div-p">
                             <img src="./static/img/site/icon_p2.svg" alt="">
-                            <p>0</p>
+                            <p>{{ tps_gerais.TOYOTA_p2 }}</p>
                         </div>
                         <div class="div-p">
                             <img src="./static/img/site/icon_p3.svg" alt="">
-                            <p>0</p>
+                            <p>{{ tps_gerais.TOYOTA_p3 }}</p>
                         </div>
                     </div>
-                    <p class="div-total">Chamados na fila: 0</p>
+                    <p class="div-total">Chamados na fila: {{ tps_gerais.TOYOTA_tot }}</p>
+                </div>
+                <div class="div-desc">
+                    <p>SUPORTE AUTOSHOP</p>
+                    <div class="priority">
+                        <div class="div-p">
+                            <img src="./static/img/site/icon_p0.svg" alt="">
+                            <p>{{ tps_gerais.AUTOSHOP_p0 }}</p>
+                        </div>
+                        <div class="div-p">
+                            <img src="./static/img/site/icon_p1.svg" alt="">
+                            <p>{{ tps_gerais.AUTOSHOP_p1 }}</p>
+                        </div>
+                        <div class="div-p">
+                            <img src="./static/img/site/icon_p2.svg" alt="">
+                            <p>{{ tps_gerais.AUTOSHOP_p2 }}</p>
+                        </div>
+                        <div class="div-p">
+                            <img src="./static/img/site/icon_p3.svg" alt="">
+                            <p>{{ tps_gerais.AUTOSHOP_p3 }}</p>
+                        </div>
+                    </div>
+                    <p class="div-total">Chamados na fila: {{ tps_gerais.AUTOSHOP_tot }}</p>
                 </div>
                 <div class="div-desc">
                     <p>SUPORTE BERÇÁRIO</p>
                     <div class="priority">
                         <div class="div-p">
                             <img src="./static/img/site/icon_p0.svg" alt="">
-                            <p>0</p>
+                            <p>{{ tps_gerais.BERCARIO_p0 }}</p>
                         </div>
                         <div class="div-p">
                             <img src="./static/img/site/icon_p1.svg" alt="">
-                            <p>0</p>
+                            <p>{{ tps_gerais.BERCARIO_p1 }}</p>
                         </div>
                         <div class="div-p">
                             <img src="./static/img/site/icon_p2.svg" alt="">
-                            <p>0</p>
+                            <p>{{ tps_gerais.BERCARIO_p2 }}</p>
                         </div>
                         <div class="div-p">
                             <img src="./static/img/site/icon_p3.svg" alt="">
-                            <p>0</p>
+                            <p>{{ tps_gerais.BERCARIO_p3 }}</p>
                         </div>
                     </div>
-                    <p class="div-total">Chamados na fila: 0</p>
+                    <p class="div-total">Chamados na fila: {{ tps_gerais.BERCARIO_tot }}</p>
                 </div>
                 <div class="div-desc">
                     <p>SUPORTE FINANCEIRO</p>
                     <div class="priority">
                         <div class="div-p">
                             <img src="./static/img/site/icon_p0.svg" alt="">
-                            <p>0</p>
+                            <p>{{ tps_gerais.FINANCEIRO_p0 }}</p>
                         </div>
                         <div class="div-p">
                             <img src="./static/img/site/icon_p1.svg" alt="">
-                            <p>0</p>
+                            <p>{{ tps_gerais.FINANCEIRO_p1 }}</p>
                         </div>
                         <div class="div-p">
                             <img src="./static/img/site/icon_p2.svg" alt="">
-                            <p>0</p>
+                            <p>{{ tps_gerais.FINANCEIRO_p2 }}</p>
                         </div>
                         <div class="div-p">
                             <img src="./static/img/site/icon_p3.svg" alt="">
-                            <p>0</p>
+                            <p>{{ tps_gerais.FINANCEIRO_p3 }}</p>
                         </div>
                     </div>
-                    <p class="div-total">Chamados na fila: 0</p>
+                    <p class="div-total">Chamados na fila: {{ tps_gerais.FINANCEIRO_tot }}</p>
                 </div>
                 <div class="div-desc">
                     <p>SUPORTE NFCE/NFSE/TEF</p>
                     <div class="priority">
                         <div class="div-p">
                             <img src="./static/img/site/icon_p0.svg" alt="">
-                            <p>0</p>
+                            <p>{{ tps_gerais.NFCE_p0 }}</p>
                         </div>
                         <div class="div-p">
                             <img src="./static/img/site/icon_p1.svg" alt="">
-                            <p>0</p>
+                            <p>{{ tps_gerais.NFCE_p1 }}</p>
                         </div>
                         <div class="div-p">
                             <img src="./static/img/site/icon_p2.svg" alt="">
-                            <p>0</p>
+                            <p>{{ tps_gerais.NFCE_p2 }}</p>
                         </div>
                         <div class="div-p">
                             <img src="./static/img/site/icon_p3.svg" alt="">
-                            <p>0</p>
+                            <p>{{ tps_gerais.NFCE_p3 }}</p>
                         </div>
                     </div>
-                    <p class="div-total">Chamados na fila: 0</p>
+                    <p class="div-total">Chamados na fila: {{ tps_gerais.NFCE_tot }}</p>
                 </div>
                 <div class="div-desc">
                     <p>SUPORTE MONTADORAS</p>
                     <div class="priority">
                         <div class="div-p">
                             <img src="./static/img/site/icon_p0.svg" alt="">
-                            <p>0</p>
+                            <p>{{ tps_gerais.MONTADORA_p0 }}</p>
                         </div>
                         <div class="div-p">
                             <img src="./static/img/site/icon_p1.svg" alt="">
-                            <p>0</p>
+                            <p>{{ tps_gerais.MONTADORA_p1 }}</p>
                         </div>
                         <div class="div-p">
                             <img src="./static/img/site/icon_p2.svg" alt="">
-                            <p>0</p>
+                            <p>{{ tps_gerais.MONTADORA_p2 }}</p>
                         </div>
                         <div class="div-p">
                             <img src="./static/img/site/icon_p3.svg" alt="">
-                            <p>0</p>
+                            <p>{{ tps_gerais.MONTADORA_p3 }}</p>
                         </div>
                     </div>
-                    <p class="div-total">Chamados na fila: 0</p>
+                    <p class="div-total">Chamados na fila: {{ tps_gerais.MONTADORA_tot }}</p>
                 </div>
                 <div class="div-desc">
                     <p>SUPORTE MOBILE</p>
                     <div class="priority">
                         <div class="div-p">
                             <img src="./static/img/site/icon_p0.svg" alt="">
-                            <p>0</p>
+                            <p>{{ tps_gerais.MOBILE_p0 }}</p>
                         </div>
                         <div class="div-p">
                             <img src="./static/img/site/icon_p1.svg" alt="">
-                            <p>0</p>
+                            <p>{{ tps_gerais.MOBILE_p1 }}</p>
                         </div>
                         <div class="div-p">
                             <img src="./static/img/site/icon_p2.svg" alt="">
-                            <p>0</p>
+                            <p>{{ tps_gerais.MOBILE_p2 }}</p>
                         </div>
                         <div class="div-p">
                             <img src="./static/img/site/icon_p3.svg" alt="">
-                            <p>0</p>
+                            <p>{{ tps_gerais.MOBILE_p3 }}</p>
                         </div>
                     </div>
-                    <p class="div-total">Chamados na fila: 0</p>
+                    <p class="div-total">Chamados na fila: {{ tps_gerais.MOBILE_tot }}</p>
                 </div>
                 <div class="div-desc">
                     <p>SUPORTE CONTABIL/FISCAL</p>
                     <div class="priority">
                         <div class="div-p">
                             <img src="./static/img/site/icon_p0.svg" alt="">
-                            <p>0</p>
+                            <p>{{ tps_gerais.CONTABIL_p0 }}</p>
                         </div>
                         <div class="div-p">
                             <img src="./static/img/site/icon_p1.svg" alt="">
-                            <p>0</p>
+                            <p>{{ tps_gerais.CONTABIL_p1 }}</p>
                         </div>
                         <div class="div-p">
                             <img src="./static/img/site/icon_p2.svg" alt="">
-                            <p>0</p>
+                            <p>{{ tps_gerais.CONTABIL_p2 }}</p>
                         </div>
                         <div class="div-p">
                             <img src="./static/img/site/icon_p3.svg" alt="">
-                            <p>0</p>
+                            <p>{{ tps_gerais.CONTABIL_p3 }}</p>
                         </div>
                     </div>
-                    <p class="div-total">Chamados na fila: 0</p>
+                    <p class="div-total">Chamados na fila: {{ tps_gerais.CONTABIL_tot }}</p>
                 </div>
                 <div class="div-desc">
                     <p>SUPORTE LINX DMS CC1</p>
                     <div class="priority">
                         <div class="div-p">
                             <img src="./static/img/site/icon_p0.svg" alt="">
-                            <p>0</p>
+                            <p>{{ tps_gerais.CC1_p0 }}</p>
                         </div>
                         <div class="div-p">
                             <img src="./static/img/site/icon_p1.svg" alt="">
-                            <p>0</p>
+                            <p>{{ tps_gerais.CC1_p1 }}</p>
                         </div>
                         <div class="div-p">
                             <img src="./static/img/site/icon_p2.svg" alt="">
-                            <p>0</p>
+                            <p>{{ tps_gerais.CC1_p2 }}</p>
                         </div>
                         <div class="div-p">
                             <img src="./static/img/site/icon_p3.svg" alt="">
-                            <p>0</p>
+                            <p>{{ tps_gerais.CC1_p3 }}</p>
                         </div>
                     </div>
-                    <p class="div-total">Chamados na fila: 0</p>
+                    <p class="div-total">Chamados na fila: {{ tps_gerais.CC1_tot }}</p>
                 </div>
             </div>
         </div>
