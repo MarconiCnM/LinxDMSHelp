@@ -154,20 +154,25 @@
  }
 
  .open h6{
-    font-size: .875rem;
+    font-size: .775rem;
  }
 
  .closed h6{
-    font-size: .875rem;
+    font-size: .775rem;
  }
 
 
 .btn {
-    font-size: .875rem !important;
+    font-size: .775rem !important;
     margin: 10px;
     cursor: pointer;
     background-color: #5b2e90;
     border-radius: 3px !important;
+}
+
+.btn:hover {
+    background-color: #572e86;
+    transition: 0.5s;
 }
 
 .btn a:link, .btn a:visited {
@@ -176,6 +181,8 @@
 
 .btn a:hover {
     color: #fff !important;
+    cursor: pointer;
+    text-decoration: none;
 }
 
 .div-card-lista-filas {
@@ -212,7 +219,7 @@
 .div-desc p {
     margin-top: 0;
     margin-bottom: -5%;
-    font-size: .875rem !important;
+    font-size: .775rem !important;
 }
 
 
@@ -243,7 +250,7 @@
 .div-total {
     margin-top: -5% !important;
     margin-bottom: 0;
-    font-size: .875rem !important;
+    font-size: .775rem !important;
 }
 
 /* ---------------------- Conteudo do card de controle de tps ----------------------*/
@@ -252,7 +259,7 @@
 }
 
 .div-card-analitico {
-    height: 550px;
+    height: 440px;
     padding: 2%;
     display: flex;
     flex-direction: column;
@@ -262,15 +269,23 @@
     background-color: #FFFFFF;
     box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.25);
     border-radius: 1px;
-    font-size: 0.875rem !important;
+    font-size: 0.675rem !important;
 }
 
 .dropdown-menu {
-    font-size: 0.875rem !important;
+    font-size: 0.775rem !important;
+}
+
+.dropdown-menu a {
+    color: #0a030f !important;
+}
+
+.dropdown-menu a:link, .dropdown-menu a:visited {
+    color: #0a030f !important;
 }
 
 .div-header-analitico span {
-    font-size: 0.8rem !important;
+    font-size: 0.7rem !important;
 }
 
 .sla-dentro {
@@ -301,7 +316,7 @@
 }
 
 .div-header-bases span {
-    font-size: 0.8rem !important;
+    font-size: 0.7rem !important;
 }
 
 .table-tps {
@@ -342,6 +357,7 @@
 
 }
 
+
 .div-card-bases {
     height: 355px;
     padding: 2%;
@@ -353,7 +369,7 @@
     background-color: #FFFFFF;
     box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.25);
     border-radius: 1px;
-    font-size: 0.875rem !important;
+    font-size: 0.775rem !important;
 }
 
 .table-bases {

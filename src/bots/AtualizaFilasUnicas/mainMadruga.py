@@ -9,8 +9,8 @@ options.add_experimental_option('excludeSwitches', ['enable-logging'])
 options.add_argument("headless")
 driver = webdriver.Chrome(options=options)
 
-host = "POADSKFS015444"
-db = "HELP"
+host = "POANOTFS013816"
+db = "LINXDMSHELP"
 user = "SA"
 password = "Linx@2021*"
 sqlcmd = (
@@ -18,22 +18,19 @@ sqlcmd = (
 
 lista_filas = [
     'DOUGLAS.MUNHOZ',
-    'GABRIELE.RODRIGUES',
     'HENRIQUE.JAEGER',
     'JULIANA.RUFATO',
     'NAIARA.ANDRADE',
-    'NICOLAS.LERMEN',
-    'ADRIANA.COSTA',
+    'NICOLAS.LERMEN'
 ]
 
 while True:
-    sleep(720)
     for fila in lista_filas:
         try:
             var = ''
             lista = 0
 
-            query_delete = f"delete from control_tps_analyst where analista = '{fila.replace('.', ' ').title()}'"
+            query_delete = f"delete from CONTROLE_TPS_ANALISTAS where analista = '{fila.replace('.', ' ').title()}'"
             subprocess.call([sqlcmd, "-U", user, "-P", password,
                             "-S", host, "-d", db, "-Q", query_delete])
 
@@ -98,9 +95,12 @@ while True:
                     dta_encerramento = driver.find_element(By.XPATH,
                                                       f"/html/body/table[1]/tbody/tr[4]/td[1]/font/strong/font[2]").text
 
+                    prioridade = driver.find_element(By.XPATH,
+                                                      f"/html/body/table[1]/tbody/tr[3]/td[1]/p/font/font/strong").text
+
                     lista += 1
 
-                    query_insert = f"insert control_tps_analyst values ({nro_tp}, '{grupo}', '{resumo}', {qtd_dias}, '{status}', '{fila.replace('.', ' ').title()}', '{dta_ult_mov[6:]}', '{dta_encerramento}')"
+                    query_insert = f"insert CONTROLE_TPS_ANALISTAS values ({nro_tp}, '{fila.replace('.', ' ').title()}', '{grupo}', '{resumo}', {qtd_dias}, '{dta_ult_mov[6:]}', '{dta_encerramento}', '{status}', '{prioridade}')"
                     subprocess.call(
                         [sqlcmd, "-U", user, "-P", password, "-S", host, "-d", db, "-Q", query_insert])
 

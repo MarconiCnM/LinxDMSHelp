@@ -201,11 +201,11 @@
                     <table class="table table-striped table-hover">
                         <thead class="header">
                             <tr>
-                                <th scope="col">SLA</th>
+                                <th scope="col">#</th>
                                 <th scope="col">Tarefa</th>
                                 <th scope="col">Prioridade</th>
                                 <th scope="col">Dias Aberto</th>
-                                <th scope="col">Ultima Mov</th>
+                                <th scope="col">Ult Mov</th>
                                 <th scope="col">Grupo</th>
                                 <th scope="col">Resumo</th>
                                 <th scope="col">Status</th>
@@ -213,13 +213,9 @@
                             </tr>
                         </thead>
                         <tbody style="overflow:hidden;">
-                            {% for tp in tps_analistas %}
+                            {% for count, tp in tps_analistas %}
                                 <tr>
-                                    <td>
-                                        <div class="sla-dentro" data-toggle="tooltip" data-placement="top" title="0h 0min">
-                                
-                                        </div>
-                                    </td>
+                                    <td>{{ count }}</td>
                                     <td>{{ tp.NRO_TP }}</td>
                                     <td>{{ tp.PRIORIDADE }}</td>
                                     <td>{{ tp.DIAS_ABERTO }}</td>
@@ -241,7 +237,7 @@
                                                     <button class="dropdown-item" href="#">Sol Importação</button>
                                                     <button class="dropdown-item" href="#">Sol Help</button>
                                                     <div class="dropdown-divider"></div>
-                                                    <button class="dropdown-item" href="#">Movimentações</button>
+                                                    <a class="dropdown-item" href="http://a-srv63/SUPORTE/followup_find.asp?OBJETO_ID={{ tp.NRO_TP }}" target="_blank">Movimentações</a>
                                                 </div>
                                             </div>
                                         </b>
@@ -255,11 +251,11 @@
                     <table class="table table-striped table-hover">
                         <thead class="header">
                             <tr>
-                                <th scope="col">SLA</th>
+                                <th scope="col">#</th>
                                 <th scope="col">Tarefa</th>
                                 <th scope="col">Prioridade</th>
                                 <th scope="col">Dias Aberto</th>
-                                <th scope="col">Ultima Mov</th>
+                                <th scope="col">Ult Mov</th>
                                 <th scope="col">Grupo</th>
                                 <th scope="col">Resumo</th>
                                 <th scope="col">Status</th>
@@ -267,14 +263,9 @@
                             </tr>
                         </thead>
                         <tbody style="overflow:hidden;">
-                            {% for tp in tps_analistas %}
-                                {% if tp.DIAS_ABERTO >= 15 %}
+                            {% for count, tp in tps_analistas15 %}
                                     <tr>
-                                        <td>
-                                            <div class="sla-dentro" data-toggle="tooltip" data-placement="top" title="0h 0min">
-                                    
-                                            </div>
-                                        </td>
+                                        <td>{{ count }}</td>
                                         <td>{{ tp.NRO_TP }}</td>
                                         <td>{{ tp.PRIORIDADE }}</td>
                                         <td>{{ tp.DIAS_ABERTO }}</td>
@@ -296,13 +287,12 @@
                                                         <button class="dropdown-item" href="#">Sol Importação</button>
                                                         <button class="dropdown-item" href="#">Sol Help</button>
                                                         <div class="dropdown-divider"></div>
-                                                        <button class="dropdown-item" href="#">Movimentações</button>
+                                                        <a class="dropdown-item" href="http://a-srv63/SUPORTE/followup_find.asp?OBJETO_ID={{ tp.NRO_TP }}" target="_blank">Movimentações</a>
                                                     </div>
                                                 </div>
                                             </b>
                                         </td>
                                     </tr>
-                                {% endif %}
                             {% endfor %}
                         </tbody>
                     </table>
@@ -311,11 +301,11 @@
                     <table class="table table-striped table-hover">
                         <thead class="header">
                             <tr>
-                                <th scope="col">SLA</th>
+                                <th scope="col">#</th>
                                 <th scope="col">Tarefa</th>
                                 <th scope="col">Prioridade</th>
                                 <th scope="col">Dias Aberto</th>
-                                <th scope="col">Ultima Mov</th>
+                                <th scope="col">Ult Mov</th>
                                 <th scope="col">Grupo</th>
                                 <th scope="col">Resumo</th>
                                 <th scope="col">Status</th>
@@ -323,14 +313,9 @@
                             </tr>
                         </thead>
                         <tbody style="overflow:hidden;">
-                            {% for tp in tps_analistas %}
-                                {% if data_hoje >= tp.DTA_FIM %}
+                            {% for count, tp in tps_backlog %}
                                     <tr>
-                                        <td>
-                                            <div class="sla-dentro" data-toggle="tooltip" data-placement="top" title="0h 0min">
-                                    
-                                            </div>
-                                        </td>
+                                        <td>{{ count }}</td>
                                         <td>{{ tp.NRO_TP }}</td>
                                         <td>{{ tp.PRIORIDADE }}</td>
                                         <td>{{ tp.DIAS_ABERTO }}</td>
@@ -352,13 +337,12 @@
                                                         <button class="dropdown-item" href="#">Sol Importação</button>
                                                         <button class="dropdown-item" href="#">Sol Help</button>
                                                         <div class="dropdown-divider"></div>
-                                                        <button class="dropdown-item" href="#">Movimentações</button>
+                                                        <a class="dropdown-item" href="http://a-srv63/SUPORTE/followup_find.asp?OBJETO_ID={{ tp.NRO_TP }}" target="_blank">Movimentações</a>
                                                     </div>
                                                 </div>
                                             </b>
                                         </td>
                                     </tr>
-                                {% endif %}
                             {% endfor %}
                         </tbody>
                     </table>

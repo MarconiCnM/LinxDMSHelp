@@ -1,6 +1,4 @@
-import os
 import subprocess
-from typing import get_origin
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 
@@ -9,7 +7,7 @@ options.add_experimental_option('excludeSwitches', ['enable-logging'])
 options.add_argument("headless")
 driver = webdriver.Chrome(options=options)
 
-host = "POADSKFS015444"
+host = "POANOTFS013816"
 db = "LINXDMSHELP"
 user = "SA"
 password = "Linx@2021*"

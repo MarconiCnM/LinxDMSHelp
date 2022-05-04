@@ -1,8 +1,10 @@
 {% extends 'main/global.html' %}
 
 {% block head %}
-<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/main/dashboard.css')}}">
-
+    <link rel= "stylesheet" 
+        type= "text/css" 
+        href= "{{url_for('static',filename='css/main/dashboard.css')}}">
+    
 {% endblock %}
 
 {% block body %}
@@ -106,7 +108,7 @@
                     <div class="col-sm-12 col-md-6 col-lg-4 col-xl-2 col-xxl-2 box-card">
                         <div class="card card-body">
                             <h6 class="title-card">Importação</h6>
-                            <img class="img-card-sol" src="./static/img/site/icon_import_card.svg" alt="">
+                            <img class="img-card-sol" src="./static/img/site/icon_import_card.svg" alt=""> 
                             <div class="numbers">
                                 <div class="open">
                                     <h6>0</h6>
@@ -129,7 +131,7 @@
                     <div class="col-sm-12 col-md-6 col-lg-4 col-xl-2 col-xxl-2 box-card">
                         <div class="card card-body">
                             <h6 class="title-card">Share</h6>
-                            <img class="img-card-sol" src="./static/img/site/icon_share_card.svg" alt="">
+                            <img class="img-card-sol" src="./static/img/site/icon_share_card.svg" alt=""> 
                             <div class="numbers">
                                 <div class="open">
                                     <h6>0</h6>
@@ -152,7 +154,7 @@
                     <div class="col-sm-12 col-md-6 col-lg-4 col-xl-2 col-xxl-2 box-card">
                         <div class="card card-body">
                             <h6 class="title-card">Help</h6>
-                            <img class="img-card-sol" src="./static/img/site/icon_help_card.svg" alt="">
+                            <img class="img-card-sol" src="./static/img/site/icon_help_card.svg" alt=""> 
                             <div class="numbers">
                                 <div class="open">
                                     <h6>0</h6>
@@ -173,12 +175,10 @@
                 </div>
             </div>
             <a class="carousel-control-prev w-auto" href="#recipeCarousel" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon bg-dark border border-dark rounded-circle"
-                    aria-hidden="true"></span>
+                <span class="carousel-control-prev-icon bg-dark border border-dark rounded-circle" aria-hidden="true"></span>
             </a>
             <a class="carousel-control-next w-auto" href="#recipeCarousel" role="button" data-slide="next">
-                <span class="carousel-control-next-icon bg-dark border border-dark rounded-circle"
-                    aria-hidden="true"></span>
+                <span class="carousel-control-next-icon bg-dark border border-dark rounded-circle" aria-hidden="true"></span>
             </a>
         </div>
     </div>
@@ -190,12 +190,10 @@
                 <h6 style="margin-left: 2px;">Listagem de TPs | <span>Tempo de atualização 10min</span></h6>
                 <nav style="width: 30%;">
                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                        <a class="nav-item nav-link active" id="nav-geral-tab" data-toggle="tab" href="#nav-geral"
-                            role="tab" aria-controls="nav-geral" aria-selected="true">Fila geral</a>
-                        <a class="nav-item nav-link" id="nav-mais15-tab" data-toggle="tab" href="#nav-mais15" role="tab"
-                            aria-controls="nav-mais15" aria-selected="false">+15</a>
-                        <a class="nav-item nav-link" id="nav-backlog-tab" data-toggle="tab" href="#nav-backlog"
-                            role="tab" aria-controls="nav-backlog" aria-selected="false">Backlog</a>
+                        <a class="nav-item nav-link active" id="nav-geral-tab" data-toggle="tab" href="#nav-geral" role="tab" aria-controls="nav-geral" aria-selected="true">Listagem</a>
+                        <a class="nav-item nav-link" id="nav-geral-tab" data-toggle="tab" href="#nav-list" role="tab" aria-controls="nav-list" aria-selected="true">Fila geral</a>
+                        <a class="nav-item nav-link" id="nav-mais15-tab" data-toggle="tab" href="#nav-mais15" role="tab" aria-controls="nav-mais15" aria-selected="false">+15</a>
+                        <a class="nav-item nav-link" id="nav-backlog-tab" data-toggle="tab" href="#nav-backlog" role="tab" aria-controls="nav-backlog" aria-selected="false">Backlog</a>
                     </div>
                 </nav>
             </div>
@@ -204,12 +202,48 @@
                     <table class="table table-striped table-hover">
                         <thead class="header">
                             <tr>
-                                <th scope="col">SLA</th>
+                                <th scope="col">Analista</th>
+                                <th scope="col">Chamados na fila</th>
+                                <th scope="col">Chamados +15</th>
+                                <th scope="col">Backlogs</th>
+                            </tr>
+                        </thead>
+                        <tbody style="overflow:hidden;">
+                            {% for count, analista in tpsanaliticotot %}
+                                <tr>
+                                    <td>{{ analista[0] }}</td>
+                                    <td>{{ analista[1] }}</td>
+                                    <td>{{ analista[2] }}</td>
+                                    <td>{{ analista[3] }}</td>
+                                    <td><b>
+                                            <div class="dropleft">
+                                                <a type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                                                    aria-expanded="false">
+                                                    ...
+                                                </a>
+                                                <div class="dropdown-menu">
+                                                    <button class="dropdown-item" href="#">Solicitar prioridade</button>
+                                                    <button class="dropdown-item" href="#">Solicitar movimentação</button>
+                                                    <button class="dropdown-item" href="#">Solicitar informação</button>
+                                                </div>
+                                            </div>
+                                        </b>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tab-pane fade" id="nav-list" role="tabpanel" aria-labelledby="nav-list-tab">
+                    <table class="table table-striped table-hover">
+                        <thead class="header">
+                            <tr>
+                                <th scope="col">#</th>
                                 <th scope="col">Tarefa</th>
                                 <th scope="col">Analista</th>
                                 <th scope="col">Prioridade</th>
                                 <th scope="col">Dias Aberto</th>
-                                <th scope="col">Ultima Mov</th>
+                                <th scope="col">Ult Mov</th>
                                 <th scope="col">Grupo</th>
                                 <th scope="col">Resumo</th>
                                 <th scope="col">Status</th>
@@ -217,38 +251,34 @@
                             </tr>
                         </thead>
                         <tbody style="overflow:hidden;">
-                            {% for tp in tps_time %}
-                            <tr>
-                                <td>
-                                    <div class="sla-dentro" data-toggle="tooltip" data-placement="top" title="0h 0min">
-
-                                    </div>
-                                </td>
-                                <td>{{ tp.NRO_TP }}</td>
-                                <td>{{ tp.ANALISTA }}</td>
-                                <td>{{ tp.PRIORIDADE }}</td>
-                                <td>{{ tp.DIAS_ABERTO }}</td>
-                                <td>{{ tp.DTA_ULT_MOV }}</td>
-                                <td>{{ tp.GRUPO }}</td>
-                                <td>{{ tp.RESUMO }}</td>
-                                <td>{{ tp.STATUS }}</td>
-                                <td><b>
-                                        <div class="dropleft">
-                                            <a type="button" class="dropdown-toggle" data-toggle="dropdown"
-                                                aria-haspopup="true" aria-expanded="false">
-                                                ...
-                                            </a>
-                                            <div class="dropdown-menu">
-                                                <button class="dropdown-item" href="#">Solicitar prioridade</button>
-                                                <button class="dropdown-item" href="#">Solicitar movimentação</button>
-                                                <button class="dropdown-item" href="#">Solicitar informação</button>
-                                                <div class="dropdown-divider"></div>
-                                                <button class="dropdown-item" href="#">Movimentações</button>
+                            {% for count, tp in tps_analistas %}
+                                <tr>
+                                    <td>{{ count }}</td>
+                                    <td>{{ tp.NRO_TP }}</td>
+                                    <td>{{ tp.ANALISTA }}</td>
+                                    <td>{{ tp.PRIORIDADE }}</td>
+                                    <td>{{ tp.DIAS_ABERTO }}</td>
+                                    <td>{{ tp.DTA_ULT_MOV }}</td>
+                                    <td>{{ tp.GRUPO }}</td>
+                                    <td>{{ tp.RESUMO }}</td>
+                                    <td>{{ tp.STATUS }}</td>
+                                    <td><b>
+                                            <div class="dropleft">
+                                                <a type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                                                    aria-expanded="false">
+                                                    ...
+                                                </a>
+                                                <div class="dropdown-menu">
+                                                    <button class="dropdown-item" href="#">Solicitar prioridade</button>
+                                                    <button class="dropdown-item" href="#">Solicitar movimentação</button>
+                                                    <button class="dropdown-item" href="#">Solicitar informação</button>
+                                                    <div class="dropdown-divider"></div>
+                                                    <a class="dropdown-item" href="http://a-srv63/SUPORTE/followup_find.asp?OBJETO_ID={{ tp.NRO_TP }}" target="_blank">Movimentações</a>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </b>
-                                </td>
-                            </tr>
+                                        </b>
+                                    </td>
+                                </tr>
                             {% endfor %}
                         </tbody>
                     </table>
@@ -257,12 +287,11 @@
                     <table class="table table-striped table-hover">
                         <thead class="header">
                             <tr>
-                                <th scope="col">SLA</th>
+                                <th scope="col">#</th>
                                 <th scope="col">Tarefa</th>
                                 <th scope="col">Analista</th>
-                                <th scope="col">Prioridade</th>
                                 <th scope="col">Dias Aberto</th>
-                                <th scope="col">Ultima Mov</th>
+                                <th scope="col">Ult Mov</th>
                                 <th scope="col">Grupo</th>
                                 <th scope="col">Resumo</th>
                                 <th scope="col">Status</th>
@@ -270,40 +299,33 @@
                             </tr>
                         </thead>
                         <tbody style="overflow:hidden;">
-                            {% for tp in tps_time %}
-                            {% if tp.DIAS_ABERTO >= 15 %}
-                            <tr>
-                                <td>
-                                    <div class="sla-dentro" data-toggle="tooltip" data-placement="top" title="0h 0min">
-
-                                    </div>
-                                </td>
-                                <td>{{ tp.NRO_TP }}</td>
-                                <td>{{ tp.ANALISTA }}</td>
-                                <td>{{ tp.PRIORIDADE }}</td>
-                                <td>{{ tp.DIAS_ABERTO }}</td>
-                                <td>{{ tp.DTA_ULT_MOV }}</td>
-                                <td>{{ tp.GRUPO }}</td>
-                                <td>{{ tp.RESUMO }}</td>
-                                <td>{{ tp.STATUS }}</td>
-                                <td><b>
-                                        <div class="dropleft">
-                                            <a type="button" class="dropdown-toggle" data-toggle="dropdown"
-                                                aria-haspopup="true" aria-expanded="false">
-                                                ...
-                                            </a>
-                                            <div class="dropdown-menu">
-                                                <button class="dropdown-item" href="#">Solicitar prioridade</button>
-                                                <button class="dropdown-item" href="#">Solicitar movimentação</button>
-                                                <button class="dropdown-item" href="#">Solicitar informação</button>
-                                                <div class="dropdown-divider"></div>
-                                                <button class="dropdown-item" href="#">Movimentações</button>
-                                            </div>
-                                        </div>
-                                    </b>
-                                </td>
-                            </tr>
-                            {% endif %}
+                            {% for count, tp in tps_analistas15 %}
+                                    <tr>
+                                        <td>{{ count }}</td>
+                                        <td>{{ tp.NRO_TP }}</td>
+                                        <td>{{ tp.ANALISTA }}</td>
+                                        <td>{{ tp.DIAS_ABERTO }}</td>
+                                        <td>{{ tp.DTA_ULT_MOV }}</td>
+                                        <td>{{ tp.GRUPO }}</td>
+                                        <td>{{ tp.RESUMO }}</td>
+                                        <td>{{ tp.STATUS }}</td>
+                                        <td><b>
+                                                <div class="dropleft">
+                                                    <a type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                                                        aria-expanded="false">
+                                                        ...
+                                                    </a>
+                                                    <div class="dropdown-menu">
+                                                        <button class="dropdown-item" href="#">Solicitar prioridade</button>
+                                                        <button class="dropdown-item" href="#">Solicitar movimentação</button>
+                                                        <button class="dropdown-item" href="#">Solicitar informação</button>
+                                                        <div class="dropdown-divider"></div>
+                                                        <a class="dropdown-item" href="http://a-srv63/SUPORTE/followup_find.asp?OBJETO_ID={{ tp.NRO_TP }}" target="_blank">Movimentações</a>
+                                                    </div>
+                                                </div>
+                                            </b>
+                                        </td>
+                                    </tr>
                             {% endfor %}
                         </tbody>
                     </table>
@@ -312,12 +334,11 @@
                     <table class="table table-striped table-hover">
                         <thead class="header">
                             <tr>
-                                <th scope="col">SLA</th>
+                                <th scope="col">#</th>
                                 <th scope="col">Tarefa</th>
                                 <th scope="col">Analista</th>
-                                <th scope="col">Prioridade</th>
                                 <th scope="col">Dias Aberto</th>
-                                <th scope="col">Ultima Mov</th>
+                                <th scope="col">Ult Mov</th>
                                 <th scope="col">Grupo</th>
                                 <th scope="col">Resumo</th>
                                 <th scope="col">Status</th>
@@ -325,40 +346,33 @@
                             </tr>
                         </thead>
                         <tbody style="overflow:hidden;">
-                            {% for tp in tps_time %}
-                            {% if data_hoje >= tp.DTA_FIM %}
-                            <tr>
-                                <td>
-                                    <div class="sla-dentro" data-toggle="tooltip" data-placement="top" title="0h 0min">
-
-                                    </div>
-                                </td>
-                                <td>{{ tp.NRO_TP }}</td>
-                                <td>{{ tp.ANALISTA }}</td>
-                                <td>{{ tp.PRIORIDADE }}</td>
-                                <td>{{ tp.DIAS_ABERTO }}</td>
-                                <td>{{ tp.DTA_ULT_MOV }}</td>
-                                <td>{{ tp.GRUPO }}</td>
-                                <td>{{ tp.RESUMO }}</td>
-                                <td>{{ tp.STATUS }}</td>
-                                <td><b>
-                                        <div class="dropleft">
-                                            <a type="button" class="dropdown-toggle" data-toggle="dropdown"
-                                                aria-haspopup="true" aria-expanded="false">
-                                                ...
-                                            </a>
-                                            <div class="dropdown-menu">
-                                                <button class="dropdown-item" href="#">Solicitar prioridade</button>
-                                                <button class="dropdown-item" href="#">Solicitar movimentação</button>
-                                                <button class="dropdown-item" href="#">Solicitar informação</button>
-                                                <div class="dropdown-divider"></div>
-                                                <button class="dropdown-item" href="#">Movimentações</button>
-                                            </div>
-                                        </div>
-                                    </b>
-                                </td>
-                            </tr>
-                            {% endif %}
+                            {% for count, tp in tps_backlog %}
+                                    <tr>
+                                        <td>{{ count }}</td>
+                                        <td>{{ tp.NRO_TP }}</td>
+                                        <td>{{ tp.ANALISTA }}</td>
+                                        <td>{{ tp.DIAS_ABERTO }}</td>
+                                        <td>{{ tp.DTA_ULT_MOV }}</td>
+                                        <td>{{ tp.GRUPO }}</td>
+                                        <td>{{ tp.RESUMO }}</td>
+                                        <td>{{ tp.STATUS }}</td>
+                                        <td><b>
+                                                <div class="dropleft">
+                                                    <a type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                                                        aria-expanded="false">
+                                                        ...
+                                                    </a>
+                                                    <div class="dropdown-menu">
+                                                        <button class="dropdown-item" href="#">Solicitar prioridade</button>
+                                                        <button class="dropdown-item" href="#">Solicitar movimentação</button>
+                                                        <button class="dropdown-item" href="#">Solicitar informação</button>
+                                                        <div class="dropdown-divider"></div>
+                                                        <a class="dropdown-item" href="http://a-srv63/SUPORTE/followup_find.asp?OBJETO_ID={{ tp.NRO_TP }}" target="_blank">Movimentações</a>
+                                                    </div>
+                                                </div>
+                                            </b>
+                                        </td>
+                                    </tr>
                             {% endfor %}
                         </tbody>
                     </table>
@@ -367,14 +381,11 @@
         </div>
         <div class="div-card-bases mb-4">
             <div class="div-header-bases d-flex justify-content-between align-items-center" style="width: 100%;">
-                <h6 style="margin-left: 2px;">Lista de bases dos servidores | <span>Tempo de atualização 5min</span>
-                </h6>
+                <h6 style="margin-left: 2px;">Lista de bases dos servidores | <span>Tempo de atualização 5min</span></h6>
                 <nav style="width: 30%;">
                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                        <a class="nav-item nav-link active" id="nav-oracle-tab" data-toggle="tab" href="#nav-oracle"
-                            role="tab" aria-controls="nav-oracle" aria-selected="true">Bases Oracle</a>
-                        <a class="nav-item nav-link" id="nav-sqlserver-tab" data-toggle="tab" href="#nav-sqlserver"
-                            role="tab" aria-controls="nav-sqlserver" aria-selected="false">Bases SQL server</a>
+                        <a class="nav-item nav-link active" id="nav-oracle-tab" data-toggle="tab" href="#nav-oracle" role="tab" aria-controls="nav-oracle" aria-selected="true">Bases Oracle</a>
+                        <a class="nav-item nav-link" id="nav-sqlserver-tab" data-toggle="tab" href="#nav-sqlserver" role="tab" aria-controls="nav-sqlserver" aria-selected="false">Bases SQL server</a>
                     </div>
                 </nav>
             </div>
@@ -405,15 +416,14 @@
                                 <td>Ativa</td>
                                 <td>
                                     <div class="dropleft">
-                                        <a type="button" class="dropdown-toggle" data-toggle="dropdown"
-                                            aria-haspopup="true" aria-expanded="false">
-                                            ...
+                                        <a type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                          ...
                                         </a>
                                         <div class="dropdown-menu">
-                                            <button class="dropdown-item" href="#">Teste de conexão</button>
-                                            <button class="dropdown-item" href="#">Conf de conexão</button>
+                                            <button  class="dropdown-item" href="#">Teste de conexão</button>
+                                            <button  class="dropdown-item" href="#">Conf de conexão</button>
                                             <div class="dropdown-divider"></div>
-                                            <button class="dropdown-item" href="#">Soliticar ajuda</button>
+                                            <button  class="dropdown-item" href="#">Soliticar ajuda</button>
                                         </div>
                                     </div>
                                 </td>
@@ -444,15 +454,14 @@
                                 <td>Ativa</td>
                                 <td>
                                     <div class="dropleft">
-                                        <a type="button" class="dropdown-toggle" data-toggle="dropdown"
-                                            aria-haspopup="true" aria-expanded="false">
-                                            ...
+                                        <a type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                          ...
                                         </a>
                                         <div class="dropdown-menu">
-                                            <button class="dropdown-item" href="#">Teste de conexão</button>
-                                            <button class="dropdown-item" href="#">Conf de conexão</button>
+                                            <button  class="dropdown-item" href="#">Teste de conexão</button>
+                                            <button  class="dropdown-item" href="#">Conf de conexão</button>
                                             <div class="dropdown-divider"></div>
-                                            <button class="dropdown-item" href="#">Soliticar ajuda</button>
+                                            <button  class="dropdown-item" href="#">Soliticar ajuda</button>
                                         </div>
                                     </div>
                                 </td>
@@ -469,8 +478,8 @@
         <div class="div-card-lista-filas mb-4">
             <div class="div-card div-tps">
                 <div class="title-control-tps">
-                    <h6>Controle de Filas</h6>
-                    <hr class="w-100">
+                    <h6>Controle de Filas</h6> 
+                    <hr class="w-100"> 
                 </div>
                 <div class="div-desc">
                     <p>SUPORTE APOLLO</p>
@@ -493,7 +502,7 @@
                         </div>
                     </div>
                     <p class="div-total">Chamados na fila: {{ tps_gerais.APOLLO_tot }}</p>
-                </div>
+                </div> 
                 <div class="div-desc">
                     <p>SUPORTE BRAVOS</p>
                     <div class="priority">
