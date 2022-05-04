@@ -11,7 +11,7 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = '900b934668183d4effbc7e84cbad2116'
 
 params = urllib.parse.quote_plus(
-    'DRIVER={SQL Server};SERVER=POANOTFS013816;DATABASE=LINXDMSHELP;Trusted_Connection=yes;')
+    'DRIVER={SQL Server};SERVER=POANOTFS013816.linx-inves.com.br;DATABASE=LINXDMSHELP;Trusted_Connection=yes;')
 app.config['SQLALCHEMY_DATABASE_URI'] = "mssql+pyodbc:///?odbc_connect=%s" % params
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 
@@ -31,6 +31,8 @@ mail_settings = {
 }
 
 app.config.update(mail_settings)
+
+mail = Mail(app)
 
 from routes import authRoutes
 from routes import dashboardRoutes

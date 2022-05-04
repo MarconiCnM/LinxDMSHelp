@@ -10,70 +10,48 @@ options.add_argument("headless")
 driver = webdriver.Chrome(options=options)
 
 host = "POANOTFS013816"
-db = "HELP"
+db = "LINXDMSHELP"
 user = "SA"
 password = "Linx@2021*"
 sqlcmd = (
     r"C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\SQLCMD.EXE")
 
 lista_filas = [
-    'ADRIANA.COSTA',
-    'ADRIANO.SIMOES',
-    'ALINE.VARGAS',
-    'ALISSON.RIBEIRO',
-    'ANA.HEITELVAN',
-    'ANA.STEIN',
-    'ARIANA.FREITAG',
-    'BRIAN.SILVA',
-    'BRUNA.SCHREINER',
-    'CARLA.GARCIA',
-    'CATARINA.SILVEIRA',
-    'DIEGO.ROSA',
-    'DIONATA.SILVEIRA',
-    'DORVALINO.NETO',
-    'ERISON.DAMACENA',
-    'FERNANDO.VARGAS',
-    'FRANCIELLE.OLIVEIRA',
-    'FREDERICO.SCHER',
-    'GABRIEL.MARTIN',
-    'GILMAR.LAZARI',
-    'GISLAINE.RODRIGUES',
-    'GUILHERME.TOLFO',
-    'IGOR.BECK',
-    'JOAO.DUARTE',
     'JOCELI.SILVA',
-    'JOSE.PROCIDIO',
-    'JUAN.SANTOS',
-    'JULIANA.RUFATO',
-    'LARISSA.PACHECO',
-    'LEONARDO.CORSINO',
-    'LEONARDO.DESOUZA',
-    'LEONARDO.GUIMARAES',
-    'LUANA.SINHORELI',
-    'LUCAS.ODY',
-    'LUIS.AMARAL',
-    'LUIS.SUSIN',
-    'MARCIA.FERREIRA',
-    'MARLENO.FILHO',
+    'CATARINA.SILVEIRA',
+    r'GABRIEL.MARTIN',
     'PAOLA.RIBEIRO',
-    'PRISCILA.POLIMENO',
-    'RAFAEL.RESENDE',
-    'RAQUEL.KUHN',
-    'SAMUEL.ZANATTA',
-    'TAMIRES.FONSECA',
-    'THAYLLA.SOARES',
+    'VANESSA.CALCAO',
     'THIAGO.DAVIS',
-    'VANESSA.CALCAO'
+    'BRUNA.SCHREINER',
+    'LUIS.AMARAL',
+    'THAYLLA.SOARES',
+    'DIONATA.SILVEIRA',
+    'LEONARDO.CORSINO',
+    'ADRIANO.SIMOES',
+    'ADRIANA.COSTA',
+    'JESSICA.PAULA',
+    'GISLAINE.RODRIGUES',
+    'LUIS.SUSIN',
+    'PRISCILA.POLIMENO',
+    'FRANCIELLE.OLIVEIRA',
+    'GILMAR.LAZARI',
+    'RODRIGO.MOREIRA',
+    'GUILHERME.TOLFO',
+    'ERISON.DAMACENA',
+    'ANA.HEITELVAN',
+    'ARIANA.FREITAG',
+    'TAMIRES.FONSECA',
+    'IGOR.BECK'
 ]
 
 while True:
-    sleep(720)
     for fila in lista_filas:
         try:
             var = ''
             lista = 0
 
-            query_delete = f"delete from control_tps_analyst where analista = '{fila.replace('.', ' ').title()}'"
+            query_delete = f"delete from CONTROLE_TPS_ANALISTAS where analista = '{fila.replace('.', ' ').title()}'"
             subprocess.call([sqlcmd, "-U", user, "-P", password,
                             "-S", host, "-d", db, "-Q", query_delete])
 
@@ -136,11 +114,14 @@ while True:
                                                       f"/html/body/table[2]/tbody/tr[1]/td[1]/div[3]/font").text
 
                     dta_encerramento = driver.find_element(By.XPATH,
-                                                           f"/html/body/table[1]/tbody/tr[4]/td[1]/font/strong/font[2]").text
+                                                      f"/html/body/table[1]/tbody/tr[4]/td[1]/font/strong/font[2]").text
+
+                    prioridade = driver.find_element(By.XPATH,
+                                                      f"/html/body/table[1]/tbody/tr[3]/td[1]/p/font/font/strong").text
 
                     lista += 1
 
-                    query_insert = f"insert control_tps_analyst values ({nro_tp}, '{grupo}', '{resumo}', {qtd_dias}, '{status}', '{fila.replace('.', ' ').title()}', '{dta_ult_mov[6:]}', '{dta_encerramento}')"
+                    query_insert = f"insert CONTROLE_TPS_ANALISTAS values ({nro_tp}, '{fila.replace('.', ' ').title()}', '{grupo}', '{resumo}', {qtd_dias}, '{dta_ult_mov[6:]}', '{dta_encerramento}', '{status}', '{prioridade}')"
                     subprocess.call(
                         [sqlcmd, "-U", user, "-P", password, "-S", host, "-d", db, "-Q", query_insert])
 
