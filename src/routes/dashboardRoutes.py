@@ -1,8 +1,10 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, flash, redirect, url_for
 from flask_login import login_required, current_user
+from app import mail, mail_settings
+from flask_mail import Message
 
 from controllers.authController import tpsAnalistas, tpsTimeGestor, tpsTimeHelper, tpsTimeCoordenador
-from models.models import BASES, GESTOR, HELPER, CONTROLE_TPS_GERAIS
+from models.models import BASES, ANALISTA, GESTOR, HELPER, CONTROLE_TPS_GERAIS, CONTROLE_TPS_ANALISTAS
 
 def init_app(app: Flask):
     @app.route('/dashboard', methods=['GET', 'POST'])
@@ -39,3 +41,75 @@ def init_app(app: Flask):
             tps_analistas15 = enumerate(result[1], start=1)
             tps_backlog = enumerate(result[2], start=1)
             return render_template('/main/dashboards/dashboardAnalista.html', bases_oracle=bases_oracle, bases_sqlserver=bases_sqlserver, tps_gerais=tps_gerais, tps_analistas=tps_analistas, tps_analistas15=tps_analistas15, tps_backlog=tps_backlog)
+
+    @app.route("/solicitaMov/<tp_id>", methods=['GET', 'POST'])
+    def solicitaMov(tp_id):
+        tp = CONTROLE_TPS_ANALISTAS.query.filter_by(id=tp_id).first()
+        analista = ANALISTA.query.filter_by(USUARIO=tp.ANALISTA).first()
+        print(analista.EMAIL)
+
+        msg = Message(
+                subject = 'Solicitação de movimentação - LinxDMS HELP',
+                sender = mail_settings["MAIL_USERNAME"],
+                recipients= [analista.EMAIL],
+                body = f'''
+                Bom dia {analista.USUARIO},
+
+                A TP {tp.NRO_TP} está a muito tempo sem movimentação, favor fazer a movimentação da mesma para que o "Fim Previsto" sejá atualizado e não conte como backlog indevidamente,
+
+                OBS: TPs com o status "Aguardando Cliente Validar", "Aguardando Informação Externa" ou "Aguardando Desenvolvimento" quando fizermos a movimentação diária na TP, será 
+                necessário utilizar a opção de "Alteração de Status", bastando selecionar o "Novo Status" igual ao anterior para atualizar o campo "Fim Previsto".
+
+                Qualquer problema ou duvida não hesite em acionar seu Helper, 
+
+                Atenciosamente,
+                Suporte Help
+                '''
+            )
+
+        mail.send(msg)
+
+
+        flash('E-email enviado', 'alert-success')
+        
+        return redirect(url_for('dashboard'))
+
+    @app.route("/solicitaInf/<tp_id>", methods=['GET', 'POST'])
+    def solicitaInf(tp_id):
+        tp = CONTROLE_TPS_ANALISTAS.query.filter_by(id=tp_id).first()
+        analista = ANALISTA.query.filter_by(USUARIO=tp.ANALISTA).first()
+        print(analista.EMAIL)
+
+        msg = Message(
+                subject = 'Solicitação de Informação - LinxDMS HELP',
+                sender = mail_settings["MAIL_USERNAME"],
+                recipients= [analista.EMAIL],
+                body = f'''
+                Bom dia {analista.USUARIO},
+
+                {current_user.USUARIO} solicita um email detalhado de como esta a atual situação da tp {tp.NRO_TP}, preencha os campos abaixo e o envie para o email {current_user.EMAIL}.
+
+                Solicitação/Reclamação do cliente:
+                O que ja foi analisado:
+                Esta aguardando alguem? Se sim descreva quem o por que:
+                Manuais validados:
+                Analistas acionados:
+                Estrutura do cliente:
+                Versão do cliente:
+                Ele está atualizado: 
+
+                OBS: Se existir algum anexo na tp envie em anexo no email.
+
+                Qualquer problema ou duvida não hesite em acionar seu Helper, 
+
+                Atenciosamente,
+                Suporte Help
+                '''
+            )
+
+        mail.send(msg)
+
+
+        flash('E-email enviado', 'alert-success')
+        
+        return redirect(url_for('dashboard'))

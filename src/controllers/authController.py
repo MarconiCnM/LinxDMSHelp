@@ -49,7 +49,6 @@ def tpsTimeHelper():
     for i in analista:
         lista_analista += "'" + i[1] + "',"
     
-    print(lista_analista)
     tpsanaliticotot = database.session.execute("SELECT grl.ANALISTA, " +
                     "COUNT(grl.NRO_TP) AS FILA, " +
                     "(SELECT COUNT(m15.NRO_TP) " +
@@ -63,8 +62,6 @@ def tpsTimeHelper():
                     "FROM CONTROLE_TPS_ANALISTAS grl " +
                     f"WHERE grl.ANALISTA IN ({lista_analista[:-1]}) " +
                     "GROUP BY grl.ANALISTA").fetchall()
-    
-    print(tpsanaliticotot)
 
     tpsgerais = database.session.execute("SELECT id, NRO_TP, ANALISTA, GRUPO, RESUMO, DIAS_ABERTO, DATEDIFF(day, DTA_ULT_MOV, getdate()) as DTA_ULT_MOV, DTA_FIM, STATUS, PRIORIDADE " + 
                     "FROM CONTROLE_TPS_ANALISTAS " + 
