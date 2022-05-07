@@ -226,7 +226,9 @@ class BASES(database.Model):
 
 class MOV_SOL(database.Model):
     id = database.Column(database.Integer, primary_key=True)
+    NRO_TP = database.Column(database.Integer, nullable=False)
     TITULO = database.Column(database.String, nullable=False)
+    TIPO = database.Column(database.String, nullable=False)
     HELPER = database.Column(database.String, nullable=False)
     ANALISTA = database.Column(database.String, nullable=False)
     RESUMO = database.Column(database.Text, nullable=False)

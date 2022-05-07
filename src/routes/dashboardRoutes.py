@@ -20,31 +20,34 @@ def init_app(app: Flask):
                 tps_analistas = enumerate(result[0], start=1)
                 tps_analistas15 = enumerate(result[1], start=1)
                 tps_backlog = enumerate(result[2], start=1)
+                tipo = 'G'
             else: 
                 result = tpsTimeGestor()
                 tpsanaliticotot = enumerate(result[3], start=0)
                 tps_analistas = enumerate(result[0], start=1)
                 tps_analistas15 = enumerate(result[1], start=1)
                 tps_backlog = enumerate(result[2], start=1)
-            return render_template('/main/dashboards/dashboardGestor.html', bases_oracle=bases_oracle, bases_sqlserver=bases_sqlserver, tps_gerais=tps_gerais, tpsanaliticotot=tpsanaliticotot, tps_analistas=tps_analistas, tps_analistas15=tps_analistas15, tps_backlog=tps_backlog)
+                tipo = 'G'
+            return render_template('/main/dashboards/dashboardGestor.html', tipo=tipo, bases_oracle=bases_oracle, bases_sqlserver=bases_sqlserver, tps_gerais=tps_gerais, tpsanaliticotot=tpsanaliticotot, tps_analistas=tps_analistas, tps_analistas15=tps_analistas15, tps_backlog=tps_backlog)
         elif HELPER.query.filter_by(EMAIL=current_user.EMAIL).first():
             result = tpsTimeHelper()
             tpsanaliticotot = enumerate(result[3], start=0)
             tps_analistas = enumerate(result[0], start=1)
             tps_analistas15 = enumerate(result[1], start=1)
             tps_backlog = enumerate(result[2], start=1)
-
-            return render_template('/main/dashboards/dashboardHelper.html', bases_oracle=bases_oracle, bases_sqlserver=bases_sqlserver, tps_gerais=tps_gerais, tpsanaliticotot=tpsanaliticotot, tps_analistas=tps_analistas, tps_analistas15=tps_analistas15, tps_backlog=tps_backlog)
+            tipo = 'H'
+            return render_template('/main/dashboards/dashboardHelper.html', tipo=tipo, bases_oracle=bases_oracle, bases_sqlserver=bases_sqlserver, tps_gerais=tps_gerais, tpsanaliticotot=tpsanaliticotot, tps_analistas=tps_analistas, tps_analistas15=tps_analistas15, tps_backlog=tps_backlog)
         else:
             result = tpsAnalistas()
             tps_analistas = enumerate(result[0], start=1)
             tps_analistas15 = enumerate(result[1], start=1)
             tps_backlog = enumerate(result[2], start=1)
-            return render_template('/main/dashboards/dashboardAnalista.html', bases_oracle=bases_oracle, bases_sqlserver=bases_sqlserver, tps_gerais=tps_gerais, tps_analistas=tps_analistas, tps_analistas15=tps_analistas15, tps_backlog=tps_backlog)
+            tipo = 'A'
+            return render_template('/main/dashboards/dashboardAnalista.html', tipo=tipo, bases_oracle=bases_oracle, bases_sqlserver=bases_sqlserver, tps_gerais=tps_gerais, tps_analistas=tps_analistas, tps_analistas15=tps_analistas15, tps_backlog=tps_backlog)
 
     @app.route("/solicitaMov/<tp_id>", methods=['GET', 'POST'])
     def solicitaMov(tp_id):
-        tp = CONTROLE_TPS_ANALISTAS.query.filter_by(id=tp_id).first()
+        tp = CONTROLE_TPS_ANALISTAS.query.filter_by(NRO_TP=tp_id).first()
         analista = ANALISTA.query.filter_by(USUARIO=tp.ANALISTA).first()
         print(analista.EMAIL)
 
@@ -76,7 +79,7 @@ def init_app(app: Flask):
 
     @app.route("/solicitaInf/<tp_id>", methods=['GET', 'POST'])
     def solicitaInf(tp_id):
-        tp = CONTROLE_TPS_ANALISTAS.query.filter_by(id=tp_id).first()
+        tp = CONTROLE_TPS_ANALISTAS.query.filter_by(NRO_TP=tp_id).first()
         analista = ANALISTA.query.filter_by(USUARIO=tp.ANALISTA).first()
         print(analista.EMAIL)
 

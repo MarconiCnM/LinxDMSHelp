@@ -3,9 +3,9 @@ from datetime import datetime, timedelta
 from flask import request, flash
 from flask_login import current_user
 
-from models.models import SOL_HISTORIA, SOL_ERRO
+from models.models import SOL_HISTORIA, SOL_ERRO, MOV_SOL
 from app import app, database, bcrypt
-
+import datetime
 
 def solAlteracao(form_alteracao):
     if form_alteracao.validate_on_submit() and 'btn_submit_salvar' in request.form:
@@ -73,6 +73,18 @@ def solErro(form_erro):
                             PALIATIVA=form_erro.paliativa.data, DOCS=complete_name, BANCO=form_erro.db_teste.data, VERSAO=form_erro.versao.data, 
                             VERSAO_ANT=form_erro.versao_ant.data, ANALISTA_ID=current_user.id)
             database.session.add(erro)
+
+            mov = MOV_SOL(NRO_TP=form_erro.nro_tp.data, TITULO='Abertura de Analise', TIPO='A', HELPER='', ANALISTA=current_user.USUARIO, RESUMO='Solicitação de erro aberta', STATUS='AGUARDANDO INICIALIZAÇÂO')
+            database.session.add(mov)
+
             database.session.commit()
             flash('Solicitação feita com sucesso', 'alert-success')
             return True
+
+def ajusteData(data):
+    fuso_horario = datetime.timezone(timedelta(hours=-3))
+
+    data = data.astimezone(fuso_horario)
+    data = data.strftime('%d/%m/%Y %H:%M')
+
+    return data

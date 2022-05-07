@@ -179,7 +179,7 @@ body::-webkit-scrollbar-thumb {
 #mensagens {
     position: absolute;
     right: 1%;
-    top: 7%;
+    top: 11%;
     opacity: 0;
     animation: move 5s;
 }

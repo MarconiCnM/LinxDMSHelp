@@ -2,8 +2,8 @@ from flask import Flask, redirect, render_template, url_for, request
 from flask_login import login_required
 
 from views.solicitacaoForms import FormAlteracao, FormErro
-from controllers.solicitacaoController import solAlteracao, solErro
-from models.models import SOL_ERRO
+from controllers.solicitacaoController import ajusteData, solAlteracao, solErro
+from models.models import SOL_ERRO, MOV_SOL
 
 def init_app(app: Flask):
     @app.route("/solicitacoes/alteracao", methods=['GET', 'POST'])
@@ -46,11 +46,14 @@ def init_app(app: Flask):
             form_erro.db_teste.data = erroID.BANCO
             form_erro.versao.data = erroID.VERSAO
             form_erro.versao_ant.data = erroID.VERSAO_ANT
+
+            movs = MOV_SOL.query.filter_by(NRO_TP=erroID.NRO_TP)
+            ajusteDta = ajusteData
         erros = SOL_ERRO.query.all()
         erro = solErro(form_erro)
         if erro:
             return redirect(url_for('dashboard'))
-        return render_template('main/solicitacoes/requisicao/erro.html', form_erro=form_erro, erros=erros, erroID=erroID)
+        return render_template('main/solicitacoes/requisicao/erro.html', form_erro=form_erro, erros=erros, erroID=erroID, movs=movs, ajusteDta=ajusteDta)
 
 
     @app.route("/solicitacoes/help", methods=['GET', 'POST'])

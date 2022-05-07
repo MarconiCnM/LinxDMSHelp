@@ -26,6 +26,7 @@ lista_filas = [
 ]
 
 while True:
+    sleep(600)
     for fila in lista_filas:
         try:
             var = ''

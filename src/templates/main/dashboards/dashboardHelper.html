@@ -29,7 +29,7 @@
                             </div>
                             <div class="btn">
                                 <a href="{{ url_for('solicitacaoErro') }}">
-                                    Solicitar
+                                    Analisar
                                 </a>
                             </div>
                         </div>
@@ -52,7 +52,7 @@
                             </div>
                             <div class="btn">
                                 <a href="{{ url_for('solicitacaoAlteracao') }}">
-                                    Solicitar
+                                    Analisar
                                 </a>
                             </div>
                         </div>
@@ -75,7 +75,7 @@
                             </div>
                             <div class="btn">
                                 <a href="{{ url_for('solicitacaoServico') }}">
-                                    Solicitar
+                                    Analisar
                                 </a>
                             </div>
                         </div>
@@ -98,7 +98,7 @@
                             </div>
                             <div class="btn">
                                 <a href="{{ url_for('solicitacaoCompilacao') }}">
-                                    Solicitar
+                                    Analisar
                                 </a>
                             </div>
                         </div>
@@ -121,7 +121,7 @@
                             </div>
                             <div class="btn">
                                 <a href="{{ url_for('solicitacaoImportacao') }}">
-                                    Solicitar
+                                    Analisar
                                 </a>
                             </div>
                         </div>
@@ -144,7 +144,7 @@
                             </div>
                             <div class="btn">
                                 <a href="{{ url_for('solicitacaoShare') }}">
-                                    Solicitar
+                                    Analisar
                                 </a>
                             </div>
                         </div>
@@ -167,7 +167,7 @@
                             </div>
                             <div class="btn">
                                 <a href="{{ url_for('solicitacaoHelp') }}">
-                                    Solicitar
+                                    Analisar
                                 </a>
                             </div>
                         </div>
@@ -274,8 +274,8 @@
                                                 </a>
                                                 <div class="dropdown-menu">
                                                     <button class="dropdown-item" href="#">Solicitar prioridade</button>
-                                                    <a class="dropdown-item" href="{{url_for('solicitaMov', tp_id=tp.id)}}">Solicitar movimentação</a>
-                                                    <a class="dropdown-item" href="{{url_for('solicitaInf', tp_id=tp.id)}}">Solicitar informação</a>
+                                                    <a class="dropdown-item" href="{{url_for('solicitaMov', tp_id=tp.NRO_TP)}}">Solicitar movimentação</a>
+                                                    <a class="dropdown-item" href="{{url_for('solicitaInf', tp_id=tp.NRO_TP)}}">Solicitar informação</a>
                                                     <div class="dropdown-divider"></div>
                                                     <a class="dropdown-item" href="http://a-srv63/SUPORTE/followup_find.asp?OBJETO_ID={{ tp.NRO_TP }}" target="_blank">Movimentações</a>
                                                 </div>
@@ -321,8 +321,8 @@
                                                     </a>
                                                     <div class="dropdown-menu">
                                                         <button class="dropdown-item" href="#">Solicitar prioridade</button>
-                                                        <a class="dropdown-item" href="{{url_for('solicitaMov', tp_id=tp.id)}}">Solicitar movimentação</a>
-                                                        <a class="dropdown-item" href="{{url_for('solicitaInf', tp_id=tp.id)}}">Solicitar informação</a>
+                                                        <a class="dropdown-item" href="{{url_for('solicitaMov', tp_id=tp.NRO_TP)}}">Solicitar movimentação</a>
+                                                        <a class="dropdown-item" href="{{url_for('solicitaInf', tp_id=tp.NRO_TP)}}">Solicitar informação</a>
                                                         <div class="dropdown-divider"></div>
                                                         <a class="dropdown-item" href="http://a-srv63/SUPORTE/followup_find.asp?OBJETO_ID={{ tp.NRO_TP }}" target="_blank">Movimentações</a>
                                                     </div>
@@ -368,8 +368,8 @@
                                                     </a>
                                                     <div class="dropdown-menu">
                                                         <button class="dropdown-item" href="#">Solicitar prioridade</button>
-                                                        <a class="dropdown-item" href="{{url_for('solicitaMov', tp_id=tp.id)}}">Solicitar movimentação</a>
-                                                        <a class="dropdown-item" href="{{url_for('solicitaInf', tp_id=tp.id)}}">Solicitar informação</a>
+                                                        <a class="dropdown-item" href="{{url_for('solicitaMov', tp_id=tp.NRO_TP)}}">Solicitar movimentação</a>
+                                                        <a class="dropdown-item" href="{{url_for('solicitaInf', tp_id=tp.NRO_TP)}}">Solicitar informação</a>
                                                         <div class="dropdown-divider"></div>
                                                         <a class="dropdown-item" href="http://a-srv63/SUPORTE/followup_find.asp?OBJETO_ID={{ tp.NRO_TP }}" target="_blank">Movimentações</a>
                                                     </div>

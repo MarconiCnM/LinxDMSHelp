@@ -87,19 +87,26 @@ def tpsTimeGestor():
     for i in analista:
         lista_analista += "'" + i[1] + "',"
     
-    tpsanaliticotot = database.session.execute("SELECT grl.ANALISTA, " +
-                "COUNT(grl.NRO_TP) AS FILA, " +
-                "(SELECT COUNT(m15.NRO_TP) " +
-                    "FROM CONTROLE_TPS_ANALISTAS m15 " +
-                    "WHERE m15.ANALISTA = grl.ANALISTA " +
-                    "AND m15.DIAS_ABERTO >= 15) as MAIS15, " +
-                "(SELECT COUNT(m15.NRO_TP) " +
-                    "FROM CONTROLE_TPS_ANALISTAS m15 " +
-                    "WHERE m15.ANALISTA = grl.ANALISTA " +
-                    "AND m15.DTA_FIM < getdate()) as BACKLOG " +
-                "FROM CONTROLE_TPS_ANALISTAS grl " +
-                f"WHERE grl.ANALISTA IN ({lista_analista[:-1]}) " +
-                "GROUP BY grl.ANALISTA").fetchall()
+    tpsanaliticotot = database.session.execute("SELECT (SELECT usuario " +
+        "FROM   analista " +
+        "WHERE  usuario = grl.analista)               AS ANALISTA, " +
+        "(SELECT nome " +
+        "FROM   time " +
+        "WHERE  id = (SELECT time_id " +
+                     "FROM   analista " +
+                     "WHERE  usuario = grl.analista)) AS EQUIPE, " +
+        "Count(grl.nro_tp)                             AS FILA, " +
+        "(SELECT Count(m15.nro_tp) " +
+        "FROM   controle_tps_analistas m15 " +
+        "WHERE  m15.analista = grl.analista " +
+               "AND m15.dias_aberto >= 15)            AS MAIS15, " +
+        "(SELECT Count(m15.nro_tp) " +
+        "FROM   controle_tps_analistas m15 " +
+        "WHERE  m15.analista = grl.analista " +
+               "AND m15.dta_fim < Getdate())          AS BACKLOG " +
+        "FROM   controle_tps_analistas grl " +
+        f"WHERE  grl.analista IN ({lista_analista[:-1]}) " +
+        "GROUP  BY grl.analista; ").fetchall()
 
     tpsgerais = database.session.execute("SELECT id, NRO_TP, ANALISTA, GRUPO, RESUMO, DIAS_ABERTO, DATEDIFF(day, DTA_ULT_MOV, getdate()) as DTA_ULT_MOV, DTA_FIM, STATUS, PRIORIDADE " + 
                     "FROM CONTROLE_TPS_ANALISTAS " + 
@@ -124,19 +131,27 @@ def tpsTimeCoordenador():
     for i in analista:
         lista_analista += "'" + i[1] + "',"
 
-    tpsanaliticotot = database.session.execute("SELECT grl.ANALISTA, " +
-            "COUNT(grl.NRO_TP) AS FILA, " +
-            "(SELECT COUNT(m15.NRO_TP) " +
-                "FROM CONTROLE_TPS_ANALISTAS m15 " +
-                "WHERE m15.ANALISTA = grl.ANALISTA " +
-                "AND m15.DIAS_ABERTO >= 15) as MAIS15, " +
-            "(SELECT COUNT(m15.NRO_TP) " +
-                "FROM CONTROLE_TPS_ANALISTAS m15 " +
-                "WHERE m15.ANALISTA = grl.ANALISTA " +
-                "AND m15.DTA_FIM < getdate()) as BACKLOG " +
-            "FROM CONTROLE_TPS_ANALISTAS grl " +
-            f"WHERE grl.ANALISTA IN ({lista_analista[:-1]}) " +
-            "GROUP BY grl.ANALISTA").fetchall()
+    tpsanaliticotot = database.session.execute("SELECT (SELECT usuario " +
+        "FROM   analista " +
+        "WHERE  usuario = grl.analista)               AS ANALISTA, " +
+        "(SELECT nome " +
+        "FROM   time " +
+        "WHERE  id = (SELECT time_id " +
+                     "FROM   analista " +
+                     "WHERE  usuario = grl.analista)) AS EQUIPE, " +
+        "Count(grl.nro_tp)                             AS FILA, " +
+        "(SELECT Count(m15.nro_tp) " +
+        "FROM   controle_tps_analistas m15 " +
+        "WHERE  m15.analista = grl.analista " +
+               "AND m15.dias_aberto >= 15)            AS MAIS15, " +
+        "(SELECT Count(m15.nro_tp) " +
+        "FROM   controle_tps_analistas m15 " +
+        "WHERE  m15.analista = grl.analista " +
+               "AND m15.dta_fim < Getdate())          AS BACKLOG " +
+        "FROM   controle_tps_analistas grl " +
+        f"WHERE  grl.analista IN ({lista_analista[:-1]}) " +
+        "GROUP  BY grl.analista; ").fetchall()
+        
     tpsgerais = database.session.execute("SELECT id, NRO_TP, ANALISTA, GRUPO, RESUMO, DIAS_ABERTO, DATEDIFF(day, DTA_ULT_MOV, getdate()) as DTA_ULT_MOV, DTA_FIM, STATUS, PRIORIDADE " + 
                     "FROM CONTROLE_TPS_ANALISTAS " + 
                     F"WHERE ANALISTA in ({lista_analista[:-1]}) " + 
