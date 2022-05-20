@@ -1,0 +1,184 @@
+from flask import flash
+from flask_login import current_user
+from app import database
+
+
+def tpsAnalistas():
+    analista = str.title(current_user.EMAIL.replace('.', ' ').split('@')[0])
+    tpsgerais = database.session.execute("SELECT id, NRO_TP, ISSUE, ANALISTA, GRUPO, RESUMO, DIAS_ABERTO, DATEDIFF(day, DTA_ULT_MOV, getdate()) as DTA_ULT_MOV, DTA_FIM, STATUS, PRIORIDADE " + 
+                    "FROM CONTROLE_TPS_ANALISTAS " + 
+                    F"WHERE ANALISTA = '{analista}' " + 
+                    "ORDER BY DIAS_ABERTO DESC").fetchall()
+    tpsmais15 = database.session.execute(f"SELECT id, NRO_TP, ISSUE, ANALISTA, GRUPO, RESUMO, DIAS_ABERTO, DATEDIFF(day, DTA_ULT_MOV, getdate()) as DTA_ULT_MOV, DTA_FIM, STATUS, PRIORIDADE " + 
+                    "FROM CONTROLE_TPS_ANALISTAS " + 
+                    F"WHERE ANALISTA = '{analista}' " + 
+                    "AND DIAS_ABERTO > 14 "
+                    "ORDER BY DIAS_ABERTO DESC").fetchall()
+    tpsbacklog = database.session.execute(f"SELECT id, NRO_TP, ISSUE, ANALISTA, GRUPO, RESUMO, DIAS_ABERTO, DATEDIFF(day, DTA_ULT_MOV, getdate()) as DTA_ULT_MOV, DTA_FIM, STATUS, PRIORIDADE " + 
+                    "FROM CONTROLE_TPS_ANALISTAS " + 
+                    F"WHERE ANALISTA = '{analista}' " + 
+                    "AND DTA_FIM < GETDATE() " 
+                    "ORDER BY DIAS_ABERTO DESC").fetchall()
+    return tpsgerais, tpsmais15, tpsbacklog
+
+def tpsTimeHelper():
+    lista_analista = ""
+    analista = database.session.execute("SELECT id, USUARIO " + 
+                    "FROM ANALISTA " + 
+                    F"WHERE TIME_ID in (SELECT ID FROM TIME WHERE HELPER_ID = '{current_user.id}') ").fetchall()
+    for i in analista:
+        lista_analista += "'" + i[1] + "',"
+    
+    tpsanaliticotot = database.session.execute("SELECT grl.ANALISTA, " +
+                    "COUNT(grl.NRO_TP) AS FILA, " +
+                    "(SELECT COUNT(m15.NRO_TP) " +
+                        "FROM CONTROLE_TPS_ANALISTAS m15 " +
+                        "WHERE m15.ANALISTA = grl.ANALISTA " +
+                        "AND m15.DIAS_ABERTO >= 15) as MAIS15, " +
+                    "(SELECT COUNT(m15.NRO_TP) " +
+                        "FROM CONTROLE_TPS_ANALISTAS m15 " +
+                        "WHERE m15.ANALISTA = grl.ANALISTA " +
+                        "AND m15.ISSUE NOT LIKE '%AUTO%' " +
+                        "AND m15.DTA_FIM < getdate()) as BACKLOG, " +
+                    "(SELECT COUNT(m15.NRO_TP) " +
+                        "FROM CONTROLE_TPS_ANALISTAS m15 " +
+                        "WHERE m15.ANALISTA = grl.ANALISTA " +
+                        "AND m15.ISSUE LIKE '%AUTO%') as ISSUE " +
+                    "FROM CONTROLE_TPS_ANALISTAS grl " +
+                    f"WHERE grl.ANALISTA IN ({lista_analista[:-1]}) " +
+                    "GROUP BY grl.ANALISTA").fetchall()
+
+    tpsgerais = database.session.execute("SELECT id, NRO_TP, ISSUE, ANALISTA, GRUPO, RESUMO, DIAS_ABERTO, DATEDIFF(day, DTA_ULT_MOV, getdate()) as DTA_ULT_MOV, DTA_FIM, STATUS, PRIORIDADE " + 
+                    "FROM CONTROLE_TPS_ANALISTAS " + 
+                    F"WHERE ANALISTA in ({lista_analista[:-1]}) " + 
+                    "ORDER BY DIAS_ABERTO DESC").fetchall()
+    tpsmais15 = database.session.execute(f"SELECT id, NRO_TP, ISSUE, ANALISTA, GRUPO, RESUMO, DIAS_ABERTO, DATEDIFF(day, DTA_ULT_MOV, getdate()) as DTA_ULT_MOV, DTA_FIM, STATUS, PRIORIDADE " + 
+                    "FROM CONTROLE_TPS_ANALISTAS " + 
+                    F"WHERE ANALISTA in ({lista_analista[:-1]}) " + 
+                    "AND DIAS_ABERTO > 14 "
+                    "ORDER BY DIAS_ABERTO DESC").fetchall()
+    tpsbacklog = database.session.execute(f"SELECT id, NRO_TP, ISSUE, ANALISTA, GRUPO, RESUMO, DIAS_ABERTO, DATEDIFF(day, DTA_ULT_MOV, getdate()) as DTA_ULT_MOV, DTA_FIM, STATUS, PRIORIDADE " + 
+                    "FROM CONTROLE_TPS_ANALISTAS " + 
+                    F"WHERE ANALISTA in ({lista_analista[:-1]}) " + 
+                    "AND DTA_FIM < GETDATE() "
+                    "ORDER BY DIAS_ABERTO DESC").fetchall()
+
+    tpsissue = database.session.execute(f"SELECT id, NRO_TP, ISSUE, ANALISTA, GRUPO, RESUMO, DIAS_ABERTO, DATEDIFF(day, DTA_ULT_MOV, getdate()) as DTA_ULT_MOV, DTA_FIM, STATUS, PRIORIDADE " + 
+                    "FROM CONTROLE_TPS_ANALISTAS " + 
+                    F"WHERE ANALISTA in ({lista_analista[:-1]}) " + 
+                    "AND ISSUE LIKE '%AUTO%' "
+                    "ORDER BY DIAS_ABERTO DESC").fetchall()
+
+    return tpsgerais, tpsmais15, tpsbacklog, tpsanaliticotot, tpsissue
+
+def tpsTimeGestor():
+    lista_analista = ""
+    analista = database.session.execute("SELECT id, USUARIO " + 
+                    "FROM ANALISTA " + 
+                    F"WHERE TIME_ID in (SELECT ID FROM TIME WHERE GESTOR_ID = '{current_user.id}') ").fetchall()
+    for i in analista:
+        lista_analista += "'" + i[1] + "',"
+    
+    tpsanaliticotot = database.session.execute("SELECT (SELECT usuario " +
+        "FROM   analista " +
+        "WHERE  usuario = grl.analista)               AS ANALISTA, " +
+        "(SELECT nome " +
+        "FROM   time " +
+        "WHERE  id = (SELECT time_id " +
+                     "FROM   analista " +
+                     "WHERE  usuario = grl.analista)) AS EQUIPE, " +
+        "Count(grl.nro_tp)                             AS FILA, " +
+        "(SELECT Count(m15.nro_tp) " +
+        "FROM   controle_tps_analistas m15 " +
+        "WHERE  m15.analista = grl.analista " +
+               "AND m15.dias_aberto >= 15)            AS MAIS15, " +
+        "(SELECT Count(m15.nro_tp) " +
+        "FROM   controle_tps_analistas m15 " +
+        "WHERE  m15.analista = grl.analista " +
+               "AND m15.ISSUE NOT LIKE '%AUTO%' " +
+               "AND m15.dta_fim < Getdate())          AS BACKLOG, " +
+        "(SELECT COUNT(m15.NRO_TP) " +
+                        "FROM CONTROLE_TPS_ANALISTAS m15 " +
+                        "WHERE m15.ANALISTA = grl.ANALISTA " +
+                        "AND m15.ISSUE LIKE '%AUTO%') as ISSUE " +
+        "FROM   controle_tps_analistas grl " +
+        f"WHERE  grl.analista IN ({lista_analista[:-1]}) " +
+        "GROUP  BY grl.analista; ").fetchall()
+
+    tpsgerais = database.session.execute("SELECT id, NRO_TP, ISSUE, ANALISTA, GRUPO, RESUMO, DIAS_ABERTO, DATEDIFF(day, DTA_ULT_MOV, getdate()) as DTA_ULT_MOV, DTA_FIM, STATUS, PRIORIDADE " + 
+                    "FROM CONTROLE_TPS_ANALISTAS " + 
+                    F"WHERE ANALISTA in ({lista_analista[:-1]}) " + 
+                    "ORDER BY DIAS_ABERTO DESC").fetchall()
+    tpsmais15 = database.session.execute(f"SELECT id, NRO_TP, ISSUE, ANALISTA, GRUPO, RESUMO, DIAS_ABERTO, DATEDIFF(day, DTA_ULT_MOV, getdate()) as DTA_ULT_MOV, DTA_FIM, STATUS, PRIORIDADE " + 
+                    "FROM CONTROLE_TPS_ANALISTAS " + 
+                    F"WHERE ANALISTA in ({lista_analista[:-1]}) " + 
+                    "AND DIAS_ABERTO > 14 "
+                    "ORDER BY DIAS_ABERTO DESC").fetchall()
+    tpsbacklog = database.session.execute(f"SELECT id, NRO_TP, ISSUE, ANALISTA, GRUPO, RESUMO, DIAS_ABERTO, DATEDIFF(day, DTA_ULT_MOV, getdate()) as DTA_ULT_MOV, DTA_FIM, STATUS, PRIORIDADE " + 
+                    "FROM CONTROLE_TPS_ANALISTAS " + 
+                    F"WHERE ANALISTA in ({lista_analista[:-1]}) " + 
+                    "AND DTA_FIM < GETDATE() "
+                    "ORDER BY DIAS_ABERTO DESC").fetchall()
+
+    tpsissue = database.session.execute(f"SELECT id, NRO_TP, ISSUE, ANALISTA, GRUPO, RESUMO, DIAS_ABERTO, DATEDIFF(day, DTA_ULT_MOV, getdate()) as DTA_ULT_MOV, DTA_FIM, STATUS, PRIORIDADE " + 
+                    "FROM CONTROLE_TPS_ANALISTAS " + 
+                    F"WHERE ANALISTA in ({lista_analista[:-1]}) " + 
+                    "AND ISSUE LIKE '%AUTO%' "
+                    "ORDER BY DIAS_ABERTO DESC").fetchall()
+
+    return tpsgerais, tpsmais15, tpsbacklog, tpsanaliticotot, tpsissue
+
+def tpsTimeCoordenador():
+    lista_analista = ""
+    analista = database.session.execute("SELECT id, USUARIO " + 
+                    "FROM ANALISTA").fetchall()
+    for i in analista:
+        lista_analista += "'" + i[1] + "',"
+
+    tpsanaliticotot = database.session.execute("SELECT (SELECT usuario " +
+        "FROM   analista " +
+        "WHERE  usuario = grl.analista)               AS ANALISTA, " +
+        "(SELECT nome " +
+        "FROM   time " +
+        "WHERE  id = (SELECT time_id " +
+                     "FROM   analista " +
+                     "WHERE  usuario = grl.analista)) AS EQUIPE, " +
+        "Count(grl.nro_tp)                             AS FILA, " +
+        "(SELECT Count(m15.nro_tp) " +
+        "FROM   controle_tps_analistas m15 " +
+        "WHERE  m15.analista = grl.analista " +
+               "AND m15.dias_aberto >= 15)            AS MAIS15, " +
+        "(SELECT Count(m15.nro_tp) " +
+        "FROM   controle_tps_analistas m15 " +
+        "WHERE  m15.analista = grl.analista " +
+               "AND m15.ISSUE NOT LIKE '%AUTO%' " +
+               "AND m15.dta_fim < Getdate())          AS BACKLOG, " +
+        "(SELECT COUNT(m15.NRO_TP) " +
+                        "FROM CONTROLE_TPS_ANALISTAS m15 " +
+                        "WHERE m15.ANALISTA = grl.ANALISTA " +
+                        "AND m15.ISSUE LIKE '%AUTO%') as ISSUE " +
+        "FROM   controle_tps_analistas grl " +
+        f"WHERE  grl.analista IN ({lista_analista[:-1]}) " +
+        "GROUP  BY grl.analista; ").fetchall()
+        
+    tpsgerais = database.session.execute("SELECT id, NRO_TP, ISSUE, ANALISTA, GRUPO, RESUMO, DIAS_ABERTO, DATEDIFF(day, DTA_ULT_MOV, getdate()) as DTA_ULT_MOV, DTA_FIM, STATUS, PRIORIDADE " + 
+                    "FROM CONTROLE_TPS_ANALISTAS " + 
+                    F"WHERE ANALISTA in ({lista_analista[:-1]}) " + 
+                    "ORDER BY DIAS_ABERTO DESC").fetchall()
+    tpsmais15 = database.session.execute(f"SELECT id, NRO_TP, ISSUE, ANALISTA, GRUPO, RESUMO, DIAS_ABERTO, DATEDIFF(day, DTA_ULT_MOV, getdate()) as DTA_ULT_MOV, DTA_FIM, STATUS, PRIORIDADE " + 
+                    "FROM CONTROLE_TPS_ANALISTAS " + 
+                    F"WHERE ANALISTA in ({lista_analista[:-1]}) " + 
+                    "AND DIAS_ABERTO > 14 "
+                    "ORDER BY DIAS_ABERTO DESC").fetchall()
+    tpsbacklog = database.session.execute(f"SELECT id, NRO_TP, ISSUE, ANALISTA, GRUPO, RESUMO, DIAS_ABERTO, DATEDIFF(day, DTA_ULT_MOV, getdate()) as DTA_ULT_MOV, DTA_FIM, STATUS, PRIORIDADE " + 
+                    "FROM CONTROLE_TPS_ANALISTAS " + 
+                    F"WHERE ANALISTA in ({lista_analista[:-1]}) " + 
+                    "AND DTA_FIM < GETDATE() "
+                    "ORDER BY DIAS_ABERTO DESC").fetchall()
+    tpsissue = database.session.execute(f"SELECT id, NRO_TP, ISSUE, ANALISTA, GRUPO, RESUMO, DIAS_ABERTO, DATEDIFF(day, DTA_ULT_MOV, getdate()) as DTA_ULT_MOV, DTA_FIM, STATUS, PRIORIDADE " + 
+                    "FROM CONTROLE_TPS_ANALISTAS " + 
+                    F"WHERE ANALISTA in ({lista_analista[:-1]}) " + 
+                    "AND ISSUE LIKE '%AUTO%' "
+                    "ORDER BY DIAS_ABERTO DESC").fetchall()
+
+    return tpsgerais, tpsmais15, tpsbacklog, tpsanaliticotot, tpsissue

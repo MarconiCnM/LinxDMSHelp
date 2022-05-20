@@ -16,57 +16,28 @@
     </div>
     <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4 col-xxl-4">
         <div class="div-card mb-3">
-            {% if request.path == url_for('solicitacaoErro') %}
-                <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon1"><img src="{{url_for('static',filename='img/site/icon-pesquisa.svg')}}" alt=""></span>
-                    <input id="myInput" type="text" class="form-control" placeholder="Pesquisar..." aria-label="Username" aria-describedby="basic-addon1">
-                </div>
-                <div class="table-cad">
-                    <table id="myTable" class="table table-bordered table-striped table-hover">
-                        <thead class="header">
-                            <tr>
-                                <th scope="col">ID</th>
-                                <th scope="col">Nro_tp</th>
-                                <th scope="col">Analista</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for erro in erros %}
-                                <a href="">
-                                    <tr data-url="{{url_for('solicitacaoErroID', erro_id=erro.id)}}">
-                                        <td>{{ erro.id }}</td>
-                                        <td>{{ erro.NRO_TP }}</td>
-                                        <td>{{ erro.requester.USUARIO }}</td>
-                                    </tr>
-                                </a>
+            <div class="div-card mb-3">
+                Movimentações
+                <div class="container div-card-mov">
+                    <div class="row">
+                        <div class="col-12 pt-4">
+                            {% for mov in movs: %}
+                                <div class="list-group-item mb-3">
+                                    <h6 class="list-group-item-heading">{{ mov.TITULO }}<br><small>{{ format_date_time(mov.DTA_CREATE) }}</small></h6>
+                                    {% if mov.TIPO == 'A' %}
+                                        <p class="list-group-item-text">Analista: <strong>{{mov.ANALISTA}}</strong></p>
+                                    {% elif mov.TIPO == 'H' %}
+                                        <p class="list-group-item-text">Helper: <strong>{{mov.HELPER}}</strong></p>
+                                    {% endif %}
+                                    <p class="list-group-item-text"> <strong>Resumo: </strong>{{mov.RESUMO}}</strong></p>
+                                    <span class="text-status">{{mov.STATUS}}</span>
+                                    <div class="clearfix"></div>
+                                </div>
                             {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-            {% else %}
-                <div class="div-card mb-3">
-                    Movimentações
-                    <div class="container div-card-mov">
-                        <div class="row">
-                            <div class="col-12 pt-4">
-                                {% for mov in movs: %}
-                                    <div class="list-group-item mb-3">
-                                        <h5 class="list-group-item-heading">{{ mov.TITULO }}<br><small>{{ ajusteDta(mov.DTA_CREATE) }}</small></h5>
-                                        {% if mov.TIPO == 'A' %}
-                                            <p class="list-group-item-text">Analista: <strong>{{mov.ANALISTA}}</strong></p>
-                                        {% elif mov.TIPO == 'H' %}
-                                            <p class="list-group-item-text">Helper: <strong>{{mov.HELPER}}</strong></p>
-                                        {% endif %}
-                                        <p class="list-group-item-text"> <strong>Resumo: </strong>{{mov.RESUMO}}</strong></p>
-                                        <span class="text-status">{{mov.STATUS}}</span>
-                                        <div class="clearfix"></div>
-                                    </div>
-                                {% endfor %}
-                            </div>
                         </div>
                     </div>
                 </div>
-            {% endif %}
+            </div>
         </div>
     </div>
     <div class="col-sm-12 col-md-12 col-lg-8 col-xl-8 col-xxl-8">
@@ -177,7 +148,7 @@
                                 {{ form_erro.paliativa(class="form-control") }}
                             {% endif %} 
                         </div>
-                        <div class="row mb-3">
+                        <div class="row mb-2">
                             <div class="mb-3 col-7">
                                 {% if form_erro.db_teste.errors %}
                                     {{ form_erro.db_teste.label(class="form-label") }}
@@ -222,22 +193,31 @@
                             </div>
                         </div>
                         <div class="mb-3 col-12 div-cod">
-                            {% if form_erro.docs.errors %}
-                                {{ form_erro.docs.label(class="form-label") }}
-                                {{ form_erro.docs(class="form-control is-invalid") }}
+                            {% if form_erro.solucao.errors %}
+                                {{ form_erro.solucao.label(class="form-label") }}
+                                {{ form_erro.solucao(class="form-control is-invalid") }}
                                 <div class="invalid-feedback">
-                                    {% for erro in form_erro.docs.errors %}
+                                    {% for erro in form_erro.solucao.errors %}
                                         {{ erro }}
                                     {% endfor %}
                                 </div>
                             {% else %}
-                                {{ form_erro.docs.label(class="form-label") }}
-                                {{ form_erro.docs(class="form-control") }}
+                                {{ form_erro.solucao.label(class="form-label") }}
+                                {{ form_erro.solucao(class="form-control") }}
                             {% endif %} 
                         </div>
                     </div>
                     <div class="col-3 d-flex flex-column mt-5">
-                        {{ form_erro.btn_submit_inserir(class="btn btn-cadastro-salvar mb-3") }}
+                        {% if erroID.STATUS == 'NÃO INICIADO' %}
+                            {{ form_erro.btn_submit_iniciar(class="btn btn-cadastro-salvar mb-3") }}
+                        {% elif erroID.STATUS == 'EM ANALISE' %}
+                            {{ form_erro.btn_submit_aprov(class="btn btn-cadastro-salvar mb-3") }}
+                            {{ form_erro.btn_submit_info(class="btn btn-cadastro mb-3") }}
+                            {{ form_erro.btn_submit_recus(class="btn btn-cadastro mb-3") }}
+                        {% elif erroID.STATUS == 'AGUARDANDO ADIÇÃO DE ROTULO' %}
+                            {{ form_erro.btn_submit_final(class="btn btn-cadastro-salvar mb-3") }}
+                        {% endif %}
+                        <a class="btn btn-cadastro mb-3" href="{{url_for('errodoc', erro_id=erroID.id)}}">Baixar Arquivos</a>
                     </div>
                 </div>
             </form>

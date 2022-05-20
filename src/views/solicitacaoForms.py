@@ -42,10 +42,20 @@ class FormErro(FlaskForm):
         'O que o sistema deveria fazer:', validators=[DataRequired()])
     paliativa = TextAreaField(
         'Paliativa:', validators=[DataRequired()])
-    docs = FileField('Adicionar aquivos', validators=[DataRequired(),
-                                             FileAllowed(['zip'])])
+    docs = FileField('Adicionar aquivos', validators=[FileAllowed(['zip'])])
     db_teste = StringField('Banco de dados:', validators=[DataRequired()])
-    versao = SelectField(u'Versão', choices=[('5.02'), ('5.03'), ('5.04'), ('5.05')])
+    versao = SelectField(u'Versão', choices=[('5.04'), ('5.05'), ('5.06'), ('5.07')])
     versao_ant = SelectField(u'Versão', choices=[('Sim'), ('Não')])
+    solucao = TextAreaField(
+        'Resolução:')
     
     btn_submit_inserir = SubmitField('Inserir')
+    btn_submit_salvar = SubmitField('Salvar')
+    btn_submit_iniciar = SubmitField('Iniciar Analise')
+    btn_submit_info = SubmitField('Solicitar Informação')
+    btn_submit_infores = SubmitField('Enviar Informação')
+    btn_submit_aprov = SubmitField('Aprovar Abertura')
+    btn_submit_recus = SubmitField('Recusar Abertura')
+    btn_submit_rotulo = SubmitField('Solicita Rotulo')
+    btn_submit_final = SubmitField('Finalizar')
+

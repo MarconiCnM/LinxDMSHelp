@@ -11,7 +11,7 @@ def gestorCad(form_gestor):
             EMAIL=form_gestor.email.data).first()
         
         if form_gestor.senha.data:
-            if bcrypt.check_password_hash(gestor.SENHA, form_gestor.senha.data) or (current_user.EMAIL == 'admin@linx.com.br'):
+            if (current_user.EMAIL == gestor.EMAIL) or (current_user.EMAIL == 'admin@linx.com.br'):
                 gestor.USUARIO = form_gestor.nome.data
                 gestor.EMAIL = form_gestor.email.data
                 gestor.SENHA = bcrypt.generate_password_hash(
@@ -21,7 +21,7 @@ def gestorCad(form_gestor):
                 return True
             else: 
                 flash(
-                    'Senha incorreta', 'alert-danger')   
+                    'Você não tem permissão para fazer essa alteração', 'alert-danger')      
         else:
             flash(
                 'Favor preencher a senha', 'alert-danger')    
@@ -64,7 +64,7 @@ def helperCad(form_helper):
             EMAIL=form_helper.email.data).first()
 
         if form_helper.senha.data:
-            if bcrypt.check_password_hash(helper.SENHA, form_helper.senha.data) or (current_user.EMAIL == 'admin@linx.com.br'):
+            if (current_user.EMAIL == helper.EMAIL) or (current_user.EMAIL == 'admin@linx.com.br'):
                 helper.USUARIO = form_helper.nome.data
                 helper.EMAIL = form_helper.email.data
                 helper.SENHA = bcrypt.generate_password_hash(
@@ -74,7 +74,7 @@ def helperCad(form_helper):
                 return True
             else: 
                 flash(
-                    'Senha incorreta', 'alert-danger')    
+                    'Você não tem permissão para fazer essa alteração', 'alert-danger')       
         else:
             flash(
                 'Favor preencher a senha', 'alert-danger')    
@@ -282,7 +282,7 @@ def analistaCad(form_analista):
             EMAIL=form_analista.email.data).first()
         
         if form_analista.senha.data:
-            if bcrypt.check_password_hash(analista.SENHA, form_analista.senha.data) or (current_user.EMAIL == 'admin@linx.com.br'):
+            if (current_user.EMAIL == analista.EMAIL) or (current_user.EMAIL == 'admin@linx.com.br'):
                 cargo = CARGO.query.filter_by(CARGO=form_analista.cargo.data).first()
                 time = TIME.query.filter_by(NOME=form_analista.time.data).first()
                 analista.USUARIO = form_analista.nome.data
@@ -296,7 +296,7 @@ def analistaCad(form_analista):
                 return True
             else: 
                 flash(
-                    'Senha incorreta', 'alert-danger')   
+                    'Você não tem permissão para fazer essa alteração', 'alert-danger')   
         else:
             flash(
                 'Favor preencher a senha', 'alert-danger')    

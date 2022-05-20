@@ -25,18 +25,18 @@
                     <table id="myTable" class="table table-bordered table-striped table-hover">
                         <thead class="header">
                             <tr>
-                                <th scope="col">ID</th>
                                 <th scope="col">Nro_tp</th>
-                                <th scope="col">Analista</th>
+                                <th scope="col">ISSUE</th>
+                                <th scope="col">Status</th>
                             </tr>
                         </thead>
                         <tbody>
                             {% for erro in erros %}
                                 <a href="">
                                     <tr data-url="{{url_for('solicitacaoErroID', erro_id=erro.id)}}">
-                                        <td>{{ erro.id }}</td>
                                         <td>{{ erro.NRO_TP }}</td>
-                                        <td>{{ erro.requester.USUARIO }}</td>
+                                        <td>{{ erro.ISSUE }}</td>
+                                        <td>{{ erro.STATUS }}</td>
                                     </tr>
                                 </a>
                             {% endfor %}
@@ -51,7 +51,7 @@
                             <div class="col-12 pt-4">
                                 {% for mov in movs: %}
                                     <div class="list-group-item mb-3">
-                                        <h5 class="list-group-item-heading">{{ mov.TITULO }}<br><small>{{ ajusteDta(mov.DTA_CREATE) }}</small></h5>
+                                        <h6 class="list-group-item-heading">{{ mov.TITULO }}<br><small>{{ format_date_time(mov.DTA_CREATE) }}</small></h6>
                                         {% if mov.TIPO == 'A' %}
                                             <p class="list-group-item-text">Analista: <strong>{{mov.ANALISTA}}</strong></p>
                                         {% elif mov.TIPO == 'H' %}
@@ -90,20 +90,22 @@
                                     {{ form_erro.nro_tp(class="form-control") }}
                                 {% endif %} 
                             </div>
-                            <div class="mb-3 col-3">
-                                {% if form_erro.issue.errors %}
-                                    {{ form_erro.issue.label(class="form-label") }}
-                                    {{ form_erro.issue(class="form-control is-invalid") }}
-                                    <div class="invalid-feedback">
-                                        {% for erro in form_erro.issue.errors %}
-                                            {{ erro }}
-                                        {% endfor %}
-                                    </div>
-                                {% else %}
-                                    {{ form_erro.issue.label(class="form-label") }}
-                                    {{ form_erro.issue(class="form-control") }}
-                                {% endif %} 
-                            </div>
+                            {% if request.path != url_for('solicitacaoErro') %}
+                                <div class="mb-3 col-3">
+                                    {% if form_erro.issue.errors %}
+                                        {{ form_erro.issue.label(class="form-label") }}
+                                        {{ form_erro.issue(class="form-control is-invalid") }}
+                                        <div class="invalid-feedback">
+                                            {% for erro in form_erro.issue.errors %}
+                                                {{ erro }}
+                                            {% endfor %}
+                                        </div>
+                                    {% else %}
+                                        {{ form_erro.issue.label(class="form-label") }}
+                                        {{ form_erro.issue(class="form-control") }}
+                                    {% endif %} 
+                                </div>
+                            {% endif %}
                         </div>
                         <div class="row">
                             <div class="mb-3 col-8">
@@ -235,9 +237,34 @@
                                 {{ form_erro.docs(class="form-control") }}
                             {% endif %} 
                         </div>
+                        {% if request.path != url_for('solicitacaoErro') %}
+                            <div class="mb-3 col-12 div-cod">
+                                {% if form_erro.solucao.errors %}
+                                    {{ form_erro.solucao.label(class="form-label") }}
+                                    {{ form_erro.solucao(class="form-control is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for erro in form_erro.solucao.errors %}
+                                            {{ erro }}
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form_erro.solucao.label(class="form-label") }}
+                                    {{ form_erro.solucao(class="form-control") }}
+                                {% endif %} 
+                            </div>
+                        {% endif %}
                     </div>
                     <div class="col-3 d-flex flex-column mt-5">
-                        {{ form_erro.btn_submit_inserir(class="btn btn-cadastro-salvar mb-3") }}
+                        {% if request.path == url_for('solicitacaoErro') %}
+                            {{ form_erro.btn_submit_inserir(class="btn btn-cadastro-salvar mb-3") }}
+                        {% else %}
+                            {% if erroID.STATUS == 'AGUARDANDO ABERTURA DE ISSUE' %}
+                                {{ form_erro.btn_submit_rotulo(class="btn btn-cadastro-salvar mb-3") }}
+                            {% elif erroID.STATUS == 'AGUARDANDO INFORMAÇÃO' %}
+                                {{ form_erro.btn_submit_infores(class="btn btn-cadastro-salvar mb-3") }}
+                            {% endif %}
+                            <a class="btn btn-cadastro mb-3" href="{{url_for('errodoc', erro_id=erroID.id)}}">Baixar Arquivos</a>
+                        {% endif %}
                     </div>
                 </div>
             </form>

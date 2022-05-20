@@ -21,7 +21,7 @@
     padding: 3%;
     background-color: #FFFFFF;
     border-radius: 1px;
-    font-size: 0.875rem;
+    font-size: 0.775rem;
 }
 
 .div-cod {
@@ -57,7 +57,7 @@
 }
 
 .div-card-mov {
-    height: 730px;
+    height: 580px;
     overflow-y: auto;
     border: 1px solid rgb(211, 209, 209);
 }
@@ -102,3 +102,20 @@
 .input-group-text img{
     width: 15px;
 }
+
+.status-tps-not-started {
+    color: rgb(8, 89, 211);
+}
+
+.status-tps-in-progress {
+    color: rgb(224, 161, 24);
+}
+
+.status-tps-approved {
+    color: rgb(18, 190, 18);
+}
+
+.status-tps-not-approved {
+    color: rgb(190, 47, 47);
+}
+

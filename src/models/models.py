@@ -50,6 +50,7 @@ class ANALISTA(database.Model, UserMixin):
         'SOL_HISTORIA', backref='requester')
     HELP = database.relationship(
         'HELP', backref='requester')
+    TIPO = database.Column(database.String, default='A')
 
 class HELPER(database.Model, UserMixin):
     id = database.Column(database.Integer, primary_key=True)
@@ -67,6 +68,7 @@ class HELPER(database.Model, UserMixin):
         'SOL_HISTORIA', backref='finisher')
     HELP = database.relationship(
         'HELP', backref='finisher')
+    TIPO = database.Column(database.String, default='H')
     
 
 class GESTOR(database.Model, UserMixin):
@@ -75,6 +77,7 @@ class GESTOR(database.Model, UserMixin):
     EMAIL = database.Column(database.String, nullable=False)
     SENHA = database.Column(database.String, nullable=False)
     TIME = database.relationship('TIME', backref='GESTAO')
+    TIPO = database.Column(database.String, default='G')
 
 
 class SOL_ERRO(database.Model):
@@ -237,16 +240,17 @@ class MOV_SOL(database.Model):
         database.DateTime, nullable=False, default=datetime.utcnow)
 
 class CONTROLE_TPS_ANALISTAS(database.Model):
-    id = database.Column(database.Integer, primary_key=True)
-    NRO_TP = database.Column(database.Integer, nullable=False)
+    id = database.Column(database.Integer, primary_key=True, autoincrement=True)
+    NRO_TP = database.Column(database.Integer, unique=True)
+    ISSUE = database.Column(database.String)
     ANALISTA = database.Column(database.String, nullable=False)
     GRUPO = database.Column(database.String, nullable=False)
     RESUMO = database.Column(database.String, nullable=False)
     DIAS_ABERTO = database.Column(database.Integer, nullable=False)
-    DTA_ULT_MOV = database.Column(
-        database.DateTime, nullable=False)
     DTA_FIM = database.Column(
-        database.DateTime, nullable=False)
+        database.DateTime)
+    DTA_ULT_MOV = database.Column(
+        database.DateTime, default='01/01/2032')
     STATUS = database.Column(database.String, nullable=False)
     PRIORIDADE = database.Column(database.String, nullable=False)
 

@@ -9,6 +9,35 @@
 
 {% block body %}
 <div class="container text-center my-3">
+    <!-- Modal -->
+    <div class="modal fade" id="modalExemplo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">O que vc deseja exportar?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="btn col-4">
+                        <a href="{{url_for('expgeral')}}">Geral</a>
+                    </div>
+                    <div class="btn col-4">
+                        <a href="{{url_for('expissues')}}">Issues</a>
+                    </div>
+                    <div class="btn col-4">
+                        <a href="{{url_for('expmais15')}}">Mais 15</a>
+                    </div>
+                    <div class="btn col-4">
+                        <a href="{{url_for('expbacklogs')}}">Backlogs</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="row mx-auto my-auto">
         <div id="recipeCarousel" class="carousel slide w-100" data-ride="carousel">
             <div class="carousel-inner" role="listbox">
@@ -28,7 +57,7 @@
                                 </div>
                             </div>
                             <div class="btn">
-                                <a href="{{ url_for('solicitacaoErro') }}">
+                                <a href="{{ url_for('analiseErro') }}">
                                     Analisar
                                 </a>
                             </div>
@@ -188,14 +217,17 @@
         <div class="div-card-analitico mb-4">
             <div class="div-header-analitico d-flex justify-content-between align-items-center" style="width: 100%;">
                 <h6 style="margin-left: 2px;">Listagem de TPs | <span>Tempo de atualização 10min</span></h6>
-                <nav class="row" style="width: 60%;">
-                    <div class="input-group mb-3 col-5">
+                <div class="btn col-1">
+                    <a href="#" class="link" type="button" data-toggle="modal" data-target="#modalExemplo">Exportar</a>
+                </div>
+                <nav class="row d-flex align-items-center" style="width: 60%;">
+                    <div class="input-group col-5">
                         <span class="input-group-text" id="basic-addon1"><img src="{{url_for('static',filename='img/site/icon-pesquisa.svg')}}" alt=""></span>
                         <input id="myInput" type="text" class="form-control" placeholder="Pesquisar..." aria-label="Username" aria-describedby="basic-addon1">
                     </div>
                     <div class="nav nav-tabs col-7" id="nav-tab" role="tablist" style="height: 50%;">
                         <a class="nav-item nav-link active" id="nav-geral-tab" data-toggle="tab" href="#nav-geral" role="tab" aria-controls="nav-geral" aria-selected="true">Listagem</a>
-                        <a class="nav-item nav-link" id="nav-geral-tab" data-toggle="tab" href="#nav-list" role="tab" aria-controls="nav-list" aria-selected="true">Fila geral</a>
+                        <a class="nav-item nav-link" id="nav-geral-tab" data-toggle="tab" href="#nav-list" role="tab" aria-controls="nav-list" aria-selected="true">Geral</a>
                         <a class="nav-item nav-link" id="nav-mais15-tab" data-toggle="tab" href="#nav-mais15" role="tab" aria-controls="nav-mais15" aria-selected="false">+15</a>
                         <a class="nav-item nav-link" id="nav-backlog-tab" data-toggle="tab" href="#nav-backlog" role="tab" aria-controls="nav-backlog" aria-selected="false">Backlog</a>
                     </div>
@@ -203,11 +235,12 @@
             </div>
             <div class="tab-content table-tps" id="nav-tabContent">
                 <div class="tab-pane fade show active" id="nav-geral" role="tabpanel" aria-labelledby="nav-geral-tab">
-                    <table class="table table-striped table-hover">
+                    <table class="table table-hover">
                         <thead class="header">
                             <tr>
                                 <th scope="col">Analista</th>
                                 <th scope="col">Chamados na fila</th>
+                                <th scope="col">Chamados com Issue</th>
                                 <th scope="col">Chamados +15</th>
                                 <th scope="col">Backlogs</th>
                             </tr>
@@ -217,6 +250,7 @@
                                 <tr>
                                     <td>{{ analista[0] }}</td>
                                     <td>{{ analista[1] }}</td>
+                                    <td>{{ analista[4] }}</td>
                                     <td>{{ analista[2] }}</td>
                                     <td>{{ analista[3] }}</td>
                                     <td><b>
@@ -239,11 +273,12 @@
                     </table>
                 </div>
                 <div class="tab-pane fade" id="nav-list" role="tabpanel" aria-labelledby="nav-list-tab">
-                    <table id="myTable" class="table table-striped table-hover">
+                    <table id="myTable" class="table table-hover">
                         <thead class="header">
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Tarefa</th>
+                                <th scope="col">Issue</th>
                                 <th scope="col">Analista</th>
                                 <th scope="col">Prioridade</th>
                                 <th scope="col">Dias Aberto</th>
@@ -259,6 +294,7 @@
                                 <tr>
                                     <td>{{ count }}</td>
                                     <td>{{ tp.NRO_TP }}</td>
+                                    <td>{{ tp.ISSUE }}</td>
                                     <td>{{ tp.ANALISTA }}</td>
                                     <td>{{ tp.PRIORIDADE }}</td>
                                     <td>{{ tp.DIAS_ABERTO }}</td>
@@ -288,11 +324,12 @@
                     </table>
                 </div>
                 <div class="tab-pane fade" id="nav-mais15" role="tabpanel" aria-labelledby="nav-mais15-tab">
-                    <table id="myTable" class="table table-striped table-hover">
+                    <table id="myTable" class="table table-hover">
                         <thead class="header">
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Tarefa</th>
+                                <th scope="col">Issue</th>
                                 <th scope="col">Analista</th>
                                 <th scope="col">Dias Aberto</th>
                                 <th scope="col">Ult Mov</th>
@@ -307,6 +344,7 @@
                                     <tr>
                                         <td>{{ count }}</td>
                                         <td>{{ tp.NRO_TP }}</td>
+                                        <td>{{ tp.ISSUE }}</td>
                                         <td>{{ tp.ANALISTA }}</td>
                                         <td>{{ tp.DIAS_ABERTO }}</td>
                                         <td>{{ tp.DTA_ULT_MOV }}</td>
@@ -335,11 +373,12 @@
                     </table>
                 </div>
                 <div class="tab-pane fade" id="nav-backlog" role="tabpanel" aria-labelledby="nav-backlog-tab">
-                    <table id="myTable" class="table table-striped table-hover">
+                    <table id="myTable" class="table table-hover">
                         <thead class="header">
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Tarefa</th>
+                                <th scope="col">Issue</th>
                                 <th scope="col">Analista</th>
                                 <th scope="col">Dias Aberto</th>
                                 <th scope="col">Ult Mov</th>
@@ -354,6 +393,7 @@
                                     <tr>
                                         <td>{{ count }}</td>
                                         <td>{{ tp.NRO_TP }}</td>
+                                        <td>{{ tp.ISSUE }}</td>
                                         <td>{{ tp.ANALISTA }}</td>
                                         <td>{{ tp.DIAS_ABERTO }}</td>
                                         <td>{{ tp.DTA_ULT_MOV }}</td>
@@ -427,7 +467,7 @@
                                             <button  class="dropdown-item" href="#">Teste de conexão</button>
                                             <button  class="dropdown-item" href="#">Conf de conexão</button>
                                             <div class="dropdown-divider"></div>
-                                            <button  class="dropdown-item" href="#">Soliticar ajuda</button>
+                                            <button  class="dropdown-item" href="#">Solicitar ajuda</button>
                                         </div>
                                     </div>
                                 </td>
@@ -465,7 +505,7 @@
                                             <button  class="dropdown-item" href="#">Teste de conexão</button>
                                             <button  class="dropdown-item" href="#">Conf de conexão</button>
                                             <div class="dropdown-divider"></div>
-                                            <button  class="dropdown-item" href="#">Soliticar ajuda</button>
+                                            <button  class="dropdown-item" href="#">Solicitar ajuda</button>
                                         </div>
                                     </div>
                                 </td>

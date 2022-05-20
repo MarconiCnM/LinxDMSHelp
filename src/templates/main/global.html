@@ -96,17 +96,17 @@
                 <a href="#"><div></div>Criação de Ambiente</a>
                 <a href="#"><div></div>Atualização de Ambiente</a>
             </div>
-            {% if tipo in ('G', 'H'): %}
-                <button class="cad-btn menu-btn"><img src="../../static/img/site/Arrow 1.svg">Cadastros</button>
+            <button class="cad-btn menu-btn"><img src="../../static/img/site/Arrow 1.svg">Cadastros</button>
                 <div class="cad-container menu-container">
                     <a href="{{ url_for('cadastroAnalista') }}"><div></div>Analista</a>
-                    <a href="{{ url_for('cadastroHelper') }}"><div></div>Helper</a>
-                    <a href="{{ url_for('cadastroGestor') }}"><div></div>Gestor</a>
-                    <a href="{{ url_for('cadastroCargo') }}"><div></div>Cargo</a>
-                    <a href="{{ url_for('cadastroTime') }}"><div></div>Time</a>
-                    <a href="{{ url_for('cadastroBases') }}"><div></div>Bases</a>
+                    {% if current_user.TIPO in ('G', 'H') %}
+                        <a href="{{ url_for('cadastroHelper') }}"><div></div>Helper</a>
+                        <a href="{{ url_for('cadastroGestor') }}"><div></div>Gestor</a>
+                        <a href="{{ url_for('cadastroCargo') }}"><div></div>Cargo</a>
+                        <a href="{{ url_for('cadastroTime') }}"><div></div>Time</a>
+                        <a href="{{ url_for('cadastroBases') }}"><div></div>Bases</a>
+                    {% endif %}
                 </div>
-            {% endif %}
             <button class="externos-btn menu-btn"><img src="../../static/img/site/Arrow 1.svg">Links Externos</button>
             <div class="externos-container menu-container">
                 <a href="https://wf.linx.com.br/" target="_blank"><div></div>Work Flow</a>
