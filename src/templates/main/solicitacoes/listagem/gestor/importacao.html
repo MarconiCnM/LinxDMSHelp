@@ -1,0 +1,91 @@
+{% extends 'main/global.html' %}
+
+{% block head %}
+    <link rel= "stylesheet" 
+    type= "text/css" 
+    href= "{{url_for('static',filename='css/main/solicitacoes/requisicao/main.css')}}">
+{% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="col-12 mb-3">
+        <div class="div-card-cabecario d-flex align-items-center">
+            Listagem de Importações
+            
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="div-card mb-3">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1"><img src="{{url_for('static',filename='img/site/icon-pesquisa.svg')}}" alt=""></span>
+                <input id="myInput" type="text" class="form-control" placeholder="Pesquisar..." aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+            <div class="table-cad">
+                <table id="myTable" class="table table-hover">
+                    <thead class="header">
+                        <tr>
+                            <th scope="col">Nro_tp</th>
+                            <th scope="col">Analista</th>
+                            <th scope="col">Grupo</th>
+                            <th scope="col">Server</th>
+                            <th scope="col">Criação</th>
+                            <th scope="col">Finalização</th>
+                            <th scope="col" class="text-center">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for imp in imps %}
+                            <a href="">
+                                <tr data-url="{{url_for('analiseImportID', imp_id=imp.id)}}">
+                                    <td>{{ imp.NRO_TP }}</td>
+                                    <td>{{ imp.requester.USUARIO }}</td>
+                                    <td>{{ imp.GRUPO.upper() }}</td>
+                                    <td>{{ imp.SERVIDOR }}</td>
+                                    <td>{{ format_date(imp.DTA_CREATE) }}</td>
+                                    {% if imp.STATUS == "FINALIZADA" %}
+                                        <td>{{ format_date(imp.DTA_CONCLUDED) }}</td>
+                                    {% else %}
+                                        <td>{{ imp.DTA_CONCLUDED }}</td>
+                                    {% endif %}
+                                    {% if imp.STATUS == "NÃO INICIADO" %}
+                                        <td class="status-tps-not-started text-center">{{ imp.STATUS.title() }}</td>
+                                    {% elif imp.STATUS == "EM IMPORTAÇÃO" %}
+                                        <td class="status-tps-in-progress text-center">{{ imp.STATUS.title() }}</td>
+                                    {% elif imp.STATUS == "AGUARDANDO INFORMAÇÃO" %}
+                                        <td class="status-tps-not-started text-center">{{ imp.STATUS.title() }}</td>
+                                    {% elif imp.STATUS == "FINALIZADA" %}
+                                        <td class="status-tps-approved text-center">{{ imp.STATUS.title() }}</td>
+                                    {% elif imp.STATUS == "NÃO APROVADO" %}
+                                        <td class="status-tps-not-approved text-center">{{ imp.STATUS.title() }}</td>
+                                    {% endif %}
+                                </tr>
+                            </a>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+    $("#myInput").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#myTable tbody tr").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+    });
+    });
+
+    $(document).ready(function(){
+    $('table tr').click(function(){
+        window.location = $(this).data('url');
+        returnfalse;
+    });
+    });
+</script>
+
+{% endblock %}

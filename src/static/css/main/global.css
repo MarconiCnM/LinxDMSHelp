@@ -302,18 +302,6 @@ tr {
     transform: rotate(90deg);
 }
 
-.menu-btn a {
-    color: #e6e6e6 !important;
-}
-.menu-btn a:link, a:visited {
-    color: #e6e6e6 !important;
-}
-
-.menu-btn a:hover {
-    color: #e6e6e6 !important;
-}
-
-
 .menu-container {
     display: none;
     background-color: #5B2E90;

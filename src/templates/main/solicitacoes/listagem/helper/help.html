@@ -1,0 +1,89 @@
+{% extends 'main/global.html' %}
+
+{% block head %}
+    <link rel= "stylesheet" 
+    type= "text/css" 
+    href= "{{url_for('static',filename='css/main/solicitacoes/requisicao/main.css')}}">
+{% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="col-12 mb-3">
+        <div class="div-card-cabecario d-flex align-items-center">
+            Analise de Help
+            
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="div-card mb-3">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1"><img src="{{url_for('static',filename='img/site/icon-pesquisa.svg')}}" alt=""></span>
+                <input id="myInput" type="text" class="form-control" placeholder="Pesquisar..." aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+            <div class="table-cad">
+                <table id="myTable" class="table table-hover">
+                    <thead class="header">
+                        <tr>
+                            <th scope="col">Nro_tp</th>
+                            <th scope="col">Analista</th>
+                            <th scope="col">Problema</th>
+                            <th scope="col">Criação</th>
+                            <th scope="col">Finalização</th>
+                            <th scope="col" class="text-center">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for help in helps %}
+                            <a href="">
+                                <tr data-url="{{url_for('analiseHelpID', help_id=help.id)}}">
+                                    <td>{{ help.NRO_TP }}</td>
+                                    <td>{{ help.requester.USUARIO }}</td>
+                                    <td>{{ help.PROBLEMA[:150] }}</td>
+                                    <td>{{ format_date(help.DTA_CREATE) }}</td>
+                                    {% if help.STATUS == "FINALIZADA" or help.STATUS == "CANCELADO" %}
+                                        <td>{{ format_date(help.DTA_CONCLUDED) }}</td>
+                                    {% else %}
+                                        <td>{{ help.DTA_CONCLUDED }}</td>
+                                    {% endif %}
+                                    {% if help.STATUS == "NÃO INICIADO" %}
+                                        <td class="status-tps-not-started text-center">{{ help.STATUS.title() }}</td>
+                                    {% elif help.STATUS == "EM ANALISE" %}
+                                        <td class="status-tps-in-progress text-center">{{ help.STATUS.title() }}</td>
+                                    {% elif help.STATUS == "AGUARDANDO INFORMAÇÃO" %}
+                                        <td class="status-tps-not-started text-center">{{ help.STATUS.title() }}</td>
+                                    {% elif help.STATUS == "FINALIZADA" %}
+                                        <td class="status-tps-approved text-center">{{ help.STATUS.title() }}</td>
+                                    {% elif help.STATUS == "CANCELADO" %}
+                                        <td class="status-tps-not-approved text-center">{{ help.STATUS.title() }}</td>
+                                    {% endif %}
+                                </tr>
+                            </a>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+    $("#myInput").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#myTable tbody tr").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+    });
+    });
+
+    $(document).ready(function(){
+    $('table tr').click(function(){
+        window.location = $(this).data('url');
+        returnfalse;
+    });
+    });
+</script>
+
+{% endblock %}

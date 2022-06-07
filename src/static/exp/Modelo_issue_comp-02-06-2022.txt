@@ -1,0 +1,9 @@
+*Número da TP:* 49612488
+
+*Grupo* DISCAUTOL
+
+*O que o script faz:* Irá remover a peça que está presa em uma OS
+
+*Qual o motivo de não conseguirmos fazer pelo sistema:* Não conseguimos via sistema
+
+        

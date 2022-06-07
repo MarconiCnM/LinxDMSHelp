@@ -6,3 +6,6 @@ flask_mail
 flask_wtf
 email_validator
 pyodbc
+pandas
+selenium
+scrapy

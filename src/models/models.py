@@ -122,6 +122,7 @@ class SOL_SERVICO(database.Model):
 class SOL_SCRIPT(database.Model):
     id = database.Column(database.Integer, primary_key=True)
     NRO_TP = database.Column(database.Integer, nullable=False)
+    ISSUE = database.Column(database.String)
     GRUPO = database.Column(database.String, nullable=False)
     OQUE = database.Column(database.Text, nullable=False)
     PORQUE = database.Column(database.Text, nullable=False)
@@ -145,7 +146,7 @@ class SOL_IMPORT(database.Model):
     TAMANHO = database.Column(database.String, nullable=False)
     SERVIDOR = database.Column(database.String, nullable=False)
     DIR_ARQ = database.Column(database.Text, nullable=False)
-    OBS = database.Column(database.Text, nullable=False)
+    OBS = database.Column(database.Text)
     SOLUCAO = database.Column(database.Text)
     STATUS = database.Column(database.String, nullable=False, default='NÃO INICIADO')
     ANALISTA_ID = database.Column(
@@ -180,6 +181,7 @@ class SOL_HISTORIA(database.Model):
     FAZENDO = database.Column(database.Text, nullable=False)
     FAZER = database.Column(database.Text, nullable=False)
     COMO = database.Column(database.Text, nullable=False)
+    BENEFICIO = database.Column(database.Text, nullable=False)
     VERSAO = database.Column(database.String, nullable=False)
     DOCS = database.Column(database.Text, nullable=False)
     ALT_CUST = database.Column(database.Text, nullable=False)
@@ -250,7 +252,7 @@ class CONTROLE_TPS_ANALISTAS(database.Model):
     DTA_FIM = database.Column(
         database.DateTime)
     DTA_ULT_MOV = database.Column(
-        database.DateTime, default='01/01/2032')
+        database.DateTime, default=datetime.utcnow)
     STATUS = database.Column(database.String, nullable=False)
     PRIORIDADE = database.Column(database.String, nullable=False)
 

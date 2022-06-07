@@ -11,7 +11,7 @@ def gestorCad(form_gestor):
             EMAIL=form_gestor.email.data).first()
         
         if form_gestor.senha.data:
-            if (current_user.EMAIL == gestor.EMAIL) or (current_user.EMAIL == 'admin@linx.com.br'):
+            if (current_user.EMAIL == gestor.EMAIL) or (current_user.TIPO == 'G'):
                 gestor.USUARIO = form_gestor.nome.data
                 gestor.EMAIL = form_gestor.email.data
                 gestor.SENHA = bcrypt.generate_password_hash(
@@ -64,7 +64,7 @@ def helperCad(form_helper):
             EMAIL=form_helper.email.data).first()
 
         if form_helper.senha.data:
-            if (current_user.EMAIL == helper.EMAIL) or (current_user.EMAIL == 'admin@linx.com.br'):
+            if (current_user.EMAIL == helper.EMAIL) or (current_user.TIPO == 'G'):
                 helper.USUARIO = form_helper.nome.data
                 helper.EMAIL = form_helper.email.data
                 helper.SENHA = bcrypt.generate_password_hash(
@@ -281,25 +281,19 @@ def analistaCad(form_analista):
         analista = ANALISTA.query.filter_by(
             EMAIL=form_analista.email.data).first()
         
-        if form_analista.senha.data:
-            if (current_user.EMAIL == analista.EMAIL) or (current_user.EMAIL == 'admin@linx.com.br'):
-                cargo = CARGO.query.filter_by(CARGO=form_analista.cargo.data).first()
-                time = TIME.query.filter_by(NOME=form_analista.time.data).first()
-                analista.USUARIO = form_analista.nome.data
-                analista.EMAIL = form_analista.email.data
+        if (current_user.EMAIL == analista.EMAIL) or (current_user.TIPO == 'G') or (current_user.TIPO == 'H'):
+            cargo = CARGO.query.filter_by(CARGO=form_analista.cargo.data).first()
+            time = TIME.query.filter_by(NOME=form_analista.time.data).first()
+            analista.USUARIO = form_analista.nome.data
+            analista.EMAIL = form_analista.email.data   
+            if form_analista.senha.data:    
                 analista.SENHA = bcrypt.generate_password_hash(
                     form_analista.senha.data)
-                analista.CARGO_ID = cargo.id
-                analista.TIME_ID = time.id
-                database.session.commit()
-                flash('Perfil atualizado com sucesso', 'alert-success')
-                return True
-            else: 
-                flash(
-                    'Você não tem permissão para fazer essa alteração', 'alert-danger')   
-        else:
-            flash(
-                'Favor preencher a senha', 'alert-danger')    
+            analista.CARGO_ID = cargo.id
+            analista.TIME_ID = time.id
+            database.session.commit()
+            flash('Perfil atualizado com sucesso', 'alert-success')
+            return True
  
 
     elif form_analista.validate_on_submit() and 'btn_submit_inserir' in request.form:

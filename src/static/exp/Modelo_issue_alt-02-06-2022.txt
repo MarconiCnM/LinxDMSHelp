@@ -1,0 +1,13 @@
+*Número da TP:* 49535104
+
+*O que o sistema está fazendo:* Ao mudar o parâmetro no financeiro 'Bloquear venda a prazo p/ clientes  c/ duplicatas vencidas a mais de [-1] dias, se os parâmetros abaixo estiverem em stand by, marcado, nem desmarcado, o sistema não faz o update, ele ignora a alteração de dias do campo do parâmetro.
+
+*O que o sistema deveria fazer:* Deveria mudar a quantidade de dias quando alterado o campo.
+
+*Como deseja que o sistema faça:* Assim como ele faz se mexer nos parâmetros Oficina / Balcão, deixando eles marcados ou desmarcados, quando ele fica stand by, também acate a alteração.
+
+*Qual o beneficio dessa alteração:* Clientes podem usar o parâmetro corretamente
+
+*Versão:* 5.07
+        
+        

@@ -10,70 +10,100 @@
 <div class="row">
     <div class="col-12 mb-3">
         <div class="div-card-cabecario d-flex align-items-center">
-            Analise de Alteração
+            Analise de Historia
+            
         </div>
     </div>
     <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4 col-xxl-4">
         <div class="div-card mb-3">
-            Movimentações
-            <div class="container div-card-mov">
-                <div class="row">
-                    <div class="col-12 pt-4">
-                        <div class="list-group-item mb-3">
-                            <h5 class="list-group-item-heading">Solicitação Finalizada <small>Segunda at 17:43</small></h5>
-                            <p class="list-group-item-text">Helper: <strong>João Marconi</strong></p>
-                            <p class="list-group-item-text"> <strong>Resumo: </strong> Rotulo adicionado e solicitação finalizada</strong></p>
-                            <span class="text-status">FINALIZADA</span>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="list-group-item mb-3">
-                            <h5 class="list-group-item-heading">Solicitação de rotulo no JIRA <small>Segunda at 16:43</small></h5>
-                            <p class="list-group-item-text">Analista: <strong>Gabriel Reolon</strong></p>
-                            <p class="list-group-item-text"> <strong>Resumo: </strong> ISSUE aberta e informada na solicitação favor adicionar o rotulo</strong></p>
-                            <span class="text-status">AGUARDANDO ADIÇÃO DE ROTULO</span>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="list-group-item mb-3">
-                            <h5 class="list-group-item-heading">Aprovação de Abertura de ISSUE <small>Segunda at 15:43</small></h5>
-                            <p class="list-group-item-text">Helper: <strong>João Marconi</strong></p>
-                            <p class="list-group-item-text"> <strong>Resumo: </strong> Solicitação aprovada, apos a abertura da issue não esqueça de vincular o numero na solicitação para adição do rotulo de aprovação</strong></p>
-                            <span class="text-status">AGUARDANDO ABERTURA DE ISSUE</span>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="list-group-item mb-3">
-                            <h5 class="list-group-item-heading">Conclusão de Informação <small>Segunda at 14:43</small></h5>
-                            <p class="list-group-item-text">Analista: <strong>Gabriel Reolon</strong></p>
-                            <p class="list-group-item-text"> <strong>Resumo: </strong> Os manuais foram passados para o cliente porem o mesmo solicita o envio para alteração</strong></p>
-                            <span class="text-status">EM ANALISE</span>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="list-group-item mb-3">
-                            <h5 class="list-group-item-heading">Solicitação de Informação <small>Segunda at 13:43</small></h5>
-                            <p class="list-group-item-text">Helper: <strong>João Marconi</strong></p>
-                            <p class="list-group-item-text"> <strong>Resumo: </strong> Vi que na tp não foram passados o manual sobre o processo, o mesmo foi passado?</strong></p>
-                            <span class="text-status">AGUARDANDO INFORMAÇÂO</span>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="list-group-item mb-3">
-                            <h5 class="list-group-item-heading">Iniciada a Analise <small>Segunda at 13:33</small></h5>
-                            <p class="list-group-item-text">Helper: <strong>João Marconi</strong></p>
-                            <span class="text-status">EM ANALISE</span>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="list-group-item mb-3">
-                            <h5 class="list-group-item-heading">Abertura de Analise <small>Segunda as 12:33</small></h5>
-                            <p class="list-group-item-text">Analista Gabriel Reolon solicitou essa analise</p>
-                            <span class="text-status">AGUARDANDO INICIALIZAÇÂO</span>
+            {% if request.path == url_for('solicitacaoAlteracao') %}
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1"><img src="{{url_for('static',filename='img/site/icon-pesquisa.svg')}}" alt=""></span>
+                    <input id="myInput" type="text" class="form-control" placeholder="Pesquisar..." aria-label="Username" aria-describedby="basic-addon1">
+                </div>
+                <div class="table-cad">
+                    <table id="myTable" class="table table-bordered table-striped table-hover">
+                        <thead class="header">
+                            <tr>
+                                <th scope="col">Nro_tp</th>
+                                <th scope="col">ISSUE</th>
+                                <th scope="col">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for alteracao in alteracoes %}
+                                <a href="">
+                                    <tr data-url="{{url_for('solicitacaoAlteracaoID', alteracao_id=alteracao.id)}}">
+                                        <td>{{ alteracao.NRO_TP }}</td>
+                                        <td>{{ alteracao.ISSUE }}</td>
+                                        <td>{{ alteracao.STATUS }}</td>
+                                    </tr>
+                                </a>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <div class="div-card mb-3">
+                    Movimentações
+                    <div class="container div-card-mov">
+                        <div class="row">
+                            <div class="col-12 pt-4">
+                                {% for mov in movs: %}
+                                    <div class="list-group-item mb-3">
+                                        <h6 class="list-group-item-heading">{{ mov.TITULO }}<br><small>{{ format_date_time(mov.DTA_CREATE) }}</small></h6>
+                                        {% if mov.TIPO == 'A' %}
+                                            <p class="list-group-item-text">Analista: <strong>{{mov.ANALISTA}}</strong></p>
+                                        {% elif mov.TIPO == 'H' %}
+                                            <p class="list-group-item-text">Helper: <strong>{{mov.HELPER}}</strong></p>
+                                        {% endif %}
+                                        <p class="list-group-item-text"> <strong>Resumo: </strong>{{mov.RESUMO}}</strong></p>
+                                        <span class="text-status">{{mov.STATUS}}</span>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                {% endfor %}
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            {% endif %}
         </div>
     </div>
     <div class="col-sm-12 col-md-12 col-lg-8 col-xl-8 col-xxl-8">
         <div class="div-card">
             <form method="POST" autocomplete="off" enctype="multipart/form-data">
                 {{ form_alteracao.csrf_token }}
+                <div class="modal fade" id="modalExemplo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Encaminhamento de Solicitação</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="mb-3 mr-3 col-12">
+                                    {% if form_alteracao.helper.errors %}
+                                        {{ form_alteracao.helper.label(class="form-label") }}
+                                        {{ form_alteracao.helper(class="form-control is-invalid") }}
+                                        <div class="invalid-feedback">
+                                            {% for erro in form_alteracao.helper.errors %}
+                                                {{ erro }}
+                                            {% endfor %}
+                                        </div>
+                                    {% else %}
+                                        {{ form_alteracao.helper.label(class="form-label") }}
+                                        {{ form_alteracao.helper(class="form-control") }}
+                                    {% endif %}
+                                </div>
+                                <div class="col-12 d-flex flex-column">
+                                    {{ form_alteracao.btn_submit_encaminhar(class="btn btn-cadastro-salvar mb-3") }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>    
                 <div class="row">
                     <div class="col-9">
                         <div class="row">
@@ -91,20 +121,22 @@
                                     {{ form_alteracao.nro_tp(class="form-control") }}
                                 {% endif %} 
                             </div>
-                            <div class="mb-3 col-3">
-                                {% if form_alteracao.issue.errors %}
-                                    {{ form_alteracao.issue.label(class="form-label") }}
-                                    {{ form_alteracao.issue(class="form-control is-invalid") }}
-                                    <div class="invalid-feedback">
-                                        {% for erro in form_alteracao.issue.errors %}
-                                            {{ erro }}
-                                        {% endfor %}
-                                    </div>
-                                {% else %}
-                                    {{ form_alteracao.issue.label(class="form-label") }}
-                                    {{ form_alteracao.issue(class="form-control") }}
-                                {% endif %} 
-                            </div>
+                            {% if request.path != url_for('solicitacaoAlteracao') %}
+                                <div class="mb-3 col-3">
+                                    {% if form_alteracao.issue.errors %}
+                                        {{ form_alteracao.issue.label(class="form-label") }}
+                                        {{ form_alteracao.issue(class="form-control is-invalid") }}
+                                        <div class="invalid-feedback">
+                                            {% for erro in form_alteracao.issue.errors %}
+                                                {{ erro }}
+                                            {% endfor %}
+                                        </div>
+                                    {% else %}
+                                        {{ form_alteracao.issue.label(class="form-label") }}
+                                        {{ form_alteracao.issue(class="form-control") }}
+                                    {% endif %} 
+                                </div>
+                            {% endif %}
                             <div class="mb-3 col-4">
                                 {% if form_alteracao.alt_cust.errors %}
                                     {{ form_alteracao.alt_cust.label(class="form-label") }}
@@ -117,36 +149,6 @@
                                 {% else %}
                                     {{ form_alteracao.alt_cust.label(class="form-label") }}
                                     {{ form_alteracao.alt_cust(class="form-control") }}
-                                {% endif %} 
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="mb-3 col-8">
-                                {% if form_alteracao.menu_dir.errors %}
-                                    {{ form_alteracao.menu_dir.label(class="form-label") }}
-                                    {{ form_alteracao.menu_dir(class="form-control is-invalid") }}
-                                    <div class="invalid-feedback">
-                                        {% for erro in form_alteracao.menu_dir.errors %}
-                                            {{ erro }}
-                                        {% endfor %}
-                                    </div>
-                                {% else %}
-                                    {{ form_alteracao.menu_dir.label(class="form-label") }}
-                                    {{ form_alteracao.menu_dir(class="form-control") }}
-                                {% endif %} 
-                            </div>
-                            <div class="mb-3 col-3">
-                                {% if form_alteracao.menu_cod.errors %}
-                                    {{ form_alteracao.menu_cod.label(class="form-label") }}
-                                    {{ form_alteracao.menu_cod(class="form-control is-invalid") }}
-                                    <div class="invalid-feedback">
-                                        {% for erro in form_alteracao.menu_cod.errors %}
-                                            {{ erro }}
-                                        {% endfor %}
-                                    </div>
-                                {% else %}
-                                    {{ form_alteracao.menu_cod.label(class="form-label") }}
-                                    {{ form_alteracao.menu_cod(class="form-control") }}
                                 {% endif %} 
                             </div>
                         </div>
@@ -193,35 +195,35 @@
                             {% endif %} 
                         </div>
                         <div class="mb-3 col-12 div-cod">
-                            {% if form_alteracao.paliativa.errors %}
-                                {{ form_alteracao.paliativa.label(class="form-label") }}
-                                {{ form_alteracao.paliativa(class="form-control is-invalid") }}
+                            {% if form_alteracao.beneficio.errors %}
+                                {{ form_alteracao.beneficio.label(class="form-label") }}
+                                {{ form_alteracao.beneficio(class="form-control is-invalid") }}
                                 <div class="invalid-feedback">
-                                    {% for erro in form_alteracao.paliativa.errors %}
+                                    {% for erro in form_alteracao.beneficio.errors %}
                                         {{ erro }}
                                     {% endfor %}
                                 </div>
                             {% else %}
-                                {{ form_alteracao.paliativa.label(class="form-label") }}
-                                {{ form_alteracao.paliativa(class="form-control") }}
+                                {{ form_alteracao.beneficio.label(class="form-label") }}
+                                {{ form_alteracao.beneficio(class="form-control") }}
                             {% endif %} 
                         </div>
-                        <div class="row mb-3">
-                            <div class="mb-3 col-7">
-                                {% if form_alteracao.db_teste.errors %}
-                                    {{ form_alteracao.db_teste.label(class="form-label") }}
-                                    {{ form_alteracao.db_teste(class="form-control is-invalid") }}
+                        <div class="row mb-2">
+                            <div class="mb-3 col-8">
+                                {% if form_alteracao.docs.errors %}
+                                    {{ form_alteracao.docs.label(class="form-label") }}
+                                    {{ form_alteracao.docs(class="form-control is-invalid") }}
                                     <div class="invalid-feedback">
-                                        {% for erro in form_alteracao.db_teste.errors %}
+                                        {% for erro in form_alteracao.docs.errors %}
                                             {{ erro }}
                                         {% endfor %}
                                     </div>
                                 {% else %}
-                                    {{ form_alteracao.db_teste.label(class="form-label") }}
-                                    {{ form_alteracao.db_teste(class="form-control") }}
+                                    {{ form_alteracao.docs.label(class="form-label") }}
+                                    {{ form_alteracao.docs(class="form-control") }}
                                 {% endif %} 
                             </div>
-                            <div class="mb-3 col-2">
+                            <div class="mb-3 col-3">
                                 {% if form_alteracao.versao.errors %}
                                     {{ form_alteracao.versao.label(class="form-label") }}
                                     {{ form_alteracao.versao(class="form-control is-invalid") }}
@@ -236,29 +238,59 @@
                                 {% endif %} 
                             </div>
                         </div>
-                        <div class="mb-3 col-12 div-cod">
-                            {% if form_alteracao.docs.errors %}
-                                {{ form_alteracao.docs.label(class="form-label") }}
-                                {{ form_alteracao.docs(class="form-control is-invalid") }}
-                                <div class="invalid-feedback">
-                                    {% for erro in form_alteracao.docs.errors %}
-                                        {{ erro }}
-                                    {% endfor %}
-                                </div>
-                            {% else %}
-                                {{ form_alteracao.docs.label(class="form-label") }}
-                                {{ form_alteracao.docs(class="form-control") }}
-                            {% endif %} 
-                        </div>
+                        {% if request.path != url_for('solicitacaoErro') %}
+                            <div class="mb-3 col-12 div-cod">
+                                {% if form_alteracao.solucao.errors %}
+                                    {{ form_alteracao.solucao.label(class="form-label") }}
+                                    {{ form_alteracao.solucao(class="form-control is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for erro in form_alteracao.solucao.errors %}
+                                            {{ erro }}
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form_alteracao.solucao.label(class="form-label") }}
+                                    {{ form_alteracao.solucao(class="form-control") }}
+                                {% endif %} 
+                            </div>
+                        {% endif %}
                     </div>
                     <div class="col-3 d-flex flex-column mt-5">
-                        {{ form_alteracao.btn_submit_salvar(class="btn btn-cadastro-salvar mb-3") }}
-                        {{ form_alteracao.btn_submit_inserir(class="btn btn-cadastro mb-3") }}
+                        {% if request.path == url_for('solicitacaoAlteracao') %}
+                            {{ form_alteracao.btn_submit_inserir(class="btn btn-cadastro-salvar mb-3") }}
+                        {% else %}
+                            {% if alteracaoID.STATUS == 'AGUARDANDO ABERTURA DE ISSUE' %}
+                                {{ form_alteracao.btn_submit_rotulo(class="btn btn-cadastro-salvar mb-3") }}
+                                <a class="btn btn-cadastro mb-3" href="{{url_for('modissuealt', alt_id=alteracaoID.id)}}">Modelo ISSUE</a>
+                            {% elif alteracaoID.STATUS == 'AGUARDANDO INFORMAÇÃO' %}
+                                {{ form_alteracao.btn_submit_infores(class="btn btn-cadastro-salvar mb-3") }}
+                            {% endif %}
+                            <a class="btn btn-cadastro mb-3" href="{{url_for('alteracaodoc', alteracao_id=alteracaoID.id)}}">Baixar Arquivos</a>
+                        {% endif %}
                     </div>
                 </div>
             </form>
         </div>
     </div>
 </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+    $("#myInput").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#myTable tbody tr").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+    });
+    });
+
+    $(document).ready(function(){
+    $('table tr').click(function(){
+        window.location = $(this).data('url');
+        returnfalse;
+    });
+    });
+</script>
 
 {% endblock %}

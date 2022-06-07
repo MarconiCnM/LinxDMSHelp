@@ -73,6 +73,37 @@
         <div class="div-card">
             <form method="POST" autocomplete="off" enctype="multipart/form-data">
                 {{ form_erro.csrf_token }}
+                <div class="modal fade" id="modalExemplo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Encaminhamento de Solicitação</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="mb-3 mr-3 col-12">
+                                    {% if form_erro.helper.errors %}
+                                        {{ form_erro.helper.label(class="form-label") }}
+                                        {{ form_erro.helper(class="form-control is-invalid") }}
+                                        <div class="invalid-feedback">
+                                            {% for erro in form_erro.helper.errors %}
+                                                {{ erro }}
+                                            {% endfor %}
+                                        </div>
+                                    {% else %}
+                                        {{ form_erro.helper.label(class="form-label") }}
+                                        {{ form_erro.helper(class="form-control") }}
+                                    {% endif %}
+                                </div>
+                                <div class="col-12 d-flex flex-column">
+                                    {{ form_erro.btn_submit_encaminhar(class="btn btn-cadastro-salvar mb-3") }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>    
                 <div class="row">
                     <div class="col-9">
                         <div class="row">
@@ -260,10 +291,14 @@
                         {% else %}
                             {% if erroID.STATUS == 'AGUARDANDO ABERTURA DE ISSUE' %}
                                 {{ form_erro.btn_submit_rotulo(class="btn btn-cadastro-salvar mb-3") }}
+                                <a class="btn btn-cadastro mb-3" href="{{url_for('modissueerro', erro_id=erroID.id)}}">Modelo ISSUE</a>
                             {% elif erroID.STATUS == 'AGUARDANDO INFORMAÇÃO' %}
                                 {{ form_erro.btn_submit_infores(class="btn btn-cadastro-salvar mb-3") }}
+                            {% elif erroID.STATUS == 'FINALIZADA' %}
+                                <a class="btn btn-cadastro-salvar mb-3" href="https://jira.linx.com.br/browse/AUTO-{{ erroID.ISSUE.upper() }}" target="_blank">Acessar ISSUE</a>
                             {% endif %}
-                            <a class="btn btn-cadastro mb-3" href="{{url_for('errodoc', erro_id=erroID.id)}}">Baixar Arquivos</a>
+                                <a class="btn btn-cadastro mb-3" href="{{url_for('errodoc', erro_id=erroID.id)}}">Baixar Arquivos</a>
+                                <a class="btn btn-cadastro mb-3" href="{{url_for('modissueerro', erro_id=erroID.id)}}">Baixar Modelo</a>
                         {% endif %}
                     </div>
                 </div>

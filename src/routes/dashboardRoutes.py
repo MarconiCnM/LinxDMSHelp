@@ -7,7 +7,7 @@ import pandas as pd
 from datetime import datetime
 import os
 
-from controllers.dashboardController import tpsAnalistas, tpsTimeGestor, tpsTimeHelper, tpsTimeCoordenador
+from controllers.dashboardController import contSolGestor, tpsAnalistas, tpsTimeGestor, tpsTimeHelper, tpsTimeCoordenador, contSolAnalista, contSolHelper, contSolCoordenador
 from models.models import BASES, ANALISTA, GESTOR, HELPER, CONTROLE_TPS_GERAIS, CONTROLE_TPS_ANALISTAS
 
 def init_app(app: Flask):
@@ -20,6 +20,7 @@ def init_app(app: Flask):
         if GESTOR.query.filter_by(EMAIL=current_user.EMAIL).first():
             if (current_user.EMAIL == 'admin@linx.com.br') or (current_user.EMAIL == 'rodrigo.silva@linx.com.br'):
                 result = tpsTimeCoordenador()
+                cont_sol = contSolCoordenador()
                 tpsanaliticotot = enumerate(result[3], start=0)
                 tps_analistas = enumerate(result[0], start=1)
                 tps_analistas15 = enumerate(result[1], start=1)
@@ -27,34 +28,36 @@ def init_app(app: Flask):
                 tipo = 'G'
             else: 
                 result = tpsTimeGestor()
+                cont_sol = contSolGestor()
                 tpsanaliticotot = enumerate(result[3], start=0)
                 tps_analistas = enumerate(result[0], start=1)
                 tps_analistas15 = enumerate(result[1], start=1)
                 tps_backlog = enumerate(result[2], start=1)
                 tipo = 'G'
-            return render_template('/main/dashboards/dashboardGestor.html', tipo=tipo, bases_oracle=bases_oracle, bases_sqlserver=bases_sqlserver, tps_gerais=tps_gerais, tpsanaliticotot=tpsanaliticotot, tps_analistas=tps_analistas, tps_analistas15=tps_analistas15, tps_backlog=tps_backlog)
+            return render_template('/main/dashboards/dashboardGestor.html', tipo=tipo, bases_oracle=bases_oracle, bases_sqlserver=bases_sqlserver, tps_gerais=tps_gerais, tpsanaliticotot=tpsanaliticotot, tps_analistas=tps_analistas, tps_analistas15=tps_analistas15, tps_backlog=tps_backlog, cont_sol=cont_sol)
         elif HELPER.query.filter_by(EMAIL=current_user.EMAIL).first():
             result = tpsTimeHelper()
+            cont_sol = contSolHelper()
             tpsanaliticotot = enumerate(result[3], start=0)
             tps_analistas = enumerate(result[0], start=1)
             tps_analistas15 = enumerate(result[1], start=1)
             tps_backlog = enumerate(result[2], start=1)
             tipo = 'H'
-            return render_template('/main/dashboards/dashboardHelper.html', tipo=tipo, bases_oracle=bases_oracle, bases_sqlserver=bases_sqlserver, tps_gerais=tps_gerais, tpsanaliticotot=tpsanaliticotot, tps_analistas=tps_analistas, tps_analistas15=tps_analistas15, tps_backlog=tps_backlog)
+            return render_template('/main/dashboards/dashboardHelper.html', tipo=tipo, bases_oracle=bases_oracle, bases_sqlserver=bases_sqlserver, tps_gerais=tps_gerais, tpsanaliticotot=tpsanaliticotot, tps_analistas=tps_analistas, tps_analistas15=tps_analistas15, tps_backlog=tps_backlog, cont_sol=cont_sol)
         else:
             result = tpsAnalistas()
+            cont_sol = contSolAnalista()
             tps_analistas = enumerate(result[0], start=1)
             tps_analistas15 = enumerate(result[1], start=1)
             tps_backlog = enumerate(result[2], start=1)
             tipo = 'A'
-            return render_template('/main/dashboards/dashboardAnalista.html', tipo=tipo, bases_oracle=bases_oracle, bases_sqlserver=bases_sqlserver, tps_gerais=tps_gerais, tps_analistas=tps_analistas, tps_analistas15=tps_analistas15, tps_backlog=tps_backlog)
+            return render_template('/main/dashboards/dashboardAnalista.html', tipo=tipo, bases_oracle=bases_oracle, bases_sqlserver=bases_sqlserver, tps_gerais=tps_gerais, tps_analistas=tps_analistas, tps_analistas15=tps_analistas15, tps_backlog=tps_backlog, cont_sol=cont_sol)
 
     @app.route("/solicitaMov/<tp_id>", methods=['GET', 'POST'])
     @login_required
     def solicitaMov(tp_id):
         tp = CONTROLE_TPS_ANALISTAS.query.filter_by(NRO_TP=tp_id).first()
         analista = ANALISTA.query.filter_by(USUARIO=tp.ANALISTA).first()
-        print(analista.EMAIL)
 
         msg = Message(
                 subject = 'Solicitação de movimentação - LinxDMS HELP',
@@ -75,8 +78,7 @@ def init_app(app: Flask):
                 '''
             )
 
-        mail.send(msg)
-
+        # mail.send(msg)
 
         flash('E-email enviado', 'alert-success')
         
@@ -87,7 +89,6 @@ def init_app(app: Flask):
     def solicitaInf(tp_id):
         tp = CONTROLE_TPS_ANALISTAS.query.filter_by(NRO_TP=tp_id).first()
         analista = ANALISTA.query.filter_by(USUARIO=tp.ANALISTA).first()
-        print(analista.EMAIL)
 
         msg = Message(
                 subject = 'Solicitação de Informação - LinxDMS HELP',
@@ -116,7 +117,7 @@ def init_app(app: Flask):
                 '''
             )
 
-        mail.send(msg)
+        #mail.send(msg)
 
 
         flash('E-email enviado', 'alert-success')

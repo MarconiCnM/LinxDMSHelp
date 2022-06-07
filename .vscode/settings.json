@@ -1,0 +1,19 @@
+{
+    "sqltools.connections": [
+        {
+            "mssqlOptions": {
+                "appName": "SQLTools",
+                "useUTC": true,
+                "encrypt": true
+            },
+            "previewLimit": 50,
+            "server": "POADSKFS015444.linx-inves.com.br",
+            "port": 1433,
+            "driver": "MSSQL",
+            "name": "LinxDMS Help - Legado",
+            "database": "Help",
+            "username": "sa",
+            "password": "Linx@2021*"
+        }
+    ]
+}

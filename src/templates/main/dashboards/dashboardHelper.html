@@ -48,11 +48,11 @@
                             <img class="img-card-sol" src="./static/img/site/icon_erro_card.svg" alt="">
                             <div class="numbers">
                                 <div class="open">
-                                    <h6>0</h6>
+                                    <h6>{{ cont_sol[0] }}</h6>
                                     <h6>Abertos</h6>
                                 </div>
                                 <div class="closed">
-                                    <h6>0</h6>
+                                    <h6>{{ cont_sol[1] }}</h6>
                                     <h6>Fechados</h6>
                                 </div>
                             </div>
@@ -71,16 +71,16 @@
                             <img class="img-card-sol" src="./static/img/site/icon_alteracao_card.svg" alt="">
                             <div class="numbers">
                                 <div class="open">
-                                    <h6>0</h6>
+                                    <h6>{{ cont_sol[2] }}</h6>
                                     <h6>Abertos</h6>
                                 </div>
                                 <div class="closed">
-                                    <h6>0</h6>
+                                    <h6>{{ cont_sol[3] }}</h6>
                                     <h6>Fechados</h6>
                                 </div>
                             </div>
                             <div class="btn">
-                                <a href="{{ url_for('solicitacaoAlteracao') }}">
+                                <a href="{{ url_for('analiseAlteracao') }}">
                                     Analisar
                                 </a>
                             </div>
@@ -94,16 +94,16 @@
                             <img class="img-card-sol" src="./static/img/site/icon_servico_card.svg" alt="">
                             <div class="numbers">
                                 <div class="open">
-                                    <h6>0</h6>
+                                    <h6>{{ cont_sol[4] }}</h6>
                                     <h6>Abertos</h6>
                                 </div>
                                 <div class="closed">
-                                    <h6>0</h6>
+                                    <h6>{{ cont_sol[5] }}</h6>
                                     <h6>Fechados</h6>
                                 </div>
                             </div>
                             <div class="btn">
-                                <a href="{{ url_for('solicitacaoServico') }}">
+                                <a href="{{ url_for('analiseServico') }}">
                                     Analisar
                                 </a>
                             </div>
@@ -117,16 +117,16 @@
                             <img class="img-card-sol" src="./static/img/site/icon_script_card.svg" alt="">
                             <div class="numbers">
                                 <div class="open">
-                                    <h6>0</h6>
+                                    <h6>{{ cont_sol[6] }}</h6>
                                     <h6>Abertos</h6>
                                 </div>
                                 <div class="closed">
-                                    <h6>0</h6>
+                                    <h6>{{ cont_sol[7] }}</h6>
                                     <h6>Fechados</h6>
                                 </div>
                             </div>
                             <div class="btn">
-                                <a href="{{ url_for('solicitacaoCompilacao') }}">
+                                <a href="{{ url_for('analiseComp') }}">
                                     Analisar
                                 </a>
                             </div>
@@ -140,16 +140,16 @@
                             <img class="img-card-sol" src="./static/img/site/icon_import_card.svg" alt=""> 
                             <div class="numbers">
                                 <div class="open">
-                                    <h6>0</h6>
+                                    <h6>{{ cont_sol[8] }}</h6>
                                     <h6>Abertos</h6>
                                 </div>
                                 <div class="closed">
-                                    <h6>0</h6>
+                                    <h6>{{ cont_sol[9] }}</h6>
                                     <h6>Fechados</h6>
                                 </div>
                             </div>
                             <div class="btn">
-                                <a href="{{ url_for('solicitacaoImportacao') }}">
+                                <a href="{{ url_for('analiseImport') }}">
                                     Analisar
                                 </a>
                             </div>
@@ -163,16 +163,16 @@
                             <img class="img-card-sol" src="./static/img/site/icon_share_card.svg" alt=""> 
                             <div class="numbers">
                                 <div class="open">
-                                    <h6>0</h6>
+                                    <h6>{{ cont_sol[10] }}</h6>
                                     <h6>Abertos</h6>
                                 </div>
                                 <div class="closed">
-                                    <h6>0</h6>
+                                    <h6>{{ cont_sol[11] }}</h6>
                                     <h6>Fechados</h6>
                                 </div>
                             </div>
                             <div class="btn">
-                                <a href="{{ url_for('solicitacaoShare') }}">
+                                <a href="{{ url_for('analiseShare') }}">
                                     Analisar
                                 </a>
                             </div>
@@ -186,16 +186,16 @@
                             <img class="img-card-sol" src="./static/img/site/icon_help_card.svg" alt=""> 
                             <div class="numbers">
                                 <div class="open">
-                                    <h6>0</h6>
+                                    <h6>{{ cont_sol[12] }}</h6>
                                     <h6>Abertos</h6>
                                 </div>
                                 <div class="closed">
-                                    <h6>0</h6>
+                                    <h6>{{ cont_sol[13] }}</h6>
                                     <h6>Fechados</h6>
                                 </div>
                             </div>
                             <div class="btn">
-                                <a href="{{ url_for('solicitacaoHelp') }}">
+                                <a href="{{ url_for('analiseHelp') }}">
                                     Analisar
                                 </a>
                             </div>
@@ -281,11 +281,11 @@
                                 <th scope="col">Issue</th>
                                 <th scope="col">Analista</th>
                                 <th scope="col">Prioridade</th>
-                                <th scope="col">Dias Aberto</th>
-                                <th scope="col">Ult Mov</th>
+                                <th onclick="sortTable(document.getElementById('myTable'),'asc',1)" scope="col">Aberto*</th>
+                                <th onclick="sortTable(document.getElementById('myTable'),'asc',6)" scope="col">Mov*</th>
                                 <th scope="col">Grupo</th>
                                 <th scope="col">Resumo</th>
-                                <th scope="col">Status</th>
+                                <th onclick="sortTable(document.getElementById('myTable'),'asc',9)" scope="col">Status*</th>
                                 <th scope="col"> </th>
                             </tr>
                         </thead>
@@ -390,6 +390,7 @@
                         </thead>
                         <tbody style="overflow:hidden;">
                             {% for count, tp in tps_backlog %}
+                                {% if tp.ISSUE == 'N' %}
                                     <tr>
                                         <td>{{ count }}</td>
                                         <td>{{ tp.NRO_TP }}</td>
@@ -417,6 +418,7 @@
                                             </b>
                                         </td>
                                     </tr>
+                                {% endif %}
                             {% endfor %}
                         </tbody>
                     </table>
@@ -782,6 +784,41 @@
         });
     });
     });
+
+    function sortTable(table, dir, n) {
+        var rows, switching, i, x, y, shouldSwitch, switchcount = 0;
+        switching = true;
+        while (switching) {
+            switching = false;
+            rows = table.rows;
+            for (i = 1; i < (rows.length - 1); i++) {
+                shouldSwitch = false;
+                x = rows[i].getElementsByTagName("TD")[n];
+                y = rows[i + 1].getElementsByTagName("TD")[n];
+                if (dir == "asc") {
+                    if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                } else if (dir == "desc") {
+                    if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                }
+            }
+            if (shouldSwitch) {
+                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                switching = true;
+                switchcount++;
+            } else {
+                if (switchcount == 0 && dir == "asc") {
+                    dir = "desc";
+                    switching = true;
+                }
+            }
+        }
+    }
 </script>
 
 {% endblock %}
