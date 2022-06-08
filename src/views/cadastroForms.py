@@ -35,6 +35,7 @@ class FormCadBase(FlaskForm):
     codigo = IntegerField('Codigo', validators=[DataRequired()])
     cliente = StringField('Informe o cliente *',
                         validators=[DataRequired()])
+    charset = StringField('Charset')
     servidor = SelectField(u'Selecione o servidor *', choices=[
         ('POA - POADSKFS044947'), ('BH - BHDSKFS0007909')])
     estrutura = SelectField(u'Selecione a estrutura *', choices=[

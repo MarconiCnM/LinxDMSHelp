@@ -227,3 +227,12 @@ def init_app(app: Flask):
         flash('Exportação realizada com sucesso', 'alert-sucess')
 
         return send_from_directory(dir_name, name, as_attachment=True)
+
+    @app.route("/limpezatemporarios", methods=['GET', 'POST'])
+    @login_required
+    def limpezatemp():
+        name = 'script-limpeza' + '.bat'
+        dir_name = os.path.join(
+                app.root_path, 'static', 'exp/')
+
+        return send_from_directory(dir_name, name, as_attachment=True)

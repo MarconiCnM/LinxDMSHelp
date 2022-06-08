@@ -222,6 +222,7 @@ class BASES(database.Model):
     id = database.Column(database.Integer, primary_key=True)
     CODIGO = database.Column(database.Integer, nullable=False)
     CLIENTE = database.Column(database.String, nullable=False)
+    CHARSET = database.Column(database.String)
     SERVIDOR = database.Column(database.String, nullable=False)
     ESTRUTURA = database.Column(database.String, nullable=False)
     INSTANCIA = database.Column(database.String)

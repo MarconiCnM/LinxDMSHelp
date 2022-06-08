@@ -72,7 +72,7 @@
                     class="text-light">&times;</span></button>
         </header>
         <div class="bs-canvas-content">
-            <button class="analise-btn menu-btn"><img src="../../static/img/site/Arrow 1.svg"> Analises</button>
+            <!--  <button class="analise-btn menu-btn"><img src="../../static/img/site/Arrow 1.svg"> Analises</button>
             <div class="analise-container menu-container">
                 <a href="#"><div></div>Erro</a>
                 <a href="#"><div></div>Alteração</a>
@@ -81,18 +81,18 @@
                 <a href="#"><div></div>Importação</a>
                 <a href="#"><div></div>Share</a>
                 <a href="#"><div></div>Help</a>
-            </div>
-            <button class="treinamento-btn menu-btn"><img src="../../static/img/site/Arrow 1.svg">Treinamento</button>
+            </div> -->
+            <!--  <button class="treinamento-btn menu-btn"><img src="../../static/img/site/Arrow 1.svg">Treinamento</button>
             <div class="treinamento-container menu-container">
                 <a href="#"><div></div>Imp/Conf de Bases</a>
                 <a href="#"><div></div>SQL e Monitor</a>
                 <a href="#"><div></div>Estrutura de Ambiente</a>
                 <a href="#"><div></div>LinxDMS</a>
                 <a href="#"><div></div>Emissão de NFe</a>
-            </div>
+            </div>  -->
             <button class="ferramentas-btn menu-btn"><img src="../../static/img/site/Arrow 1.svg">Ferramentas</button>
             <div class="ferramentas-container menu-container">
-                <a href="#"><div></div>Limpa de Arq Temp</a>
+                <a href="{{ url_for('limpezatemp') }}"><div></div>Limpeza de Arq Temp</a>
                 <a href="#"><div></div>Criação de Ambiente</a>
                 <a href="#"><div></div>Atualização de Ambiente</a>
             </div>
@@ -114,6 +114,9 @@
                 <a href="https://jira.linx.com.br/secure/Dashboard.jspa" target="_blank"><div></div>Jira</a>
                 <a href="http://apollo-app03.eastus.cloudapp.azure.com:81/" target="_blank"><div></div>Dicionario do Banco</a>
                 <a href="https://share.linx.com.br/pages/viewpage.action?pageId=304502307" target="_blank"><div></div>DVI</a>
+                {% if current_user.TIPO in ('G', 'H') %}
+                    <a href="https://suporte.ccmtecnologia.com.br/portal/pt/signin" target="_blank"><div></div>CCM</a>
+                {% endif %}
             </div>
         </div>
     </div>

@@ -121,6 +121,7 @@ def basesCad(form_bases):
                 flash('O Campo usuario é obrigatorio para Oracle', 'alert-danger')
             else: 
                 base.CLIENTE = form_bases.cliente.data
+                base.CHARSET = form_bases.charset.data
                 base.SERVIDOR = form_bases.servidor.data
                 base.ESTRUTURA = form_bases.estrutura.data
                 base.INSTANCIA = form_bases.instancia.data
@@ -157,6 +158,7 @@ def basesCad(form_bases):
                     flash('O Campo usuario é obrigatorio para Oracle', 'alert-danger')
                 else: 
                     base = BASES(CODIGO=form_bases.codigo.data, 
+                        CHARSET = form_bases.charset.data,
                         CLIENTE=form_bases.cliente.data, 
                         SERVIDOR=form_bases.servidor.data, 
                         ESTRUTURA=form_bases.estrutura.data, 

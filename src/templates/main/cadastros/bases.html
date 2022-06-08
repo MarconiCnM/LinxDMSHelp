@@ -63,19 +63,35 @@
                                     {{ form_bases.codigo(class="form-control") }}
                             {% endif %} 
                         </div>
-                        <div class="mb-3 col-7 div-cod">
-                            {% if form_bases.cliente.errors %}
-                                {{ form_bases.cliente.label(class="form-label") }}
-                                {{ form_bases.cliente(class="form-control is-invalid") }}
-                                <div class="invalid-feedback">
-                                    {% for erro in form_bases.cliente.errors %}
-                                        {{ erro }}
-                                    {% endfor %}
-                                </div>
-                            {% else %}
-                                {{ form_bases.cliente.label(class="form-label") }}
-                                {{ form_bases.cliente(class="form-control") }}
-                            {% endif %} 
+                        <div class="row">
+                            <div class="mb-3 mr-3 col-5">
+                                {% if form_bases.cliente.errors %}
+                                    {{ form_bases.cliente.label(class="form-label") }}
+                                    {{ form_bases.cliente(class="form-control is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for erro in form_bases.cliente.errors %}
+                                            {{ erro }}
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form_bases.cliente.label(class="form-label") }}
+                                    {{ form_bases.cliente(class="form-control") }}
+                                {% endif %} 
+                            </div>
+                            <div class="mb-3 mr-3 col-5">
+                                {% if form_bases.charset.errors %}
+                                    {{ form_bases.charset.label(class="form-label") }}
+                                    {{ form_bases.charset(class="form-control is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for erro in form_bases.charset.errors %}
+                                            {{ erro }}
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form_bases.charset.label(class="form-label") }}
+                                    {{ form_bases.charset(class="form-control") }}
+                                {% endif %} 
+                            </div>
                         </div>
                         <div class="row">
                             <div class="mb-3 mr-3 col-5">

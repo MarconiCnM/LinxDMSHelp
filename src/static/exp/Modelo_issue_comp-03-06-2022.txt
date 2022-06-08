@@ -1,9 +1,0 @@
-*Número da TP:* 49660663
-
-*Grupo* FARIA
-
-*O que o script faz:* Altera a descrição 
-
-*Qual o motivo de não conseguirmos fazer pelo sistema:* Não tem como alterar o nome da função pelo sistema 
-
-        

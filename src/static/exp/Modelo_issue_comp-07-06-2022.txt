@@ -1,0 +1,9 @@
+*Número da TP:* 49734323
+
+*Grupo* 075568 - GRUPO LIANE - LIANE MATRIZ
+
+*O que o script faz:* O script vai deletar uma peça que esta na tabela 'ofi_peca_solicitada' que não existe na OS e esta com situação 3.
+
+*Qual o motivo de não conseguirmos fazer pelo sistema:* porque não aparece no sistema para excluir.
+
+        

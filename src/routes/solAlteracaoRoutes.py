@@ -27,12 +27,13 @@ def init_app(app: Flask):
         format_date_time = formatDateTime
 
         if alteracaoID and request.method == 'GET':
-            form_alteracao.nro_tp.data=alteracaoID.NRO_TP
+            form_alteracao.nro_tp.data = alteracaoID.NRO_TP
             form_alteracao.issue.data = alteracaoID.ISSUE
             form_alteracao.fazendo.data = alteracaoID.FAZENDO
             form_alteracao.fazer.data = alteracaoID.FAZER
             form_alteracao.como.data = alteracaoID.COMO
             form_alteracao.beneficio.data = alteracaoID.BENEFICIO
+            form_alteracao.alt_cust.data = alteracaoID.ALT_CUST
             form_alteracao.versao.data = alteracaoID.VERSAO
             form_alteracao.solucao.data = alteracaoID.SOLUCAO
 
@@ -65,6 +66,7 @@ def init_app(app: Flask):
             form_alteracao.fazer.data = alteracaoID.FAZER
             form_alteracao.como.data = alteracaoID.COMO
             form_alteracao.beneficio.data = alteracaoID.BENEFICIO
+            form_alteracao.alt_cust.data = alteracaoID.ALT_CUST
             form_alteracao.versao.data = alteracaoID.VERSAO
             form_alteracao.solucao.data = alteracaoID.SOLUCAO
 
