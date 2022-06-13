@@ -8,7 +8,7 @@
 {% endblock %}
 
 {% block body %}
-<div class="container text-center my-3">
+<div class="container text-center my-3 mb-4">
     <!-- Modal -->
     <div class="modal fade" id="modalExemplo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
@@ -220,12 +220,12 @@
                 <div class="btn col-1">
                     <a href="#" class="link" type="button" data-toggle="modal" data-target="#modalExemplo">Exportar</a>
                 </div>
-                <nav class="row d-flex align-items-center" style="width: 60%;">
-                    <div class="input-group col-5">
-                        <span class="input-group-text" id="basic-addon1"><img src="{{url_for('static',filename='img/site/icon-pesquisa.svg')}}" alt=""></span>
-                        <input id="myInput" type="text" class="form-control" placeholder="Pesquisar..." aria-label="Username" aria-describedby="basic-addon1">
-                    </div>
-                    <div class="nav nav-tabs col-7" id="nav-tab" role="tablist" style="height: 50%;">
+                <div class="input-group input-group-dashboard">
+                    <span class="input-group-text" id="basic-addon1"><img src="{{url_for('static',filename='img/site/icon-pesquisa.svg')}}" alt=""></span>
+                    <input id="myInput" type="text" class="form-control" placeholder="Pesquisar..." aria-label="Username" aria-describedby="basic-addon1">
+                </div>
+                <nav class="row d-flex flex-row align-items-center">
+                    <div class="nav nav-tabs col-12" id="nav-tab" role="tablist" style="height: 50%;">
                         <a class="nav-item nav-link active" id="nav-geral-tab" data-toggle="tab" href="#nav-geral" role="tab" aria-controls="nav-geral" aria-selected="true">Listagem</a>
                         <a class="nav-item nav-link" id="nav-geral-tab" data-toggle="tab" href="#nav-list" role="tab" aria-controls="nav-list" aria-selected="true">Geral</a>
                         <a class="nav-item nav-link" id="nav-mais15-tab" data-toggle="tab" href="#nav-mais15" role="tab" aria-controls="nav-mais15" aria-selected="false">+15</a>
@@ -253,7 +253,7 @@
                                     <td>{{ analista[4] }}</td>
                                     <td>{{ analista[2] }}</td>
                                     <td>{{ analista[3] }}</td>
-                                    <td><b>
+                                    <!--  <td><b>
                                             <div class="dropleft">
                                                 <a type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                                                     aria-expanded="false">
@@ -266,8 +266,8 @@
                                                 </div>
                                             </div>
                                         </b>
-                                    </td>
-                                </tr>
+                                    </td> -->
+                                </tr> 
                             {% endfor %}
                         </tbody>
                     </table>

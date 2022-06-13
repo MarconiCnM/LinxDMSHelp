@@ -27,7 +27,7 @@ mail_settings = {
     "MAIL_USE_TLS": False,
     "MAIL_USE_SSL": True,
     "MAIL_USERNAME": 'linxdmshelp@gmail.com',
-    "MAIL_PASSWORD": 'Leviathan2302*'
+    "MAIL_PASSWORD": 'ASDFqwer1597*Linx'
 }
 
 app.config.update(mail_settings)

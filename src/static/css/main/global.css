@@ -2,8 +2,8 @@ body {
     background-color: #f1f3f6 !important;
 }
 
-a:active {
-	text-decoration: none
+a, a:active {
+	text-decoration: none !important;
 }
 
 body::-webkit-scrollbar {
@@ -162,7 +162,7 @@ tr {
 .navbar-lside  spam {
     color: #6b6b6b;
     font-size: 18px;
-    padding-left: 40px;
+    padding-left: 70px;
     vertical-align: middle;
     padding-right: 5px;
     border-right: 1px solid rgb(190, 190, 190);

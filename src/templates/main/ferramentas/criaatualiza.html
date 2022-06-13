@@ -1,0 +1,161 @@
+{% extends 'main/global.html' %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/main/cadastros/main.css')}}">
+{% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
+        <div class="div-card mb-3">
+            <div class="div-card-cabecario d-flex justify-content-center">
+                Criação de Sistema
+            </div>
+            <form method="POST" autocomplete="off">
+                {{ form_atualizacria.csrf_token }}
+                <div class="col-12">
+                    <div class="row mb-3">
+                        <div class="mb-3 col-12">
+                            {% if form_atualizacria.diretorio.errors %}
+                            {{ form_atualizacria.diretorio.label(class="form-label") }}
+                            {{ form_atualizacria.diretorio(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for erro in form_atualizacria.diretorio.errors %}
+                                {{ erro }}
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            {{ form_atualizacria.diretorio.label(class="form-label") }}
+                            {{ form_atualizacria.diretorio(class="form-control") }}
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="mb-3 col-4">
+                            {% if form_atualizacria.versao.errors %}
+                            {{ form_atualizacria.versao.label(class="form-label") }}
+                            {{ form_atualizacria.versao(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for erro in form_atualizacria.versao.errors %}
+                                {{ erro }}
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            {{ form_atualizacria.versao.label(class="form-label") }}
+                            {{ form_atualizacria.versao(class="form-control") }}
+                            {% endif %}
+                        </div>
+                        <div class="mb-3 col-4">
+                            {% if form_atualizacria.estrutura.errors %}
+                            {{ form_atualizacria.estrutura.label(class="form-label") }}
+                            {{ form_atualizacria.estrutura(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for erro in form_atualizacria.estrutura.errors %}
+                                {{ erro }}
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            {{ form_atualizacria.estrutura.label(class="form-label") }}
+                            {{ form_atualizacria.estrutura(class="form-control") }}
+                            {% endif %}
+                        </div>
+                        <div class="mb-3 col-4">
+                            {% if form_atualizacria.programa.errors %}
+                            {{ form_atualizacria.programa.label(class="form-label") }}
+                            {{ form_atualizacria.programa(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for erro in form_atualizacria.programa.errors %}
+                                {{ erro }}
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            {{ form_atualizacria.programa.label(class="form-label") }}
+                            {{ form_atualizacria.programa(class="form-control") }}
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="col-12 d-flex justify-content-center">
+                        {{ form_atualizacria.btn_submit_criar(class="btn btn-cadastro-salvar mb-3") }}
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
+        <div class="div-card">
+            <div class="div-card-cabecario d-flex justify-content-center">
+                Atualização de Sistema
+            </div>
+            <form method="POST" autocomplete="off">
+                {{ form_atualizacria.csrf_token }}
+                <div class="col-12">
+                    <div class="row mb-3">
+                        <div class="mb-3 col-12">
+                            {% if form_atualizacria.diretorioatualiza.errors %}
+                            {{ form_atualizacria.diretorioatualiza.label(class="form-label") }}
+                            {{ form_atualizacria.diretorioatualiza(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for erro in form_atualizacria.diretorioatualiza.errors %}
+                                {{ erro }}
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            {{ form_atualizacria.diretorioatualiza.label(class="form-label") }}
+                            {{ form_atualizacria.diretorioatualiza(class="form-control") }}
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="mb-3 col-4">
+                            {% if form_atualizacria.versao.errors %}
+                            {{ form_atualizacria.versao.label(class="form-label") }}
+                            {{ form_atualizacria.versao(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for erro in form_atualizacria.versao.errors %}
+                                {{ erro }}
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            {{ form_atualizacria.versao.label(class="form-label") }}
+                            {{ form_atualizacria.versao(class="form-control") }}
+                            {% endif %}
+                        </div>
+                        <div class="mb-3 col-4">
+                            {% if form_atualizacria.estrutura.errors %}
+                            {{ form_atualizacria.estrutura.label(class="form-label") }}
+                            {{ form_atualizacria.estrutura(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for erro in form_atualizacria.estrutura.errors %}
+                                {{ erro }}
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            {{ form_atualizacria.estrutura.label(class="form-label") }}
+                            {{ form_atualizacria.estrutura(class="form-control") }}
+                            {% endif %}
+                        </div>
+                        <div class="mb-3 col-4">
+                            {% if form_atualizacria.programa.errors %}
+                            {{ form_atualizacria.programa.label(class="form-label") }}
+                            {{ form_atualizacria.programa(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for erro in form_atualizacria.programa.errors %}
+                                {{ erro }}
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            {{ form_atualizacria.programa.label(class="form-label") }}
+                            {{ form_atualizacria.programa(class="form-control") }}
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="col-12 d-flex justify-content-center">
+                        {{ form_atualizacria.btn_submit_atualizar(class="btn btn-cadastro-salvar mb-3") }}
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

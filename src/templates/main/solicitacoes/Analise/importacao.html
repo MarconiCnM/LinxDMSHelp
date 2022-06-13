@@ -16,10 +16,10 @@
     <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4 col-xxl-4">
         <div class="div-card mb-3">
             <div class="div-card mb-3">
-                Movimentações
+                <h6 class="card-subtitle mb-2 text-muted">Movimentações</h6>
                 <div class="container div-card-mov">
                     <div class="row">
-                        <div class="col-12 pt-4">
+                        <div class="list-group px-1">
                             {% for mov in movs: %}
                                 <div class="list-group-item mb-3">
                                     <h6 class="list-group-item-heading">{{ mov.TITULO }}<br><small>{{ format_date_time(mov.DTA_CREATE) }}</small></h6>

@@ -7,8 +7,9 @@ import pandas as pd
 from datetime import datetime
 import os
 
-from controllers.dashboardController import contSolGestor, tpsAnalistas, tpsTimeGestor, tpsTimeHelper, tpsTimeCoordenador, contSolAnalista, contSolHelper, contSolCoordenador
+from controllers.dashboardController import contSolGestor, tpsAnalistas, tpsTimeGestor, tpsTimeHelper, tpsTimeCoordenador, contSolAnalista, contSolHelper, contSolCoordenador, pegaLink
 from models.models import BASES, ANALISTA, GESTOR, HELPER, CONTROLE_TPS_GERAIS, CONTROLE_TPS_ANALISTAS
+from views.ferramentaForms import FormCriaAtualiza
 
 def init_app(app: Flask):
     @app.route('/dashboard', methods=['GET', 'POST'])
@@ -78,7 +79,7 @@ def init_app(app: Flask):
                 '''
             )
 
-        # mail.send(msg)
+        mail.send(msg)
 
         flash('E-email enviado', 'alert-success')
         
@@ -147,7 +148,7 @@ def init_app(app: Flask):
   
         marks_data.to_excel(dir_name + name)
 
-        flash('Exportação realizada com sucesso', 'alert-sucess')
+        flash('Exportação realizada com sucesso', 'alert-success')
 
         return send_from_directory(dir_name, name, as_attachment=True)
 
@@ -173,7 +174,7 @@ def init_app(app: Flask):
   
         marks_data.to_excel(dir_name + name)
 
-        flash('Exportação realizada com sucesso', 'alert-sucess')
+        flash('Exportação realizada com sucesso', 'alert-success')
 
         return send_from_directory(dir_name, name, as_attachment=True)
 
@@ -199,7 +200,7 @@ def init_app(app: Flask):
   
         marks_data.to_excel(dir_name + name)
 
-        flash('Exportação realizada com sucesso', 'alert-sucess')
+        flash('Exportação realizada com sucesso', 'alert-success')
 
         return send_from_directory(dir_name, name, as_attachment=True)
 
@@ -224,7 +225,7 @@ def init_app(app: Flask):
   
         marks_data.to_excel(dir_name + name)
 
-        flash('Exportação realizada com sucesso', 'alert-sucess')
+        flash('Exportação realizada com sucesso', 'alert-success')
 
         return send_from_directory(dir_name, name, as_attachment=True)
 
@@ -236,3 +237,134 @@ def init_app(app: Flask):
                 app.root_path, 'static', 'exp/')
 
         return send_from_directory(dir_name, name, as_attachment=True)
+    
+
+    @app.route('/criaatualiza', methods=['GET', 'POST'])
+    @login_required
+    def criaatualiza():
+        form_atualizacria = FormCriaAtualiza()
+
+        if form_atualizacria.validate_on_submit() and 'btn_submit_criar' in request.form and request.method == 'POST':
+            if form_atualizacria.diretorio.data == '':
+                flash('Por favor preencha o diretorio', 'alert-danger')
+            else:
+                links = pegaLink(form_atualizacria)
+                dir = form_atualizacria.diretorio.data
+
+                if form_atualizacria.estrutura.data == '2 Camadas':
+                    modelo = 'https://distribuicao.blob.core.windows.net/suporte/Marconi/Modelo.zip'
+                    texto = f"""@echo off
+set PATH=%PATH%;C:/Program Files/7-Zip/
+mkdir "{dir}"
+cd "{dir}"
+cUrl.exe "{modelo}" -o "{dir}\Modelo.zip"
+
+7z e -y "Modelo.zip"
+xcopy "{dir}\Modelo\." "{dir}" /e
+
+rmdir Modelo /s /q
+
+cUrl.exe "{links[0]}" -o "{dir}\{links[0].split('/')[-1]}"
+cUrl.exe "{links[1]}" -o "{dir}\{links[1].split('/')[-1]}"
+cUrl.exe "{links[2]}" -o "{dir}\{links[2].split('/')[-1]}"
+
+7z e -y "{links[0].split('/')[-1]}"
+7z e -y "{links[1].split('/')[-1]}"
+7z e -y "{links[2].split('/')[-1]}" 
+
+del {links[0].split('/')[-1]}
+del {links[1].split('/')[-1]}
+del {links[2].split('/')[-1]}
+"""
+                elif form_atualizacria.estrutura.data == '3 Camadas':
+                    modelo = 'https://distribuicao.blob.core.windows.net/suporte/Marconi/Modelo-3Camadas.zip'
+                    texto = f"""@echo off
+set PATH=%PATH%;C:/Program Files/7-Zip/
+mkdir "{dir}"
+cd "{dir}"
+cUrl.exe "{modelo}" -o "{dir}\Modelo.zip"
+
+7z e "Modelo.zip"
+xcopy "{dir}\Modelo-3Camadas\." "{dir}" /e
+
+rmdir Modelo-3Camadas /s /q
+
+cUrl.exe "{links[0]}" -o "{dir}\{links[0].split('/')[-1]}"
+cUrl.exe "{links[1]}" -o "{dir}\{links[1].split('/')[-1]}"
+cUrl.exe "{links[2]}" -o "{dir}\{links[2].split('/')[-1]}"
+cUrl.exe "{links[3]}" -o "{dir}\{links[3].split('/')[-1]}"
+cUrl.exe "{links[4]}" -o "{dir}\{links[4].split('/')[-1]}"
+
+7z e -y "{links[0].split('/')[-1]}"
+7z e -y "{links[1].split('/')[-1]}"
+7z e -y "{links[2].split('/')[-1]}" 
+7z e -y "{links[3].split('/')[-1]}" 
+7z e -y "{links[4].split('/')[-1]}" 
+
+del {links[0].split('/')[-1]}
+del {links[1].split('/')[-1]}
+del {links[2].split('/')[-1]}
+del {links[3].split('/')[-1]}
+del {links[4].split('/')[-1]}
+
+    """
+                name = 'criasistema-' + datetime.today().strftime('%d-%m-%Y') + '.bat'
+                dir_name = os.path.join(
+                        app.root_path, 'static', 'exp\\')
+        
+                arquivo = open(dir_name + name, 'w') 
+                arquivo.write(texto)
+                arquivo.close()
+
+                flash('Exportação realizada com sucesso', 'alert-success')
+
+                return send_from_directory(dir_name, name, as_attachment=True)
+
+        if form_atualizacria.validate_on_submit() and 'btn_submit_atualizar' in request.form and request.method == 'POST':
+            if form_atualizacria.diretorioatualiza.data == '':
+                flash('Por favor preencha o diretorio', 'alert-danger')
+            else:
+                links = pegaLink(form_atualizacria)
+                dir = form_atualizacria.diretorioatualiza.data
+
+                if form_atualizacria.estrutura.data == '2 Camadas':
+                    texto = f"""@echo off
+set PATH=%PATH%;C:/Program Files/7-Zip/
+cd "{dir}"
+
+cUrl.exe "{links[1]}" -o "{dir}\{links[1].split('/')[-1]}"
+
+7z e -y "{links[1].split('/')[-1]}"
+
+del {links[1].split('/')[-1]}
+"""
+                elif form_atualizacria.estrutura.data == '3 Camadas':
+                    texto = f"""@echo off
+set PATH=%PATH%;C:/Program Files/7-Zip/
+cd "{dir}"
+
+cUrl.exe "{links[2]}" -o "{dir}\{links[2].split('/')[-1]}"
+cUrl.exe "{links[3]}" -o "{dir}\{links[3].split('/')[-1]}"
+
+7z e -y "{links[2].split('/')[-1]}" 
+7z e -y "{links[3].split('/')[-1]}" 
+
+del {links[2].split('/')[-1]}
+del {links[3].split('/')[-1]}
+
+    """
+
+                name = 'atualizasistema-' + datetime.today().strftime('%d-%m-%Y') + '.bat'
+                dir_name = os.path.join(
+                        app.root_path, 'static', 'exp\\')
+        
+                arquivo = open(dir_name + name, 'w') 
+                arquivo.write(texto)
+                arquivo.close()
+
+                flash('Exportação realizada com sucesso', 'alert-success')
+
+                return send_from_directory(dir_name, name, as_attachment=True)
+
+
+        return render_template('/main/ferramentas/criaatualiza.html', form_atualizacria=form_atualizacria)

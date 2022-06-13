@@ -16,57 +16,28 @@
     </div>
     <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4 col-xxl-4">
         <div class="div-card mb-3">
-            {% if request.path == url_for('solicitacaoAlteracao') %}
-                <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon1"><img src="{{url_for('static',filename='img/site/icon-pesquisa.svg')}}" alt=""></span>
-                    <input id="myInput" type="text" class="form-control" placeholder="Pesquisar..." aria-label="Username" aria-describedby="basic-addon1">
-                </div>
-                <div class="table-cad">
-                    <table id="myTable" class="table table-bordered table-striped table-hover">
-                        <thead class="header">
-                            <tr>
-                                <th scope="col">Nro_tp</th>
-                                <th scope="col">ISSUE</th>
-                                <th scope="col">Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for alteracao in alteracoes %}
-                                <a href="">
-                                    <tr data-url="{{url_for('solicitacaoErroID', erro_id=erro.id)}}">
-                                        <td>{{ alteracao.NRO_TP }}</td>
-                                        <td>{{ alteracao.ISSUE }}</td>
-                                        <td>{{ alteracao.STATUS }}</td>
-                                    </tr>
-                                </a>
+            <div class="div-card mb-3">
+                <h6 class="card-subtitle mb-2 text-muted">Movimentações</h6>
+                <div class="container div-card-mov">
+                    <div class="row">
+                        <div class="list-group px-1">
+                            {% for mov in movs: %}
+                                <div class="list-group-item mb-3">
+                                    <h6 class="list-group-item-heading">{{ mov.TITULO }}<br><small>{{ format_date_time(mov.DTA_CREATE) }}</small></h6>
+                                    {% if mov.TIPO == 'A' %}
+                                        <p class="list-group-item-text">Analista: <strong>{{mov.ANALISTA}}</strong></p>
+                                    {% elif mov.TIPO == 'H' %}
+                                        <p class="list-group-item-text">Helper: <strong>{{mov.HELPER}}</strong></p>
+                                    {% endif %}
+                                    <p class="list-group-item-text"> <strong>Resumo: </strong>{{mov.RESUMO}}</strong></p>
+                                    <span class="text-status">{{mov.STATUS}}</span>
+                                    <div class="clearfix"></div>
+                                </div>
                             {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-            {% else %}
-                <div class="div-card mb-3">
-                    Movimentações
-                    <div class="container div-card-mov">
-                        <div class="row">
-                            <div class="col-12 pt-4">
-                                {% for mov in movs: %}
-                                    <div class="list-group-item mb-3">
-                                        <h6 class="list-group-item-heading">{{ mov.TITULO }}<br><small>{{ format_date_time(mov.DTA_CREATE) }}</small></h6>
-                                        {% if mov.TIPO == 'A' %}
-                                            <p class="list-group-item-text">Analista: <strong>{{mov.ANALISTA}}</strong></p>
-                                        {% elif mov.TIPO == 'H' %}
-                                            <p class="list-group-item-text">Helper: <strong>{{mov.HELPER}}</strong></p>
-                                        {% endif %}
-                                        <p class="list-group-item-text"> <strong>Resumo: </strong>{{mov.RESUMO}}</strong></p>
-                                        <span class="text-status">{{mov.STATUS}}</span>
-                                        <div class="clearfix"></div>
-                                    </div>
-                                {% endfor %}
-                            </div>
                         </div>
                     </div>
                 </div>
-            {% endif %}
+            </div>
         </div>
     </div>
     <div class="col-sm-12 col-md-12 col-lg-8 col-xl-8 col-xxl-8">
@@ -264,6 +235,8 @@
                             {{ form_alteracao.btn_submit_recus(class="btn btn-cadastro mb-3") }}
                         {% elif alteracaoID.STATUS == 'AGUARDANDO ADIÇÃO DE ROTULO' %}
                             {{ form_alteracao.btn_submit_final(class="btn btn-cadastro-salvar mb-3") }}
+                            <a class="btn btn-cadastro-salvar mb-3" href="https://jira.linx.com.br/browse/AUTO-{{ alteracaoID.ISSUE.upper() }}" target="_blank">Acessar ISSUE</a>
+                        {% elif alteracaoID.STATUS == 'FINALIZADA' %}
                             <a class="btn btn-cadastro mb-3" href="https://jira.linx.com.br/browse/AUTO-{{ alteracaoID.ISSUE.upper() }}" target="_blank">Acessar ISSUE</a>
                         {% endif %}
                         <a class="btn btn-cadastro mb-3 link" href="#" type="button" data-toggle="modal" data-target="#modalExemplo">Encaminhar</a>

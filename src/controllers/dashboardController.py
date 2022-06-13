@@ -257,3 +257,148 @@ def contSolCoordenador():
     helpFechado = HELP.query.filter(HELP.STATUS == 'FINALIZADA').count()
 
     return erroAberto, erroFechado, alteracaoAberto, alteracaoFechado, servicoAberto, servicoFechado, scriptAberto, scriptFechado, importAberto, importFechado, shareAberto, shareFechado, helpAberto, helpFechado
+
+def pegaLink(form_atualizacria):
+    versao = form_atualizacria.versao.data
+    estrutura = form_atualizacria.estrutura.data
+    programa = form_atualizacria.programa.data
+    if versao == '5.07':
+        if estrutura == '2 Camadas':
+            if programa == 'Apollo':
+                linkliberacao = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.07/Liberacao_Inicial/DVI_Apollo0507.zip'
+                linkatualizacao = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.07/Atualizacoes_DVI/DVI_Atualizacoes_Apollo_V0507.zip'
+                linkscript = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.07/Liberacao_Inicial/script0507.zip'
+            elif programa == 'Bravos':
+                linkliberacao = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.07/Liberacao_Inicial/DVI_BRAVOS0507.zip'
+                linkatualizacao = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.07/Atualizacoes_DVI/DVI_Atualizacoes_BRAVOS_V0507.zip'
+                linkscript = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.07/Liberacao_Inicial/script0507.zip'
+            elif programa == 'Toyota':
+                linkliberacao = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.07/Liberacao_Inicial/DVI_TOYOTA_0507.zip'
+                linkatualizacao = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.07/Atualizacoes_DVI/DVI_Atualizacoes_TOYOTA_V0507.zip'
+                linkscript = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.07/Liberacao_Inicial/script0507.zip'
+            elif programa == 'Autoshop':
+                linkliberacao = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.07/Liberacao_Inicial/DVI_AUTOSHOP_0507.zip'
+                linkatualizacao = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.07/Atualizacoes_DVI/DVI_Atualizacoes_AUTOSHOP_V0507.zip'
+                linkscript = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.07/Liberacao_Inicial/script0507.zip'
+        elif estrutura == '3 Camadas':
+            if programa == 'Apollo':
+                linkliberacaoclient = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.07/Liberacao_Inicial/DVI_Apollo0507_Client.zip'
+                linkliberacaoserver = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.07/Liberacao_Inicial/DVI_Apollo0507_Server.zip'
+                linkatualizacaoclient = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.07/Atualizacoes_DVI/DVI_Atualizacoes_Apollo_V0507_3Camadas_Client.zip'
+                inkatualizacaoserver = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.07/Atualizacoes_DVI/DVI_Atualizacoes_Apollo_V0507_3Camadas_Server.zip'
+                linkscript = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.07/Liberacao_Inicial/script0507.zip'
+            elif programa == 'Bravos':
+                linkliberacaoclient = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.07/Liberacao_Inicial/DVI_BRAVOS0507_Client.zip'
+                linkliberacaoserver = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.07/Liberacao_Inicial/DVI_BRAVOS0507_Server.zip'
+                linkatualizacaoclient = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.07/Atualizacoes_DVI/DVI_Atualizacoes_BRAVOS_V0507_3Camadas_Client.zip'
+                inkatualizacaoserver = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.07/Atualizacoes_DVI/DVI_Atualizacoes_BRAVOS_V0507_3Camadas_Server.zip'
+                linkscript = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.07/Liberacao_Inicial/script0507.zip'
+            elif programa == 'Toyota':
+                linkliberacaoclient = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.07/Liberacao_Inicial/DVI_TOYOTA_0507_Client.zip'
+                linkliberacaoserver = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.07/Liberacao_Inicial/DVI_TOYOTA_0507_Server.zip'
+                linkatualizacaoclient = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.07/Atualizacoes_DVI/DVI_Atualizacoes_TOYOTA_V0507_3Camadas_Client.zip'
+                inkatualizacaoserver = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.07/Atualizacoes_DVI/DVI_Atualizacoes_TOYOTA_V0507_3Camadas_Server.zip'
+                linkscript = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.07/Liberacao_Inicial/script0507.zip'
+            elif programa == 'Autoshop':
+                linkliberacaoclient = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.07/Liberacao_Inicial/DVI_AUTOSHOP_0507_Client.zip'
+                linkliberacaoserver = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.07/Liberacao_Inicial/DVI_AUTOSHOP_0507_Server.zip'
+                linkatualizacaoclient = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.07/Atualizacoes_DVI/DVI_Atualizacoes_AUTOSHOP_V0507_3Camadas_Client.zip'
+                inkatualizacaoserver = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.07/Atualizacoes_DVI/DVI_Atualizacoes_AUTOSHOP_V0507_3Camadas_Server.zip'
+                linkscript = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.07/Liberacao_Inicial/script0507.zip'
+        else:
+            flash('Erro', 'alert-danger')
+    if versao == '5.06':
+        if estrutura == '2 Camadas':
+            if programa == 'Apollo':
+                linkliberacao = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.06/Liberacao_Inicial/DVI_Apollo0506.zip'
+                linkatualizacao = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.06/Atualizacoes_DVI/DVI_Atualizacoes_Apollo_V0506.zip'
+                linkscript = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.06/Liberacao_Inicial/script0506.zip'
+            elif programa == 'Bravos':
+                linkliberacao = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.06/Liberacao_Inicial/DVI_BRAVOS0506.zip'
+                linkatualizacao = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.06/Atualizacoes_DVI/DVI_Atualizacoes_BRAVOS_V0506.zip'
+                linkscript = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.06/Liberacao_Inicial/script0506.zip'
+            elif programa == 'Toyota':
+                linkliberacao = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.06/Liberacao_Inicial/DVI_TOYOTA_0506.zip'
+                linkatualizacao = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.06/Atualizacoes_DVI/DVI_Atualizacoes_TOYOTA_V0506.zip'
+                linkscript = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.06/Liberacao_Inicial/script0506.zip'
+            elif programa == 'Autoshop':
+                linkliberacao = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.06/Liberacao_Inicial/DVI_AUTOSHOP_0506.zip'
+                linkatualizacao = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.06/Atualizacoes_DVI/DVI_Atualizacoes_AUTOSHOP_V0506.zip'
+                linkscript = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.06/Liberacao_Inicial/script0506.zip'
+        elif estrutura == '3 Camadas':
+            if programa == 'Apollo':
+                linkliberacaoclient = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.06/Liberacao_Inicial/DVI_Apollo0506_Client.zip'
+                linkliberacaoserver = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.06/Liberacao_Inicial/DVI_Apollo0506_Server.zip'
+                linkatualizacaoclient = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.06/Atualizacoes_DVI/DVI_Atualizacoes_Apollo_V0506_3Camadas_Client.zip'
+                inkatualizacaoserver = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.06/Atualizacoes_DVI/DVI_Atualizacoes_Apollo_V0506_3Camadas_Server.zip'
+                linkscript = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.06/Liberacao_Inicial/script0506.zip'
+            elif programa == 'Bravos':
+                linkliberacaoclient = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.06/Liberacao_Inicial/DVI_BRAVOS0506_Client.zip'
+                linkliberacaoserver = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.06/Liberacao_Inicial/DVI_BRAVOS0506_Server.zip'
+                linkatualizacaoclient = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.06/Atualizacoes_DVI/DVI_Atualizacoes_BRAVOS_V0506_3Camadas_Client.zip'
+                inkatualizacaoserver = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.06/Atualizacoes_DVI/DVI_Atualizacoes_BRAVOS_V0506_3Camadas_Server.zip'
+                linkscript = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.06/Liberacao_Inicial/script0506.zip'
+            elif programa == 'Toyota':
+                linkliberacaoclient = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.06/Liberacao_Inicial/DVI_TOYOTA_0506_Client.zip'
+                linkliberacaoserver = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.06/Liberacao_Inicial/DVI_TOYOTA_0506_Server.zip'
+                linkatualizacaoclient = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.06/Atualizacoes_DVI/DVI_Atualizacoes_TOYOTA_V0506_3Camadas_Client.zip'
+                inkatualizacaoserver = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.06/Atualizacoes_DVI/DVI_Atualizacoes_TOYOTA_V0506_3Camadas_Server.zip'
+                linkscript = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.06/Liberacao_Inicial/script0506.zip'
+            elif programa == 'Autoshop':
+                linkliberacaoclient = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.06/Liberacao_Inicial/DVI_AUTOSHOP_0506_Client.zip'
+                linkliberacaoserver = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.06/Liberacao_Inicial/DVI_AUTOSHOP_0506_Server.zip'
+                linkatualizacaoclient = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.06/Atualizacoes_DVI/DVI_Atualizacoes_AUTOSHOP_V0506_3Camadas_Client.zip'
+                inkatualizacaoserver = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.06/Atualizacoes_DVI/DVI_Atualizacoes_AUTOSHOP_V0506_3Camadas_Server.zip'
+                linkscript = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.06/Liberacao_Inicial/script0506.zip'
+        else:
+            flash('Erro', 'alert-danger')
+    if versao == '5.05':
+        if estrutura == '2 Camadas':
+            if programa == 'Apollo':
+                linkliberacao = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.05/Liberacao_Inicial/DVI_Apollo0505.zip'
+                linkatualizacao = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.05/Atualizacoes_DVI/DVI_Atualizacoes_Apollo_V0505.zip'
+                linkscript = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.05/Liberacao_Inicial/script0505.zip'
+            elif programa == 'Bravos':
+                linkliberacao = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.05/Liberacao_Inicial/DVI_BRAVOS0505.zip'
+                linkatualizacao = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.05/Atualizacoes_DVI/DVI_Atualizacoes_BRAVOS_V0505.zip'
+                linkscript = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.05/Liberacao_Inicial/script0505.zip'
+            elif programa == 'Toyota':
+                linkliberacao = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.05/Liberacao_Inicial/DVI_TOYOTA_0505.zip'
+                linkatualizacao = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.05/Atualizacoes_DVI/DVI_Atualizacoes_TOYOTA_V0505.zip'
+                linkscript = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.05/Liberacao_Inicial/script0505.zip'
+            elif programa == 'Autoshop':
+                linkliberacao = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.05/Liberacao_Inicial/DVI_AUTOSHOP_0505.zip'
+                linkatualizacao = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.05/Atualizacoes_DVI/DVI_Atualizacoes_AUTOSHOP_V0505.zip'
+                linkscript = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.05/Liberacao_Inicial/script0505.zip'
+        elif estrutura == '3 Camadas':
+            if programa == 'Apollo':
+                linkliberacaoclient = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.05/Liberacao_Inicial/DVI_Apollo0505_Client.zip'
+                linkliberacaoserver = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.05/Liberacao_Inicial/DVI_Apollo0505_Server.zip'
+                linkatualizacaoclient = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.05/Atualizacoes_DVI/DVI_Atualizacoes_Apollo_V0505_3Camadas_Client.zip'
+                inkatualizacaoserver = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.05/Atualizacoes_DVI/DVI_Atualizacoes_Apollo_V0505_3Camadas_Server.zip'
+                linkscript = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.05/Liberacao_Inicial/script0505.zip'
+            elif programa == 'Bravos':
+                linkliberacaoclient = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.05/Liberacao_Inicial/DVI_BRAVOS0505_Client.zip'
+                linkliberacaoserver = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.05/Liberacao_Inicial/DVI_BRAVOS0505_Server.zip'
+                linkatualizacaoclient = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.05/Atualizacoes_DVI/DVI_Atualizacoes_BRAVOS_V0505_3Camadas_Client.zip'
+                inkatualizacaoserver = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.05/Atualizacoes_DVI/DVI_Atualizacoes_BRAVOS_V0505_3Camadas_Server.zip'
+                linkscript = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.05/Liberacao_Inicial/script0505.zip'
+            elif programa == 'Toyota':
+                linkliberacaoclient = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.05/Liberacao_Inicial/DVI_TOYOTA_0505_Client.zip'
+                linkliberacaoserver = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.05/Liberacao_Inicial/DVI_TOYOTA_0505_Server.zip'
+                linkatualizacaoclient = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.05/Atualizacoes_DVI/DVI_Atualizacoes_TOYOTA_V0505_3Camadas_Client.zip'
+                inkatualizacaoserver = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.05/Atualizacoes_DVI/DVI_Atualizacoes_TOYOTA_V0505_3Camadas_Server.zip'
+                linkscript = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.05/Liberacao_Inicial/script0505.zip'
+            elif programa == 'Autoshop':
+                linkliberacaoclient = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.05/Liberacao_Inicial/DVI_AUTOSHOP_0505_Client.zip'
+                linkliberacaoserver = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.05/Liberacao_Inicial/DVI_AUTOSHOP_0505_Server.zip'
+                linkatualizacaoclient = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.05/Atualizacoes_DVI/DVI_Atualizacoes_AUTOSHOP_V0505_3Camadas_Client.zip'
+                inkatualizacaoserver = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.05/Atualizacoes_DVI/DVI_Atualizacoes_AUTOSHOP_V0505_3Camadas_Server.zip'
+                linkscript = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.05/Liberacao_Inicial/script0505.zip'
+        else:
+            flash('Erro', 'alert-danger')
+        
+    if estrutura == '2 Camadas':
+        return linkliberacao, linkatualizacao, linkscript
+    elif estrutura == '3 Camadas':
+        return linkliberacaoclient, linkliberacaoserver, linkatualizacaoclient, inkatualizacaoserver, linkscript
