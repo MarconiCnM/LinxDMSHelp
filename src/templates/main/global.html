@@ -88,6 +88,15 @@
                 <a href="#"><div></div>LinxDMS</a>
                 <a href="#"><div></div>Emissão de NFe</a>
             </div>  -->
+            {% if current_user.TIPO in ('G', 'H') %}
+            <button class="cad-btn menu-btn"><img src="../../static/img/site/Arrow 1.svg">Gestão Suporte</button>
+            <div class="cad-container menu-container">
+                <a href="#"><div></div>Consulta de Atendimentos</a>
+                <a href="#"><div></div>Consulta de chamados</a>
+                <a href="#"><div></div>Relatorio de atendimento</a>
+                <a href="#"><div></div>Performance de colaborador</a>
+            </div>
+            {% endif %}
             <button class="ferramentas-btn menu-btn"><img src="../../static/img/site/Arrow 1.svg">Ferramentas</button>
             <div class="ferramentas-container menu-container">
                 <a href="{{ url_for('limpezatemp') }}"><div></div>Limpeza de Arq Temp</a>

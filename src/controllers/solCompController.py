@@ -66,6 +66,62 @@ def solComp(form_comp):
         flash('Analise Iniciada', 'alert-success')
         return True
     
+    if form_comp.validate_on_submit() and 'btn_submit_info' in request.form:
+        comp = SOL_SCRIPT.query.filter_by(
+            NRO_TP=form_comp.nro_tp.data).first()
+
+        
+        if form_comp.solucao.data == '':
+            flash(
+                'Por favor digite no campo solução sua duvida ou requisição', 'alert-danger')
+        else:
+            comp.NRO_TP=form_comp.nro_tp.data 
+            comp.ISSUE=form_comp.issue.data
+            comp.GRUPO=form_comp.grupo.data              
+            comp.OQUE=form_comp.oque.data 
+            comp.PORQUE=form_comp.porque.data
+            comp.SOLUCAO=form_comp.solucao.data
+            comp.STATUS = 'AGUARDANDO INFORMAÇÃO'
+
+            mov = MOV_SOL(NRO_TP=form_comp.nro_tp.data, TITULO='Solicitação de Informação', TIPO='H', HELPER=current_user.USUARIO, ANALISTA='', RESUMO=form_comp.solucao.data, STATUS='AGUARDANDO INFORMAÇÃO')
+            
+            database.session.add(mov)
+            database.session.commit()
+            
+            enviaEmailComp(comp.NRO_TP, 'H')
+
+            flash('Aguardando Informação', 'alert-success')
+            
+            return True
+
+    if form_comp.validate_on_submit() and 'btn_submit_infores' in request.form:
+        comp = SOL_SCRIPT.query.filter_by(
+            NRO_TP=form_comp.nro_tp.data).first()
+
+        
+        if form_comp.solucao.data == '':
+            flash(
+                'Por favor digite no campo solução sua resposta', 'alert-danger')
+        else:
+            comp.NRO_TP=form_comp.nro_tp.data 
+            comp.ISSUE=form_comp.issue.data
+            comp.GRUPO=form_comp.grupo.data              
+            comp.OQUE=form_comp.oque.data 
+            comp.PORQUE=form_comp.porque.data
+            comp.SOLUCAO=form_comp.solucao.data
+            comp.STATUS = 'EM ANALISE'
+
+            mov = MOV_SOL(NRO_TP=form_comp.nro_tp.data, TITULO='Conclusão de Informação', TIPO='A', HELPER='', ANALISTA=current_user.USUARIO, RESUMO=form_comp.solucao.data, STATUS='EM ANALISE')
+            
+            database.session.add(mov)
+            database.session.commit()
+            
+            enviaEmailComp(comp.NRO_TP, 'A')
+            
+            flash('Enviada a Analise', 'alert-success')
+
+            return True
+            
     if form_comp.validate_on_submit() and 'btn_submit_aprov' in request.form:
         comp = SOL_SCRIPT.query.filter_by(
             NRO_TP=form_comp.nro_tp.data).first()
