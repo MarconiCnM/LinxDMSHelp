@@ -91,10 +91,10 @@
             {% if current_user.TIPO in ('G', 'H') %}
             <button class="cad-btn menu-btn"><img src="../../static/img/site/Arrow 1.svg">Gestão Suporte</button>
             <div class="cad-container menu-container">
-                <a href="#"><div></div>Consulta de Atendimentos</a>
-                <a href="#"><div></div>Consulta de chamados</a>
-                <a href="#"><div></div>Relatorio de atendimento</a>
-                <a href="#"><div></div>Performance de colaborador</a>
+                <a href="{{ url_for('consultaAtendimento') }}"><div></div>Consulta de Atendimentos</a>
+                <a href="{{ url_for('consultaChamados') }}"><div></div>Consulta de chamados</a>
+                <a href="{{ url_for('relatorioAtendimento') }}"><div></div>Relatorio de atendimento</a>
+                <a href="{{ url_for('performanceColaborador') }}"><div></div>Performance de colaborador</a>
             </div>
             {% endif %}
             <button class="ferramentas-btn menu-btn"><img src="../../static/img/site/Arrow 1.svg">Ferramentas</button>
@@ -117,10 +117,14 @@
             <div class="externos-container menu-container">
                 <a href="https://wf.linx.com.br/" target="_blank"><div></div>Work Flow</a>
                 <a href="https://share.linx.com.br/login.action?os_destination=%2F" target="_blank"><div></div>Linx Share</a>
-                <a href="https://jira.linx.com.br/secure/Dashboard.jspa" target="_blank"><div></div>Jira</a>
-                <a href="http://apollo-app03.eastus.cloudapp.azure.com:81/" target="_blank"><div></div>Dicionario do Banco</a>
-                <a href="https://share.linx.com.br/pages/viewpage.action?pageId=304502307" target="_blank"><div></div>DVI</a>
+                <a href="https://jira.linx.com.br/secure/Dashboard.jspa" target="_blank"><div></div>Jira Linx</a>
+                <a href="http://apollo-app03.eastus.cloudapp.azure.com:81/" target="_blank"><div></div>Dicionario DB</a>
+                <a href="https://share.linx.com.br/pages/viewpage.action?pageId=304502307" target="_blank"><div></div>DVI Share</a>
+                <a href="http://apollo-app-download.linx.com.br/rundvi/dvi2.dll7" target="_blank"><div></div>DVI Legado</a>
+                <a href="http://linxnfse.linx.com.br/portalcross/login.xhtml" target="_blank"><div></div>Portal Cross</a>
+                <a href="http://192.168.45.4:8080/interact_multiagent/" target="_blank"><div></div>Interact Multiagent</a>
                 {% if current_user.TIPO in ('G', 'H') %}
+                    <a href="http://linxnfse.linx.com.br/portalcross/login.xhtml" target="_blank"><div></div>Interact Manager</a>
                     <a href="https://suporte.ccmtecnologia.com.br/portal/pt/signin" target="_blank"><div></div>CCM</a>
                 {% endif %}
             </div>

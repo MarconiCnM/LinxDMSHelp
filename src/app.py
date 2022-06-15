@@ -44,6 +44,7 @@ from routes import solCompRoutes
 from routes import solImportRoutes
 from routes import solShareRoutes
 from routes import solHelpRoutes
+from routes import gestaoSuporteRoutes
 
 authRoutes.init_app(app)
 dashboardRoutes.init_app(app)
@@ -55,3 +56,4 @@ solCompRoutes.init_app(app)
 solImportRoutes.init_app(app)   
 solShareRoutes.init_app(app)
 solHelpRoutes.init_app(app)
+gestaoSuporteRoutes.init_app(app)

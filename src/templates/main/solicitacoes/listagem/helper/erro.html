@@ -42,7 +42,7 @@
                                     <td>{{ erro.ISSUE.upper() }}</td>
                                     <td>{{ erro.FAZENDO[:100] }}</td>
                                     <td>{{ format_date(erro.DTA_CREATE) }}</td>
-                                    {% if erro.STATUS == "FINALIZADA" %}
+                                    {% if erro.STATUS == "FINALIZADA" or erro.STATUS == "NÃO APROVADO" %}
                                         <td>{{ format_date(erro.DTA_CONCLUDED) }}</td>
                                     {% else %}
                                         <td>{{ erro.DTA_CONCLUDED }}</td>
