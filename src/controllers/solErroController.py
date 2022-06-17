@@ -9,7 +9,7 @@ from app import app, database, mail, mail_settings
 
 def solErro(form_erro):
     print('Log - 1')
-    if 'btn_submit_inserir' in request.form:
+    if form_erro.validate_on_submit() and 'btn_submit_inserir' in request.form:
         erro = SOL_ERRO.query.filter_by(
             NRO_TP=form_erro.nro_tp.data).first()
         print('Log - 2')
