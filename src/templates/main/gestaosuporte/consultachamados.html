@@ -25,46 +25,158 @@
                 <div class="col-3">
                     <div class="title mb-1">
                         Produto:
+                    </div> 
+                    <div class="input-group input-group-sm">
+                        <input type="text" class="form-control">
+                        <button class="btn btn-outline-secondary" type="button" data-toggle="modal" data-target="#modalproduto">
+                            <img src="{{url_for('static',filename='img/site/icon-pesquisa.svg')}}" alt="">
+                        </button>       
                     </div>
-                    <select class="form-select form-select-sm">
-                        <option selected> </option>
-                        {% for produto in produtos %}
-                            <option value="1">{{produto[0]}}</option>
-                        {% endfor %}
-                    </select>
+                    <div class="modal fade" id="modalproduto" tabindex="-1" role="dialog" aria-labelledby="modalprodutoLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h5 class="modal-title" id="modalprodutoLabel">Selecione um registro</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="content-body" style="overflow:hidden;">
+                                    {% for produto in produtos %}
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            {{produto[0]}}
+                                        </label>
+                                    </div>
+                                {% endfor %}
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-2">
                     <div class="title mb-1">
                         Equipe:
                     </div>
-                    <select class="form-select form-select-sm">
-                        <option selected> </option>
-                        {% for equipe in equipes %}
-                            <option value="1">{{equipe[0]}}</option>
-                        {% endfor %}
-                    </select>
+                    <div class="input-group input-group-sm">
+                        <input type="text" class="form-control">
+                        <button class="btn btn-outline-secondary" type="button" data-toggle="modal" data-target="#modalequipe">
+                            <img src="{{url_for('static',filename='img/site/icon-pesquisa.svg')}}" alt="">
+                        </button>       
+                    </div>
+                    <div class="modal fade" id="modalequipe" tabindex="-1" role="dialog" aria-labelledby="modalequipeLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h5 class="modal-title" id="modalequipeLabel">Selecione um registro</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="content-body" style="overflow:hidden;">
+                                    {% for equipe in equipes %}
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                {{equipe[0]}}
+                                            </label>
+                                        </div>
+                                    {% endfor %}                                
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-2">
                     <div class="title mb-1">
                         Analista:
                     </div>
-                    <select class="form-select form-select-sm">
-                        <option selected> </option>
-                        {% for analista in analistas %}
-                            <option value="1">{{analista[0]}}</option>
-                        {% endfor %}
-                    </select>
+                    <div class="input-group input-group-sm">
+                        <input type="text" class="form-control">
+                        <button class="btn btn-outline-secondary" type="button" data-toggle="modal" data-target="#modalanalista">
+                            <img src="{{url_for('static',filename='img/site/icon-pesquisa.svg')}}" alt="">
+                        </button>       
+                    </div>
+                    <div class="modal fade" id="modalanalista" tabindex="-1" role="dialog" aria-labelledby="modalanalistaLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h5 class="modal-title" id="modalanalistaLabel">Selecione um registro</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="content-body" style="overflow:hidden;">
+                                    {% for analista in analistas %}
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                {{analista[0]}}
+                                            </label>
+                                        </div>
+                                    {% endfor %}                                
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-2">
                     <div class="title mb-1">
                         Helper:
                     </div>
-                    <select class="form-select form-select-sm">
-                        <option selected> </option>
-                        {% for helper in helpers %}
-                            <option value="1">{{helper[0]}}</option>
-                        {% endfor %}
-                    </select>
+                    <div class="input-group input-group-sm">
+                        <input type="text" class="form-control">
+                        <button class="btn btn-outline-secondary" type="button" data-toggle="modal" data-target="#modalhelper">
+                            <img src="{{url_for('static',filename='img/site/icon-pesquisa.svg')}}" alt="">
+                        </button>       
+                    </div>
+                    <div class="modal fade" id="modalhelper" tabindex="-1" role="dialog" aria-labelledby="modalhelperLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h5 class="modal-title" id="modalhelperLabel">Selecione um registro</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="content-body" style="overflow:hidden;">
+                                    {% for helper in helpers %}
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                {{helper[0]}}
+                                            </label>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="row mt-4">
@@ -82,34 +194,118 @@
                     <div class="title mb-1">
                         Cliente:
                     </div>
-                    <select class="form-select form-select-sm">
-                        <option selected> </option>
-                        {% for cliente in clientes %}
-                            <option value="1">{{cliente[0]}}</option>
-                        {% endfor %}
-                    </select>
+                    <div class="input-group input-group-sm">
+                        <input type="text" class="form-control">
+                        <button class="btn btn-outline-secondary" type="button" data-toggle="modal" data-target="#modalcliente">
+                            <img src="{{url_for('static',filename='img/site/icon-pesquisa.svg')}}" alt="">
+                        </button>       
+                    </div>
+                    <div class="modal fade" id="modalcliente" tabindex="-1" role="dialog" aria-labelledby="modalclienteLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h5 class="modal-title" id="modalclienteLabel">Selecione um registro</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="content-body" style="overflow:hidden;">
+                                    {% for cliente in clientes %}
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                {{cliente[0]}}
+                                            </label>
+                                        </div>
+                                    {% endfor %}                                
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-2">
                     <div class="title mb-1">
                         Status:
                     </div>
-                    <select class="form-select form-select-sm">
-                        <option selected> </option>
-                        {% for statu in status %}
-                            <option value="1">{{statu[0]}}</option>
-                        {% endfor %}
-                    </select>
+                    <div class="input-group input-group-sm">
+                        <input type="text" class="form-control">
+                        <button class="btn btn-outline-secondary" type="button" data-toggle="modal" data-target="#modalstatus">
+                            <img src="{{url_for('static',filename='img/site/icon-pesquisa.svg')}}" alt="">
+                        </button>       
+                    </div>
+                    <div class="modal fade" id="modalstatus" tabindex="-1" role="dialog" aria-labelledby="modalstatusLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h5 class="modal-title" id="modalstatusLabel">Selecione um registro</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="content-body" style="overflow:hidden;">
+                                    {% for statu in status %}
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                {{statu[0]}}
+                                            </label>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-2">
                     <div class="title mb-1">
                         Tipo Solicitação:
                     </div>
-                    <select class="form-select form-select-sm">
-                        <option selected> </option>
-                        {% for tipo in tipos %}
-                            <option value="1">{{tipo[0]}}</option>
-                        {% endfor %}
-                    </select>
+                    <div class="input-group input-group-sm">
+                        <input type="text" class="form-control">
+                        <button class="btn btn-outline-secondary" type="button" data-toggle="modal" data-target="#modaltipo">
+                            <img src="{{url_for('static',filename='img/site/icon-pesquisa.svg')}}" alt="">
+                        </button>       
+                    </div>
+                    <div class="modal fade" id="modaltipo" tabindex="-1" role="dialog" aria-labelledby="modaltipoLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h5 class="modal-title" id="modaltipoLabel">Selecione um registro</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="content-body" style="overflow:hidden;">
+                                    {% for tipo in tipos %}
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                {{tipo[0]}}
+                                            </label>
+                                        </div>
+                                    {% endfor %}                                
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-2">
                     <div class="title mb-1">
@@ -117,9 +313,12 @@
                     </div>
                     <select class="form-select form-select-sm">
                         <option selected> </option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                        <option value="1">SLA_Encerrados Apollo_Toyota</option>
+                        <option value="2">Backlog_Andamento Apollo_Toyota</option>
+                        <option value="3">Total Abertura Apollo_Toyota</option>
+                        <option value="4">Reaberto Apollo_Toyota</option>
+                        <option value="5">Encerrados Apollo_Toyota</option>
+                        <option value="6">Abertos + 15 Apollo_Toyota</option>
                     </select>
                 </div>
             </div>

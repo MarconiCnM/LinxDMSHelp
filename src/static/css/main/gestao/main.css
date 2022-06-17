@@ -43,3 +43,13 @@
     color: #ffffff !important;
     border-radius: 1px !important;
 }
+
+
+.input-group img{
+    width: 15px;
+}
+
+.modal-body {
+    max-height: 400px !important;
+    overflow-y: scroll;
+}
