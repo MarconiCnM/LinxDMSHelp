@@ -19,7 +19,7 @@ class FormAlteracao(FlaskForm):
     beneficio = TextAreaField(
         'Qual o beneficio dessa alteração:', validators=[DataRequired()])
     docs = FileField('Adicionar aquivos', validators=[FileAllowed(['zip'])])
-    versao = SelectField(u'Versão:', choices=[('5.05'), ('5.06'), ('5.07')])
+    versao = SelectField(u'Versão:', choices=[('5.05'), ('5.06'), ('5.07'), ('5.08')])
     solucao = TextAreaField(
         'Resolução:')
 
@@ -57,7 +57,7 @@ class FormErro(FlaskForm):
         'Paliativa:', validators=[DataRequired()])
     docs = FileField('Adicionar aquivos', validators=[FileAllowed(['zip'])])
     db_teste = StringField('Banco de dados:', validators=[DataRequired()])
-    versao = SelectField(u'Versão', choices=[('5.05'), ('5.06'), ('5.07')])
+    versao = SelectField(u'Versão', choices=[('5.05'), ('5.06'), ('5.07'), ('5.08')])
     versao_ant = SelectField(u'Anterior:', choices=[('Sim'), ('Não')])
     solucao = TextAreaField(
         'Resolução:')
@@ -207,7 +207,7 @@ class FormHelp(FlaskForm):
         'Paliativa:', validators=[DataRequired()])
     docs = FileField('Adicionar aquivos', validators=[FileAllowed(['zip'])])
     db_teste = StringField('Banco de dados:', validators=[DataRequired()])
-    versao = SelectField(u'Versão', choices=[('5.05'), ('5.06'), ('5.07')])
+    versao = SelectField(u'Versão', choices=[('5.05'), ('5.06'), ('5.07'), ('5.08')])
     solucao = TextAreaField(
         'Resolução:')
     

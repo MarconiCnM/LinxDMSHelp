@@ -22,12 +22,12 @@ login_manager.login_view = 'loginPage'
 login_manager.login_message_category = 'alert-warning'
 
 mail_settings = {
-    "MAIL_SERVER": 'smtp.gmail.com',
-    "MAIL_PORT": 465,
-    "MAIL_USE_TLS": False,
-    "MAIL_USE_SSL": True,
-    "MAIL_USERNAME": 'linxdmshelp@gmail.com',
-    "MAIL_PASSWORD": 'ASDFqwer1597*Linx'
+    "MAIL_SERVER": 'smtp.office365.com',
+    "MAIL_PORT": 587,
+    "MAIL_USE_TLS": True,
+    "MAIL_USE_SSL": False,
+    "MAIL_USERNAME": 'linxdmshelp@outlook.com',
+    "MAIL_PASSWORD": 'Leviathan2302*'
 }
 
 app.config.update(mail_settings)

@@ -1,6 +1,7 @@
 from flask import flash
 from flask_login import current_user
 from app import database
+from datetime import datetime, timedelta
 from models.models import SOL_ERRO, SOL_HISTORIA, SOL_SERVICO, SOL_SCRIPT, SOL_IMPORT, SOL_SHARE, HELP, ANALISTA, TIME
 
 def tpsAnalistas():
@@ -262,6 +263,51 @@ def pegaLink(form_atualizacria):
     versao = form_atualizacria.versao.data
     estrutura = form_atualizacria.estrutura.data
     programa = form_atualizacria.programa.data
+    if versao == '5.08':
+        if estrutura == '2 Camadas':
+            if programa == 'Apollo':
+                linkliberacao = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.08/Liberacao_Inicial/DVI_Apollo0508.zip'
+                linkatualizacao = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.08/Atualizacoes_DVI/DVI_Atualizacoes_Apollo_V0508.zip'
+                linkscript = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.08/Liberacao_Inicial/script0508.zip'
+            elif programa == 'Bravos':
+                linkliberacao = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.08/Liberacao_Inicial/DVI_BRAVOS0508.zip'
+                linkatualizacao = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.08/Atualizacoes_DVI/DVI_Atualizacoes_BRAVOS_V0508.zip'
+                linkscript = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.08/Liberacao_Inicial/script0508.zip'
+            elif programa == 'Toyota':
+                linkliberacao = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.08/Liberacao_Inicial/DVI_TOYOTA_0508.zip'
+                linkatualizacao = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.08/Atualizacoes_DVI/DVI_Atualizacoes_TOYOTA_V0508.zip'
+                linkscript = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.08/Liberacao_Inicial/script0508.zip'
+            elif programa == 'Autoshop':
+                linkliberacao = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.08/Liberacao_Inicial/DVI_AUTOSHOP_0508.zip'
+                linkatualizacao = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.08/Atualizacoes_DVI/DVI_Atualizacoes_AUTOSHOP_V0508.zip'
+                linkscript = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.08/Liberacao_Inicial/script0508.zip'
+        elif estrutura == '3 Camadas':
+            if programa == 'Apollo':
+                linkliberacaoclient = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.08/Liberacao_Inicial/DVI_Apollo0508_Client.zip'
+                linkliberacaoserver = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.08/Liberacao_Inicial/DVI_Apollo0508_Server.zip'
+                linkatualizacaoclient = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.08/Atualizacoes_DVI/DVI_Atualizacoes_Apollo_V0508_3Camadas_Client.zip'
+                inkatualizacaoserver = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.08/Atualizacoes_DVI/DVI_Atualizacoes_Apollo_V0508_3Camadas_Server.zip'
+                linkscript = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.08/Liberacao_Inicial/script0508.zip'
+            elif programa == 'Bravos':
+                linkliberacaoclient = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.08/Liberacao_Inicial/DVI_BRAVOS0508_Client.zip'
+                linkliberacaoserver = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.08/Liberacao_Inicial/DVI_BRAVOS0508_Server.zip'
+                linkatualizacaoclient = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.08/Atualizacoes_DVI/DVI_Atualizacoes_BRAVOS_V0508_3Camadas_Client.zip'
+                inkatualizacaoserver = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.08/Atualizacoes_DVI/DVI_Atualizacoes_BRAVOS_V0508_3Camadas_Server.zip'
+                linkscript = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.08/Liberacao_Inicial/script0508.zip'
+            elif programa == 'Toyota':
+                linkliberacaoclient = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.08/Liberacao_Inicial/DVI_TOYOTA_0508_Client.zip'
+                linkliberacaoserver = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.08/Liberacao_Inicial/DVI_TOYOTA_0508_Server.zip'
+                linkatualizacaoclient = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.08/Atualizacoes_DVI/DVI_Atualizacoes_TOYOTA_V0508_3Camadas_Client.zip'
+                inkatualizacaoserver = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.08/Atualizacoes_DVI/DVI_Atualizacoes_TOYOTA_V0508_3Camadas_Server.zip'
+                linkscript = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.08/Liberacao_Inicial/script0508.zip'
+            elif programa == 'Autoshop':
+                linkliberacaoclient = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.08/Liberacao_Inicial/DVI_AUTOSHOP_0508_Client.zip'
+                linkliberacaoserver = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.08/Liberacao_Inicial/DVI_AUTOSHOP_0508_Server.zip'
+                linkatualizacaoclient = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.08/Atualizacoes_DVI/DVI_Atualizacoes_AUTOSHOP_V0508_3Camadas_Client.zip'
+                inkatualizacaoserver = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.08/Atualizacoes_DVI/DVI_Atualizacoes_AUTOSHOP_V0508_3Camadas_Server.zip'
+                linkscript = 'https://distribuicao.blob.core.windows.net/dms/DVI/Versoes/v5.08/Liberacao_Inicial/script0508.zip'
+        else:
+            flash('Erro', 'alert-danger')
     if versao == '5.07':
         if estrutura == '2 Camadas':
             if programa == 'Apollo':
@@ -402,3 +448,15 @@ def pegaLink(form_atualizacria):
         return linkliberacao, linkatualizacao, linkscript
     elif estrutura == '3 Camadas':
         return linkliberacaoclient, linkliberacaoserver, linkatualizacaoclient, inkatualizacaoserver, linkscript
+
+    
+def formatDate(dta_create):
+    dta_create= dta_create[:16].replace('-', '/')
+
+    data = dta_create.split(' ')[0].split('/')[2] + '/' + dta_create.split(' ')[0].split('/')[1] + '/' +  dta_create.split(' ')[0].split('/')[0] 
+    
+    hora = dta_create.split(' ')[1]
+
+    dataFormatada = data
+
+    return dataFormatada

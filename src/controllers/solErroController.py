@@ -8,19 +8,17 @@ from models.models import ANALISTA, SOL_ERRO, MOV_SOL, TIME, HELPER
 from app import app, database, mail, mail_settings
 
 def solErro(form_erro):
-    print('Log - 1')
     if form_erro.validate_on_submit() and 'btn_submit_inserir' in request.form:
         erro = SOL_ERRO.query.filter_by(
             NRO_TP=form_erro.nro_tp.data).first()
-        print('Log - 2')
+        
         if erro:
             flash(
                 'Já existe solicitação de analise de erro para essa TP', 'alert-danger')
         elif form_erro.docs.data is None:
             flash(
                 'Por favor adicione os arquivos', 'alert-danger')
-        else:
-            print('Log - 3')
+        else: 
             time = TIME.query.filter_by(id=current_user.TIME_ID).first()
             helper = HELPER.query.filter_by(id=time.HELPER_ID).first()
 
@@ -172,9 +170,8 @@ def solErro(form_erro):
         erro = SOL_ERRO.query.filter_by(
             NRO_TP=form_erro.nro_tp.data).first()
         
-        print(form_erro.issue.data)
 
-        if not form_erro.issue.data.find('AUTO-'):
+        if not form_erro.issue.data.find('AUTO-') or form_erro.issue.data == 'N':
             flash(
                 'Por favor informe o numero da issue aberta', 'alert-danger')
         else:

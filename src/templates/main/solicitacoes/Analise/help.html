@@ -10,7 +10,7 @@
 <div class="row">
     <div class="col-12 mb-3">
         <div class="div-card-cabecario d-flex align-items-center">
-            Analise de Erro
+            Analise de Help
             
         </div>
     </div>
@@ -243,7 +243,7 @@
                     <div class="col-3 d-flex flex-column mt-5">
                         {% if helpID.STATUS == 'NÃO INICIADO' %}
                             {{ form_help.btn_submit_iniciar(class="btn btn-cadastro-salvar mb-3") }}
-                        {% elif helpID.STATUS == 'EM ANALISE' %}
+                        {% elif helpID.STATUS == 'EM ANALISE' or helpID.STATUS == 'AGUARDANDO INFORMAÇÃO' %}
                             {{ form_help.btn_submit_aprov(class="btn btn-cadastro-salvar mb-3") }}
                             {{ form_help.btn_submit_info(class="btn btn-cadastro mb-3") }}
                             {{ form_help.btn_submit_recus(class="btn btn-cadastro mb-3") }}

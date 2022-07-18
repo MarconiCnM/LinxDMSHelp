@@ -73,7 +73,6 @@
         <div class="div-card">
             <form method="POST" autocomplete="off" enctype="multipart/form-data">
                 {{ form_erro.csrf_token }}
-                {% if current_user.tipo == 'H' or current_user.tipo == 'G' %}
                     <div class="modal fade" id="modalExemplo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
@@ -105,7 +104,6 @@
                             </div>
                         </div>
                     </div>    
-                {% endif %}
                 <div class="row">
                     <div class="col-9">
                         <div class="row">

@@ -64,22 +64,21 @@ def init_app(app: Flask):
                 subject = 'Solicitação de movimentação - LinxDMS HELP',
                 sender = mail_settings["MAIL_USERNAME"],
                 recipients= [analista.EMAIL],
-                body = f'''
-                Bom dia {analista.USUARIO},
+                body = f'''Bom dia {analista.USUARIO},
 
-                A TP {tp.NRO_TP} está a muito tempo sem movimentação, favor fazer a movimentação da mesma para que o "Fim Previsto" sejá atualizado e não conte como backlog indevidamente,
+A TP {tp.NRO_TP} está a muito tempo sem movimentação, favor fazer a movimentação da mesma para que o "Fim Previsto" sejá atualizado e não conte como backlog indevidamente,
 
-                OBS: TPs com o status "Aguardando Cliente Validar", "Aguardando Informação Externa" ou "Aguardando Desenvolvimento" quando fizermos a movimentação diária na TP, será 
-                necessário utilizar a opção de "Alteração de Status", bastando selecionar o "Novo Status" igual ao anterior para atualizar o campo "Fim Previsto".
+OBS: TPs com o status "Aguardando Cliente Validar", "Aguardando Informação Externa" ou "Aguardando Desenvolvimento" quando fizermos a movimentação diária na TP, será 
+necessário utilizar a opção de "Alteração de Status", bastando selecionar o "Novo Status" igual ao anterior para atualizar o campo "Fim Previsto".
 
-                Qualquer problema ou duvida não hesite em acionar seu Helper, 
+Qualquer problema ou duvida não hesite em acionar seu Helper, 
 
-                Atenciosamente,
-                Suporte Help
+Atenciosamente,
+Suporte Help
                 '''
             )
 
-        mail.send(msg)
+        #mail.send(msg)
 
         flash('E-email enviado', 'alert-success')
         
@@ -95,26 +94,25 @@ def init_app(app: Flask):
                 subject = 'Solicitação de Informação - LinxDMS HELP',
                 sender = mail_settings["MAIL_USERNAME"],
                 recipients= [analista.EMAIL],
-                body = f'''
-                Bom dia {analista.USUARIO},
+                body = f'''Bom dia {analista.USUARIO},
 
-                {current_user.USUARIO} solicita um email detalhado de como esta a atual situação da tp {tp.NRO_TP}, preencha os campos abaixo e o envie para o email {current_user.EMAIL}.
+{current_user.USUARIO} solicita um email detalhado de como esta a atual situação da tp {tp.NRO_TP}, preencha os campos abaixo e o envie para o email {current_user.EMAIL}.
 
-                Solicitação/Reclamação do cliente:
-                O que ja foi analisado:
-                Esta aguardando alguem? Se sim descreva quem o por que:
-                Manuais validados:
-                Analistas acionados:
-                Estrutura do cliente:
-                Versão do cliente:
-                Ele está atualizado: 
+Solicitação/Reclamação do cliente:
+O que ja foi analisado:
+Esta aguardando alguem? Se sim descreva quem o por que:
+Manuais validados:
+Analistas acionados:
+Estrutura do cliente:
+Versão do cliente:
+Ele está atualizado: 
 
-                OBS: Se existir algum anexo na tp envie em anexo no email.
+OBS: Se existir algum anexo na tp envie em anexo no email.
 
-                Qualquer problema ou duvida não hesite em acionar seu Helper, 
+Qualquer problema ou duvida não hesite em acionar seu Helper, 
 
-                Atenciosamente,
-                Suporte Help
+Atenciosamente,
+Suporte Help
                 '''
             )
 

@@ -11,453 +11,712 @@
             <div class="div-card-cabecario d-flex justify-content-center mb-2">
                 Consulta chamados
             </div>
-            <div class="row">
-                <div class="col-3">
-                    <div class="title mb-1">
-                        Data Abertura:
+            <form action="" method="POST">
+                <div class="row">
+                    <div class="col-3">
+                        <div class="title mb-1">
+                            Data Abertura:
+                        </div>
+                        <div class="d-flex flex-row">
+                            <input id="startDateAberto" name="startDateAberto" class="form-control" type="date" />
+                            <label for="endDate" class="mx-2">Até:</label>
+                            <input id="endDateAberto" name="endDateAberto" class="form-control" type="date" />
+                        </div>
                     </div>
-                    <div class="d-flex flex-row">
-                        <input id="startDate" class="form-control" type="date" />
-                        <label for="endDate" class="mx-2" >Até:</label>
-                        <input id="endDate" class="form-control" type="date" />
-                    </div>
-                </div>
-                <div class="col-3">
-                    <div class="title mb-1">
-                        Produto:
-                    </div> 
-                    <div class="input-group input-group-sm">
-                        <input type="text" class="form-control">
-                        <button class="btn btn-outline-secondary" type="button" data-toggle="modal" data-target="#modalproduto">
-                            <img src="{{url_for('static',filename='img/site/icon-pesquisa.svg')}}" alt="">
-                        </button>       
-                    </div>
-                    <div class="modal fade" id="modalproduto" tabindex="-1" role="dialog" aria-labelledby="modalprodutoLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                            <h5 class="modal-title" id="modalprodutoLabel">Selecione um registro</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
+                    <div class="col-3">
+                        <div class="title mb-1">
+                            Produto:
+                        </div>
+                        <div class="input-group input-group-sm">
+                            <input id="listProduto" name="listProduto" type="text" class="form-control">
+                            <button class="btn btn-outline-secondary" type="button" data-toggle="modal"
+                                data-target="#modalproduto">
+                                <img src="{{url_for('static',filename='img/site/icon-pesquisa.svg')}}" alt="">
                             </button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="content-body" style="overflow:hidden;">
-                                    {% for produto in produtos %}
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                            {{produto[0]}}
-                                        </label>
+                        </div>
+                        <div class="modal fade" id="modalproduto" tabindex="-1" role="dialog"
+                            aria-labelledby="modalprodutoLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="modalprodutoLabel">Selecione um registro</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
                                     </div>
+                                    <div class="modal-body">
+                                        <div class="content-body" style="overflow:hidden;">
+                                            {% for index, produto in produtos %}
+                                            <div class="form-check fcproduto">
+                                                <input id="inputProduto{{ index }}" class="form-check-input fcproduto"
+                                                    type="checkbox" value="">
+                                                <label id="labelProduto{{ index }}" class="form-check-label fcproduto">
+                                                    {{produto[0]}}
+                                                </label>
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Fechar</button>
+                                        <button id="btnsubmitProduto" type="button" class="btn btn-primary"
+                                            data-dismiss="modal">Salvar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="title mb-1">
+                            Equipe:
+                        </div>
+                        <div class="input-group input-group-sm">
+                            <input id="listEquipe" name="listEquipe" type="text" class="form-control">
+                            <button class="btn btn-outline-secondary" type="button" data-toggle="modal"
+                                data-target="#modalequipe">
+                                <img src="{{url_for('static',filename='img/site/icon-pesquisa.svg')}}" alt="">
+                            </button>
+                        </div>
+                        <div class="modal fade" id="modalequipe" tabindex="-1" role="dialog"
+                            aria-labelledby="modalequipeLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="modalequipeLabel">Selecione um registro</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="content-body" style="overflow:hidden;">
+                                            {% for index, equipe in equipes %}
+                                            <div class="form-check fcequipe">
+                                                <input id="inputEquipe{{ index }}" class="form-check-input"
+                                                    type="checkbox" value="" id="flexCheckDefault">
+                                                <label id="labelEquipe{{ index }}" class="form-check-label"
+                                                    for="flexCheckDefault">
+                                                    {{equipe[0]}}
+                                                </label>
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Fechar</button>
+                                        <button id="btnsubmitEquipe" type="button" class="btn btn-primary"
+                                            data-dismiss="modal">Salvar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="title mb-1">
+                            Analista:
+                        </div>
+                        <div class="input-group input-group-sm">
+                            <input id="listAnalista" name="listAnalista" type="text" class="form-control">
+                            <button class="btn btn-outline-secondary" type="button" data-toggle="modal"
+                                data-target="#modalanalista">
+                                <img src="{{url_for('static',filename='img/site/icon-pesquisa.svg')}}" alt="">
+                            </button>
+                        </div>
+                        <div class="modal fade" id="modalanalista" tabindex="-1" role="dialog"
+                            aria-labelledby="modalanalistaLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="modalanalistaLabel">Selecione um registro</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="content-body" style="overflow:hidden;">
+                                            {% for index, analista in analistas %}
+                                            <div class="form-check fcanalista">
+                                                <input id="inputAnalista{{ index }}" class="form-check-input"
+                                                    type="checkbox" value="" id="flexCheckDefault">
+                                                <label id="labelAnalista{{ index }}" class="form-check-label"
+                                                    for="flexCheckDefault">
+                                                    {{analista[0]}}
+                                                </label>
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Fechar</button>
+                                        <button id="btnsubmitAnalista" type="button" class="btn btn-primary"
+                                            data-dismiss="modal">Salvar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="title mb-1">
+                            Helper:
+                        </div>
+                        <div class="input-group input-group-sm">
+                            <input id="listHelper" name="listHelper" type="text" class="form-control">
+                            <button class="btn btn-outline-secondary" type="button" data-toggle="modal"
+                                data-target="#modalhelper">
+                                <img src="{{url_for('static',filename='img/site/icon-pesquisa.svg')}}" alt="">
+                            </button>
+                        </div>
+                        <div class="modal fade" id="modalhelper" tabindex="-1" role="dialog"
+                            aria-labelledby="modalhelperLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="modalhelperLabel">Selecione um registro</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="content-body" style="overflow:hidden;">
+                                            {% for index, helper in helpers %}
+                                            <div class="form-check fchelper">
+                                                <input id="inputHelper{{ index }}" class="form-check-input"
+                                                    type="checkbox" value="" id="flexCheckDefault">
+                                                <label id="labelHelper{{ index }}" class="form-check-label"
+                                                    for="flexCheckDefault">
+                                                    {{helper[0]}}
+                                                </label>
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Fechar</button>
+                                        <button id="btnsubmitHelper" type="button" class="btn btn-primary"
+                                            data-dismiss="modal">Salvar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-3">
+                        <div class="title mb-1">
+                            Data Encerramento:
+                        </div>
+                        <div class="d-flex flex-row">
+                            <input id="startDateEncerra" name="startDateEncerra" class="form-control" type="date" />
+                            <label for="endDate" class="mx-2">Até:</label>
+                            <input id="endDateEncerra" name="endDateEncerra" class="form-control" type="date" />
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="title mb-1">
+                            Cliente:
+                        </div>
+                        <div class="input-group input-group-sm">
+                            <input id="listCliente" name="listCliente" type="text" class="form-control">
+                            <button class="btn btn-outline-secondary" type="button" data-toggle="modal"
+                                data-target="#modalcliente">
+                                <img src="{{url_for('static',filename='img/site/icon-pesquisa.svg')}}" alt="">
+                            </button>
+                        </div>
+                        <div class="modal fade" id="modalcliente" tabindex="-1" role="dialog"
+                            aria-labelledby="modalclienteLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="modalclienteLabel">Selecione um registro</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="content-body" style="overflow:hidden;">
+                                            {% for index, cliente in clientes %}
+                                            <div class="form-check fccliente">
+                                                <input id="inputCliente{{ index }}" class="form-check-input"
+                                                    type="checkbox" value="" id="flexCheckDefault">
+                                                <label id="labelCliente{{ index }}" class="form-check-label"
+                                                    for="flexCheckDefault">
+                                                    {{cliente[0]}}
+                                                </label>
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Fechar</button>
+                                        <button id="btnsubmitCliente" type="button" class="btn btn-primary"
+                                            data-dismiss="modal">Salvar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="title mb-1">
+                            Status:
+                        </div>
+                        <div class="input-group input-group-sm">
+                            <input id="listStatus" name="listStatus" type="text" class="form-control">
+                            <button class="btn btn-outline-secondary" type="button" data-toggle="modal"
+                                data-target="#modalstatus">
+                                <img src="{{url_for('static',filename='img/site/icon-pesquisa.svg')}}" alt="">
+                            </button>
+                        </div>
+                        <div class="modal fade" id="modalstatus" tabindex="-1" role="dialog"
+                            aria-labelledby="modalstatusLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="modalstatusLabel">Selecione um registro</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="content-body" style="overflow:hidden;">
+                                            {% for index, statu in status %}
+                                            <div class="form-check fcstatus">
+                                                <input id="inputStatus{{ index }}" class="form-check-input"
+                                                    type="checkbox" value="" id="flexCheckDefault">
+                                                <label id="labelStatus{{ index }}" class="form-check-label"
+                                                    for="flexCheckDefault">
+                                                    {{statu[0]}}
+                                                </label>
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Fechar</button>
+                                        <button id="btnsubmitStatus" type="button" class="btn btn-primary"
+                                            data-dismiss="modal">Salvar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="title mb-1">
+                            Tipo Solicitação:
+                        </div>
+                        <div class="input-group input-group-sm">
+                            <input id="listTipo" name="listTipo" type="text" class="form-control">
+                            <button class="btn btn-outline-secondary" type="button" data-toggle="modal"
+                                data-target="#modaltipo">
+                                <img src="{{url_for('static',filename='img/site/icon-pesquisa.svg')}}" alt="">
+                            </button>
+                        </div>
+                        <div class="modal fade" id="modaltipo" tabindex="-1" role="dialog"
+                            aria-labelledby="modaltipoLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="modaltipoLabel">Selecione um registro</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="content-body" style="overflow:hidden;">
+                                            {% for index, tipo in tipos %}
+                                            <div class="form-check fctipo">
+                                                <input id="inputTipo{{ index }}" class="form-check-input"
+                                                    type="checkbox" value="" id="flexCheckDefault">
+                                                <label id="labelTipo{{ index }}" class="form-check-label"
+                                                    for="flexCheckDefault">
+                                                    {{tipo[0]}}
+                                                </label>
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Fechar</button>
+                                        <button id="btnsubmitTipo" type="button" class="btn btn-primary"
+                                            data-dismiss="modal">Salvar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="title mb-1">
+                            Filtro Rápido:
+                        </div>
+                        <select class="form-select form-select-sm">
+                            <option selected> </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-2">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
+                            <label class="form-check-label" for="flexCheckChecked">
+                                Somente chamados de suporte
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="title mb-2">
+                            Nível NPS:
+                            <input id="npsvalor" name="npsvalor" type="hidden" class="form-control" value="Todos">
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="radionps" id="radionps1" checked>
+                            <label class="form-check-label" for="radionps1" id="lradionps1">
+                                Promotor
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="radionps" id="radionps2" checked>
+                            <label class="form-check-label" for="radionps2"  id="lradionps2">
+                                Neutro
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="radionps" id="radionps3" checked>
+                            <label class="form-check-label" for="radionps3"  id="lradionps3">
+                                Detrator
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="radionps" id="radionps4" checked>
+                            <label class="form-check-label" for="radionps4"  id="lradionps4">
+                                Todos
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="title mb-2">
+                            Aberto/Encerrado:
+                            <input id="afvalue" name="afvalue" type="hidden" class="form-control" value="Ambos">
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="radioabertoencerrado"
+                                id="radioabertoencerrado1">
+                            <label class="form-check-label" for="radioabertoencerrado1" id="lradioabertoencerrado1">
+                                Aberto
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="radioabertoencerrado"
+                                id="radioabertoencerrado2">
+                            <label class="form-check-label" for="radioabertoencerrado2" id="lradioabertoencerrado2">
+                                Encerrado
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="radioabertoencerrado"
+                                id="radioabertoencerrado3" checked>
+                            <label class="form-check-label" for="radioabertoencerrado3" id="lradioabertoencerrado3">
+                                Ambos
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="title mb-2">
+                            FCR:
+                            <input id="fcrvalue" name="fcrvalue" type="hidden" class="form-control" value="Ambos">
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="radiofcr" id="radiofcr1">
+                            <label class="form-check-label" for="radiofcr1" id="lradiofcr1">
+                                Sim
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="radiofcr" id="radiofcr2">
+                            <label class="form-check-label" for="radiofcr2" id="lradiofcr2" >
+                                Não
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="radiofcr" id="radiofcr3" checked>
+                            <label class="form-check-label" for="radiofcr2"  id="radiofcr3">
+                                Ambos
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="title mb-2">
+                            Reaberto:
+                            <input id="reaberturavalue" name="reaberturavalue" type="hidden" class="form-control" value="Ambos">
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="radioreabertura" id="radioreabertura1">
+                            <label class="form-check-label" for="radioreabertura1"  id="lradioreabertura1">
+                                Sim
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="radioreabertura" id="radioreabertura2">
+                            <label class="form-check-label" for="radioreabertura2"  id="lradioreabertura2">
+                                Não
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="radioreabertura" id="radioreabertura3"
+                                checked>
+                            <label class="form-check-label" for="radioreabertura3" id="radioreabertura3">
+                                Ambos
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="title mb-2">
+                            No SLA:
+                            <input id="slavalue" name="slavalue" type="hidden" class="form-control" value="Ambos">
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="radioSLA" id="radioSLA1">
+                            <label class="form-check-label" for="radioSLA1" id="lradioSLA1">
+                                Backlog
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="radioSLA" id="radioSLA2">
+                            <label class="form-check-label" for="radioSLA2" id="lradioSLA2">
+                                No SLA
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="radioSLA" id="radioSLA3" checked>
+                            <label class="form-check-label" for="radioSLA3" id="radioSLA3">
+                                Ambos
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row d-flex justify-content-center mt-4">
+                    <a id="limpafiltros" class="btn btn-cadastro-salvar">Limpar</a>
+                    <button type="submit" class="btn btn-cadastro-salvar mx-3">Pesquisar</button>
+                </div>
+            </form>
+        </div>
+        {% if carrega_resultado == 'S' %}
+        <div class="row">
+            <div class="col-12">
+                <div class="div-card mb-3">
+                    <div class="row">
+                        <div class="div-header-analitico d-flex justify-content-between align-items-center" style="width: 100%;">
+                            <div class="btn btn-exportar col-1">
+                                <a href="#" class="link" type="button" data-toggle="modal" data-target="#modalExemplo">Exportar</a>
+                            </div>
+                            <div class="input-group input-group-dashboard">
+                                <span class="input-group-text" id="basic-addon1"><img src="{{url_for('static',filename='img/site/icon-pesquisa.svg')}}" alt=""></span>
+                                <input id="myInput" type="text" class="form-control" placeholder="Pesquisar..." aria-label="Username" aria-describedby="basic-addon1">
+                            </div>
+                            <div class="mb-3 col-4">
+                                Total: {{total}}
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="table-cad table-responsive">
+                        <table id="myTable" class="table table-hover">
+                            <thead class="header">
+                                <tr>
+                                    <th scope="col">Nro_tp</th> 
+                                    <th scope="col">Issue</th>
+                                    <th scope="col">Segmento</th>
+                                    <th scope="col">Produto</th>
+                                    <th scope="col">Cliente</th>
+                                    <th scope="col">Analista</th>
+                                    <th scope="col">Prioridade</th>
+                                    <th scope="col">Resumo</th>
+                                    <th scope="col">Abertura</th>
+                                    <th scope="col">Conclusão</th>
+                                    <th scope="col">Aberto</th>
+                                    <th scope="col">Ult Mov</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">SLA</th>
+                                </tr>
+                            </thead>
+                            <tbody style="font-size:0.8em;">
+                                {% for index, tp in result %}
+                                    <tr>
+                                        <td>{{ tp.ID_TAREFA }}</td>
+                                        <td>{{ tpID_ISSUE }}</td>
+                                        <td>{{ tp.SEGMENTO }}</td>
+                                        <td>{{ tp.PRODUTO }}</td>
+                                        <td>{{ tp.NO_CONTA }}</td>
+                                        <td>{{ tp.NO_RESPONSAVEL}}</td>
+                                        <td>{{ tp.PRIORIDADE }}</td>
+                                        <td>{{ tp.ASSUNTO_TAREFA }}</td>
+                                        <td>{{ format_date(tp.DH_ABERTURA) }}</td>
+                                        <td>{{ tp.DH_CONCLUSAO }}</td>
+                                        <td>{{ tp.DIAS_EM_ABERTO }}</td>
+                                        <td>{{ format_date(tp.DH_ULT_MOV) }}</td>
+                                        <td>{{ tp.NO_STATUS_TAREFA }}</td>
+                                        <td>{{ tp.NO_SLA_HOLD }}</td>
+                                    </tr>
                                 {% endfor %}
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
-                            </div>
-                        </div>
-                        </div>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-                <div class="col-2">
-                    <div class="title mb-1">
-                        Equipe:
-                    </div>
-                    <div class="input-group input-group-sm">
-                        <input type="text" class="form-control">
-                        <button class="btn btn-outline-secondary" type="button" data-toggle="modal" data-target="#modalequipe">
-                            <img src="{{url_for('static',filename='img/site/icon-pesquisa.svg')}}" alt="">
-                        </button>       
-                    </div>
-                    <div class="modal fade" id="modalequipe" tabindex="-1" role="dialog" aria-labelledby="modalequipeLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                            <h5 class="modal-title" id="modalequipeLabel">Selecione um registro</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="content-body" style="overflow:hidden;">
-                                    {% for equipe in equipes %}
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                            <label class="form-check-label" for="flexCheckDefault">
-                                                {{equipe[0]}}
-                                            </label>
-                                        </div>
-                                    {% endfor %}                                
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
-                            </div>
-                        </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-2">
-                    <div class="title mb-1">
-                        Analista:
-                    </div>
-                    <div class="input-group input-group-sm">
-                        <input type="text" class="form-control">
-                        <button class="btn btn-outline-secondary" type="button" data-toggle="modal" data-target="#modalanalista">
-                            <img src="{{url_for('static',filename='img/site/icon-pesquisa.svg')}}" alt="">
-                        </button>       
-                    </div>
-                    <div class="modal fade" id="modalanalista" tabindex="-1" role="dialog" aria-labelledby="modalanalistaLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                            <h5 class="modal-title" id="modalanalistaLabel">Selecione um registro</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="content-body" style="overflow:hidden;">
-                                    {% for analista in analistas %}
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                            <label class="form-check-label" for="flexCheckDefault">
-                                                {{analista[0]}}
-                                            </label>
-                                        </div>
-                                    {% endfor %}                                
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
-                            </div>
-                        </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-2">
-                    <div class="title mb-1">
-                        Helper:
-                    </div>
-                    <div class="input-group input-group-sm">
-                        <input type="text" class="form-control">
-                        <button class="btn btn-outline-secondary" type="button" data-toggle="modal" data-target="#modalhelper">
-                            <img src="{{url_for('static',filename='img/site/icon-pesquisa.svg')}}" alt="">
-                        </button>       
-                    </div>
-                    <div class="modal fade" id="modalhelper" tabindex="-1" role="dialog" aria-labelledby="modalhelperLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                            <h5 class="modal-title" id="modalhelperLabel">Selecione um registro</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="content-body" style="overflow:hidden;">
-                                    {% for helper in helpers %}
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                            <label class="form-check-label" for="flexCheckDefault">
-                                                {{helper[0]}}
-                                            </label>
-                                        </div>
-                                    {% endfor %}
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
-                            </div>
-                        </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row mt-4">
-                <div class="col-3">
-                    <div class="title mb-1">
-                        Data Encerramento:
-                    </div>
-                    <div class="d-flex flex-row">
-                        <input id="startDate" class="form-control" type="date" />
-                        <label for="endDate" class="mx-2" >Até:</label>
-                        <input id="endDate" class="form-control" type="date" />
-                    </div>
-                </div>
-                <div class="col-3">
-                    <div class="title mb-1">
-                        Cliente:
-                    </div>
-                    <div class="input-group input-group-sm">
-                        <input type="text" class="form-control">
-                        <button class="btn btn-outline-secondary" type="button" data-toggle="modal" data-target="#modalcliente">
-                            <img src="{{url_for('static',filename='img/site/icon-pesquisa.svg')}}" alt="">
-                        </button>       
-                    </div>
-                    <div class="modal fade" id="modalcliente" tabindex="-1" role="dialog" aria-labelledby="modalclienteLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                            <h5 class="modal-title" id="modalclienteLabel">Selecione um registro</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="content-body" style="overflow:hidden;">
-                                    {% for cliente in clientes %}
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                            <label class="form-check-label" for="flexCheckDefault">
-                                                {{cliente[0]}}
-                                            </label>
-                                        </div>
-                                    {% endfor %}                                
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
-                            </div>
-                        </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-2">
-                    <div class="title mb-1">
-                        Status:
-                    </div>
-                    <div class="input-group input-group-sm">
-                        <input type="text" class="form-control">
-                        <button class="btn btn-outline-secondary" type="button" data-toggle="modal" data-target="#modalstatus">
-                            <img src="{{url_for('static',filename='img/site/icon-pesquisa.svg')}}" alt="">
-                        </button>       
-                    </div>
-                    <div class="modal fade" id="modalstatus" tabindex="-1" role="dialog" aria-labelledby="modalstatusLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                            <h5 class="modal-title" id="modalstatusLabel">Selecione um registro</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="content-body" style="overflow:hidden;">
-                                    {% for statu in status %}
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                            <label class="form-check-label" for="flexCheckDefault">
-                                                {{statu[0]}}
-                                            </label>
-                                        </div>
-                                    {% endfor %}
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
-                            </div>
-                        </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-2">
-                    <div class="title mb-1">
-                        Tipo Solicitação:
-                    </div>
-                    <div class="input-group input-group-sm">
-                        <input type="text" class="form-control">
-                        <button class="btn btn-outline-secondary" type="button" data-toggle="modal" data-target="#modaltipo">
-                            <img src="{{url_for('static',filename='img/site/icon-pesquisa.svg')}}" alt="">
-                        </button>       
-                    </div>
-                    <div class="modal fade" id="modaltipo" tabindex="-1" role="dialog" aria-labelledby="modaltipoLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                            <h5 class="modal-title" id="modaltipoLabel">Selecione um registro</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="content-body" style="overflow:hidden;">
-                                    {% for tipo in tipos %}
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                            <label class="form-check-label" for="flexCheckDefault">
-                                                {{tipo[0]}}
-                                            </label>
-                                        </div>
-                                    {% endfor %}                                
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
-                            </div>
-                        </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-2">
-                    <div class="title mb-1">
-                        Filtro Rápido:
-                    </div>
-                    <select class="form-select form-select-sm">
-                        <option selected> </option>
-                        <option value="1">SLA_Encerrados Apollo_Toyota</option>
-                        <option value="2">Backlog_Andamento Apollo_Toyota</option>
-                        <option value="3">Total Abertura Apollo_Toyota</option>
-                        <option value="4">Reaberto Apollo_Toyota</option>
-                        <option value="5">Encerrados Apollo_Toyota</option>
-                        <option value="6">Abertos + 15 Apollo_Toyota</option>
-                    </select>
-                </div>
-            </div>
-            <div class="row mt-4">
-                <div class="col-2">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-                        <label class="form-check-label" for="flexCheckChecked">
-                            Somente chamados de suporte
-                        </label>
-                    </div>
-                </div>
-                <div class="col-2">
-                    <div class="title mb-2">
-                        Nível NPS:
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="radionps" id="radionps1">
-                        <label class="form-check-label" for="radionps1">
-                            Promotor
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="radionps" id="radionps2" checked>
-                        <label class="form-check-label" for="radionps2">
-                            Neutro
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="radionps" id="radionps2" checked>
-                        <label class="form-check-label" for="radionps2">
-                            Detrator
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="radionps" id="radionps2" checked>
-                        <label class="form-check-label" for="radionps2">
-                            Todos
-                        </label>
-                    </div>
-                </div>
-                <div class="col-2">
-                    <div class="title mb-2">
-                        Aberto/Encerrado:
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="radioabertoencerrado" id="radioabertoencerrado1">
-                        <label class="form-check-label" for="radioabertoencerrado1">
-                            Aberto
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="radioabertoencerrado" id="radioabertoencerrado2" checked>
-                        <label class="form-check-label" for="radioabertoencerrado2">
-                            Encerrado
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="radioabertoencerrado" id="radioabertoencerrado2" checked>
-                        <label class="form-check-label" for="radioabertoencerrado2">
-                            Ambos
-                        </label>
-                    </div>
-                </div>
-                <div class="col-2">
-                    <div class="title mb-2">
-                        FCR:
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="radiofcr" id="radiofcr1">
-                        <label class="form-check-label" for="radiofcr1">
-                            Sim
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="radiofcr" id="radiofcr2" checked>
-                        <label class="form-check-label" for="radiofcr2">
-                            Não
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="radiofcr" id="radiofcr2" checked>
-                        <label class="form-check-label" for="radiofcr2">
-                            Ambos
-                        </label>
-                    </div>
-                </div>
-                <div class="col-2">
-                    <div class="title mb-2">
-                        Reaberto:
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="radioreabertura" id="radioreabertura1">
-                        <label class="form-check-label" for="radioreabertura1">
-                            Sim
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="radioreabertura" id="radioreabertura2" checked>
-                        <label class="form-check-label" for="radioreabertura2">
-                            Não
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="radioreabertura" id="radioreabertura2" checked>
-                        <label class="form-check-label" for="radioreabertura2">
-                            Ambos
-                        </label>
-                    </div>
-                </div>
-                <div class="col-2">
-                    <div class="title mb-2">
-                        No SLA:
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="radioSLA" id="radioSLA1">
-                        <label class="form-check-label" for="radioSLA1">
-                            Backlog
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="radioSLA" id="radioSLA2" checked>
-                        <label class="form-check-label" for="radioSLA2">
-                            No SLA
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="radioSLA" id="radioSLA2" checked>
-                        <label class="form-check-label" for="radioSLA2">
-                            Ambos
-                        </label>
-                    </div>
-                </div>
-            </div>
-            <div class="row d-flex justify-content-center mt-4">
-                <button class="btn btn-cadastro-salvar" >Pesquisar</button>
             </div>
         </div>
+        {% endif %}
     </div>
 </div>
+
+<script>
+    const btnSubmitProduto = document.getElementById("btnsubmitProduto")
+    const btnSubmitEquipe = document.getElementById("btnsubmitEquipe")
+    const btnSubmitAnalista = document.getElementById("btnsubmitAnalista")
+    const btnSubmitHelper = document.getElementById("btnsubmitHelper")
+    const btnSubmitCliente = document.getElementById("btnsubmitCliente")
+    const btnSubmitStatus = document.getElementById("btnsubmitStatus")
+    const btnSubmitTipo = document.getElementById("btnsubmitTipo")
+
+    btnSubmitProduto.addEventListener("click", () => alimentainput('.fcproduto', 'inputProduto', 'labelProduto', 'listProduto'))
+    btnSubmitEquipe.addEventListener("click", () => alimentainput('.fcequipe', 'inputEquipe', 'labelEquipe', 'listEquipe'))
+    btnSubmitAnalista.addEventListener("click", () => alimentainput('.fcanalista', 'inputAnalista', 'labelAnalista', 'listAnalista'))
+    btnSubmitHelper.addEventListener("click", () => alimentainput('.fchelper', 'inputHelper', 'labelHelper', 'listHelper'))
+    btnSubmitCliente.addEventListener("click", () => alimentainput('.fccliente', 'inputCliente', 'labelCliente', 'listCliente'))
+    btnSubmitStatus.addEventListener("click", () => alimentainput('.fcstatus', 'inputStatus', 'labelStatus', 'listStatus'))
+    btnSubmitTipo.addEventListener("click", () => alimentainput('.fctipo', 'inputTipo', 'labelTipo', 'listTipo'))
+
+    function alimentainput(listcompnent, inputid, labelid, listid) {
+        const listCompnent = document.querySelectorAll(listcompnent)
+        let list = []
+
+
+        for (let i = 0; i < listCompnent.length; i++) {
+            const input = document.getElementById(inputid + [i])
+            try {
+                if (input.checked) {
+                    const label = document.getElementById(labelid + [i])
+
+                    list.push("'" + label.textContent.trim() + "'")
+                }
+            }
+            catch (e) {
+                console.log(e)
+            }
+        }
+        const valend = document.getElementById(listid)
+        return valend.value = list
+    }
+
+    document.getElementById("radionps1").addEventListener("click", function() {
+        var item = document.getElementById("lradionps1").textContent.trim();
+        document.getElementById("npsvalor").value = item
+    });
+
+    document.getElementById("radionps2").addEventListener("click", function() {
+        var item = document.getElementById("lradionps2").textContent.trim();
+        document.getElementById("npsvalor").value = item
+    });
+
+    document.getElementById("radionps3").addEventListener("click", function() {
+        var item = document.getElementById("lradionps3").textContent.trim();
+        document.getElementById("npsvalor").value = item
+    });
+
+    document.getElementById("radionps4").addEventListener("click", function() {
+        var item = document.getElementById("lradionps4").textContent.trim();
+        document.getElementById("npsvalor").value = item
+    });
+
+    document.getElementById("radioabertoencerrado1").addEventListener("click", function() {
+        var item = document.getElementById("lradioabertoencerrado1").textContent.trim();
+        document.getElementById("afvalue").value = item
+    });
+
+    document.getElementById("radioabertoencerrado2").addEventListener("click", function() {
+        var item = document.getElementById("lradioabertoencerrado2").textContent.trim();
+        document.getElementById("afvalue").value = item
+    });
+
+    document.getElementById("radioabertoencerrado3").addEventListener("click", function() {
+        var item = document.getElementById("lradioabertoencerrado3").textContent.trim();
+        document.getElementById("afvalue").value = item
+    });
+
+    document.getElementById("radiofcr1").addEventListener("click", function() {
+        var item = document.getElementById("lradiofcr1").textContent.trim();
+        document.getElementById("fcrvalue").value = item
+    });
+
+    document.getElementById("radiofcr2").addEventListener("click", function() {
+        var item = document.getElementById("lradiofcr2").textContent.trim();
+        document.getElementById("fcrvalue").value = item
+    });
+
+    document.getElementById("radiofcr3").addEventListener("click", function() {
+        var item = document.getElementById("lradiofcr3").textContent.trim();
+        document.getElementById("fcrvalue").value = item
+    });
+
+    document.getElementById("radioreabertura1").addEventListener("click", function() {
+        var item = document.getElementById("lradioreabertura1").textContent.trim();
+        document.getElementById("reaberturavalue").value = item
+    });
+
+    document.getElementById("radioreabertura2").addEventListener("click", function() {
+        var item = document.getElementById("lradioreabertura2").textContent.trim();
+        document.getElementById("reaberturavalue").value = item
+    });
+
+    document.getElementById("radioreabertura3").addEventListener("click", function() {
+        var item = document.getElementById("lradioreabertura3").textContent.trim();
+        document.getElementById("reaberturavalue").value = item
+    });
+
+    document.getElementById("radioSLA1").addEventListener("click", function() {
+        var item = document.getElementById("lradioSLA1").textContent.trim();
+        document.getElementById("slavalue").value = item
+    });
+
+    document.getElementById("radioSLA2").addEventListener("click", function() {
+        var item = document.getElementById("lradioSLA2").textContent.trim();
+        document.getElementById("slavalue").value = item
+    });
+
+    document.getElementById("radioSLA3").addEventListener("click", function() {
+        var item = document.getElementById("lradioSLA3").textContent.trim();
+        document.getElementById("slavalue").value = item
+    });
+
+    document.getElementById("limpafiltros").addEventListener("click", function() {
+        document.getElementById("startDateAberto").value = ''
+        document.getElementById("endDateAberto").value = ''
+        document.getElementById("listProduto").value = ''
+        document.getElementById("listEquipe").value = ''
+        document.getElementById("listAnalista").value = ''
+        document.getElementById("listHelper").value = ''
+        document.getElementById("startDateEncerra").value = ''
+        document.getElementById("endDateEncerra").value = ''
+        document.getElementById("listCliente").value = ''
+        document.getElementById("listStatus").value = ''
+        document.getElementById("listTipo").value = ''
+        
+
+
+        document.getElementById("npsvalor").value = 'Todos'
+        document.getElementById("radionps4").checked = true
+        document.getElementById("afvalue").value = 'Ambos'
+        document.getElementById("radioabertoencerrado3").checked = true
+        document.getElementById("fcrvalue").value = 'Ambos'
+        document.getElementById("radiofcr3").checked = true
+        document.getElementById("reaberturavalue").value = 'Ambos'
+        document.getElementById("radioreabertura3").checked = true
+        document.getElementById("slavalue").value = 'Ambos'
+        document.getElementById("radioSLA3").checked = true
+    });
+</script>
 
 {% endblock %}

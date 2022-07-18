@@ -1,0 +1,87 @@
+{% extends 'main/global.html' %}
+
+{% block head %}
+    <link rel= "stylesheet" 
+    type= "text/css" 
+    href= "{{url_for('static',filename='css/main/solicitacoes/requisicao/main.css')}}">
+{% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="col-12 mb-3">
+        <div class="div-card-cabecario d-flex align-items-center">
+            Consulta Chamados
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="div-card mb-3">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1"><img src="{{url_for('static',filename='img/site/icon-pesquisa.svg')}}" alt=""></span>
+                <input id="myInput" type="text" class="form-control" placeholder="Pesquisar..." aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+            <div class="table-cad table-responsive">
+                <table id="myTable" class="table table-hover">
+                    <thead class="header">
+                        <tr>
+                            <th scope="col">Nro_tp</th> 
+                            <th scope="col">Issue</th>
+                            <th scope="col">Segmento</th>
+                            <th scope="col">Produto</th>
+                            <th scope="col">Cliente</th>
+                            <th scope="col">Analista</th>
+                            <th scope="col">Prioridade</th>
+                            <th scope="col">Resumo</th>
+                            <th scope="col">Abertura</th>
+                            <th scope="col">Conclusão</th>
+                            <th scope="col">Aberto</th>
+                            <th scope="col">Ult Mov</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">SLA</th>
+                        </tr>
+                    </thead>
+                    <tbody style="font-size:0.8em;">
+                        {% for index, tp in result %}
+                            <tr>
+                                <td>{{ tp.ID_TAREFA }}</td>
+                                <td>{{ tpID_ISSUE }}</td>
+                                <td>{{ tp.SEGMENTO }}</td>
+                                <td>{{ tp.PRODUTO }}</td>
+                                <td>{{ tp.NO_CONTA }}</td>
+                                <td>{{ tp.NO_RESPONSAVEL}}</td>
+                                <td>{{ tp.PRIORIDADE }}</td>
+                                <td>{{ tp.ASSUNTO_TAREFA }}</td>
+                                <td>{{ format_date(tp.DH_ABERTURA) }}</td>
+                                <td>{{ tp.DH_CONCLUSAO }}</td>
+                                <td>{{ tp.DIAS_EM_ABERTO }}</td>
+                                <td>{{ format_date(tp.DH_ULT_MOV) }}</td>
+                                <td>{{ tp.NO_STATUS_TAREFA }}</td>
+                                <td>{{ tp.NO_SLA_HOLD }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+    $("#myInput").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#myTable tbody tr").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+    });
+    });
+
+    $(document).ready(function(){
+    $('table tr').click(function(){
+        window.location = $(this).data('url');
+        returnfalse;
+    });
+    });
+</script>
+
+{% endblock %}

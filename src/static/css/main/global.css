@@ -8,7 +8,7 @@ a, a:active {
 
 body::-webkit-scrollbar {
     width: 6px;               /* width of the entire scrollbar */
-  }
+}
   
 body::-webkit-scrollbar-track {
     background: #c9c9c9;        /* color of the tracking area */
